@@ -1,16 +1,6 @@
 ---
 layout: post
 title:  "Create a WaitGroup by yourself"
-comments: true
-comment: "<h3>References:</h3>
-<p>
-- The Go programming language<br>
-Author: Alan A. A. Donovan & Brian W. Kernighan<br>
-ISBN: 978-986-476-133-3<br>
-- Concurrency in Go<br>
-Author: Katherine Cox-Buday<br>
-ISBN: 978-1-491-94119-5
-</p>"
 categories: golang concurrency
 tags:
   - golang
@@ -101,3 +91,13 @@ defer close(wait)
 Maybe you will feel confusing about this part. The reason is `channel` won't be collect by GC automatic(if it can, it will be another hell). So always closing it is important.
 
 ps. In productive code, please still using the `sync.WaitGroup`, I do a test, `sync.WaitGroup` is 25% faster than the version you see at here.
+
+### References:
+
+#### [The Go programming language](http://www.gopl.io/)
+- Author: Alan A. A. Donovan & Brian W. Kernighan
+- ISBN: 978-986-476-133-3
+
+#### [Concurrency in Go](http://shop.oreilly.com/product/0636920046189.do)
+- Author: Katherine Cox-Buday
+- ISBN: 978-1-491-94119-5

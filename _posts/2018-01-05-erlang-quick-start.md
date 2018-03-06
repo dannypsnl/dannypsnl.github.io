@@ -1,13 +1,6 @@
 ---
 layout: post
 title:  "Erlang Quick Start"
-comments: true
-comment: "<h3>References:</h3>
-<p>
-- Programming Erlang: 2ed<br>
-Author: Joe Armstrong<br>
-ISBN: 978-1-93778-553-6
-</p>"
 categories: erlang
 tags:
   - erlang
@@ -208,3 +201,9 @@ User switch command
 像這樣，這會馬上退出
 
 下一篇介紹模組好了，我到底欠幾個下一篇了QQ
+
+### References:
+
+#### [Programming Erlang: 2ed](https://pragprog.com/book/jaerlang2/programming-erlang)
+- Author: Joe Armstrong
+- ISBN: 978-1-93778-553-6
