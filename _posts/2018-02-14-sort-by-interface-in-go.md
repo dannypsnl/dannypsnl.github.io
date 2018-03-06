@@ -1,11 +1,6 @@
 ---
 layout: post
 title:  "Sort by interface in Go"
-comments: true
-comment: "<h3>References:</h3>
-<p>- The Go programming language<br>
-Author: Alan A. A. Donovan & Brian W. Kernighan<br>
-ISBN: 978-986-476-133-3"
 categories: golang
 tags:
   - golang
@@ -94,3 +89,9 @@ func quickSort(data Interface, a, b, maxDepth int) {
 The more you should go to read algorithm. But you can get the unusual theory from Go's design of `sort` package.
 
 Thank for read.
+
+### References:
+
+#### [The Go programming language](http://www.gopl.io/)
+- Author: Alan A. A. Donovan & Brian W. Kernighan
+- ISBN: 978-986-476-133-3
