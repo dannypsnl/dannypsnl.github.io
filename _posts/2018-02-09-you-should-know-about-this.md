@@ -6,7 +6,7 @@ tags:
   - javascript
 ---
 
-this scope rule is one of hardest problem in JS. Let's start it.
+`this` scope rule is one of hardest problem in JS. Let's start it.
 
 ```js
 function print() {
@@ -17,16 +17,15 @@ let obj = {
   print
 }
 obj.print() // Output: This is obj
-// It's good.
-But if we send print to other place?
+// It's good. But if we send print to other place?
 
 let printClone = obj.print;
-printClone(); // Which this at here? You have to see this of this place then you will know
+printClone(); // Which `this` at here? You have to see `this` of this place then you will know
 // Ok, let me tell you true, you don't know where does the function be send, so you also can't know which this at there.
 // The behavior is totally can not be prediction.
 ```
 
-Ok, now we see the true: this is dynamic. But! we still need to send us function to other place, right? We have to understanding print get the this at `obj.print()` this expression, not at `let obj = { ... }` part. Why this is important? Because a lots of novice of JS will write something like this.
+Ok! Now we know the true: `this` is dynamic. But! We still need to send us function to other place, right? We have to understanding print get the this at `obj.print()` this expression, not at `let obj = { ... }` part. Why this is important? Because a lots of novice of JS will write something like this.
 
 ```js
 // ignore, we are in obj definition
@@ -34,12 +33,13 @@ print: print.bind(this),
 // ignore
 ```
 
-`bind` is the next we will talk, the point is the this of `= { ... }`, whatever is type in, there is only `{}`,
+`bind` is the next thing we will discuss, the point is the this of `= { ... }`, whatever is type in, there is only `{}`,
 a null object at there! So you will get a null object out of your expected. What does bind do? Let me show it for you.
 
 ```js
 let printClone = print.bind(obj) // Or obj.print, understanding a truth: function has no relation with any object before we bind(and some other operation) it.
-printClone() // Output: This is obj
+printClone() // `this` at here is `obj`
+// Output: This is obj
 ```
 
 `bind` return a new function, combine by a function with a object, use object to be new function's `this`.
@@ -62,9 +62,12 @@ let printClone = car.print
 printClone() // Output: { name: "Tasla", price: 100000 }
 ```
 
-Very interesting, right? Because we use closure at here. We reference the `self` in `NewCar`. The most important part came, every time you call NewCar for a new object. The `self` is different. This is the one of the greatest trick in es3/5, seems this rule is so complex, why don't use closure to avoid it. In es3/5, this trick is good enough.
+Very interesting, right? Because we use closure at here. We reference the `self` in `NewCar`.
+The most important part came, every time you call `NewCar` for a new object. The `self` is different.
+This is the one of the greatest trick in ES3/5, seems this rule is so complex, why don't use closure to avoid it.
+In ES3/5, this trick is good enough.
 
-Now we have class, but what does it real mean?
+In ES6, we have `class`, but what does it real mean?
 
 ```javascript
 function Car() {
@@ -80,10 +83,10 @@ var clone = car.dump
 clone() // Of course, error
 ```
 
-`Car` call constructor in es5, because we can use `new` ask JS `this` reference to the object we create.<br>
+`Car` call constructor in ES5, because we can use `new` ask JS `this` reference to the object we create.<br>
 But as you see, the function inside still have dynamic `this`.<br>
 Don't worry about that, because what I want to say is keyword `class` work as same as constructor!<br>
-How we fix it in es5?
+How we fix it in ES5?
 
 ```javascript
 function Car() {
