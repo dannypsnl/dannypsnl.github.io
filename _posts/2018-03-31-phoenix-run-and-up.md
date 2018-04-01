@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Phoneix 安裝與啟動"
-categories: elixir phoenix
+categories: phoenix elixir web
 tags:
-  - elixir
   - phoenix
+  - elixir
+  - web
 ---
 
 這幾天好不容易有機會試玩 Elixir 的神奇框架 Phoenix
