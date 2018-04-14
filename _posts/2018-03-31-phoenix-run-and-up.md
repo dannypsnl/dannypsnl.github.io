@@ -28,10 +28,10 @@ $ mix phx.new hello
 
 接著會跑出整串的安裝過程，所有問題都按 y ，Phoenix 會為你安裝需要的相依還有 js 等等，等待結束之後進入目錄 `$ cd hello`
 
-預設的資料庫 Database 是 專案名稱_dev ，所以現在用 ecto 創建一個 db 吧
+預設的資料庫 Database 是 `專案名稱_dev` ，所以現在用 ecto 創建一個 db 吧
 
-```
-$ mix ecto.create hello _ dev
+```bash
+$ mix ecto.create hello_dev
 ```
 
 > p.s. 這裡有個問題是你必須現在 `port: 5432` 上跑一個 postgre ，否則會跑出一連串的錯誤，因為 phoenix 會不斷嘗試連接資料庫
@@ -40,7 +40,7 @@ $ mix ecto.create hello _ dev
 
 Docker command:
 
-```
+```bash
 $ docker run --rm --name dev-postgre -d postgre:10.3
 ```
 
@@ -48,7 +48,7 @@ $ docker run --rm --name dev-postgre -d postgre:10.3
 
 最後啟動伺服器
 
-```
+```bash
 $ mix phx.server
 ```
 
