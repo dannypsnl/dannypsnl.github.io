@@ -31,7 +31,7 @@ $ mix phx.new hello
 預設的資料庫 Database 是 `專案名稱_dev` ，所以現在用 ecto 創建一個 db 吧
 
 ```bash
-$ mix ecto.create hello_dev
+$ mix ecto.create
 ```
 
 > p.s. 這裡有個問題是你必須先在 `port: 5432` 上跑一個 postgre ，否則會跑出一連串的錯誤，因為 phoenix 會不斷嘗試連接資料庫
