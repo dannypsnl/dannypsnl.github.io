@@ -191,7 +191,11 @@ func (w *ErrorWrapper) Then(task interface{}) *ErrorWrapper {
     return w
 }
 
-func (w ErrorWrapper) Error() string { return fmt.Sprintf("%s", w.err) }
+func (w *ErrorWrapper) Final(catch func(error)) {
+    if w.err != nil {
+        catch(w.err)
+    }
+}
 ```
 
 Now, we coding like
@@ -205,9 +209,7 @@ w.Then(func(network, host string) (net.Conn, error) {
 }).Then(func(conn net.Conn) error {
     _, err := conn.Write([]byte{`command`})
     return err
+}).Final(func(e error) {
+    panic(e)
 })
-
-if w.Error() != nil {
-    panic(w)
-}
 ```
