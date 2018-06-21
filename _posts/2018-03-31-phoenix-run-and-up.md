@@ -41,7 +41,7 @@ $ mix ecto.create hello_dev
 Docker command:
 
 ```bash
-$ docker run --rm --name dev-postgre -d postgres:10.3
+$ docker run --rm --name dev-postgre -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:10.3
 ```
 
 為了讓電腦環境更乾淨你可以選擇用 docker 建立 phoenix 的開發環境，再將資料庫 link 進開發容器之中，檔案掛 volume 即可
