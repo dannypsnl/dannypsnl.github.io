@@ -4,34 +4,35 @@ title: About
 sidebar_link: true
 ---
 
-# Skills
-## C++
-## Go
-## Rust
-
 # Projects
 
-- [redux](https://github.com/dannypsnl/redux)<br>
-A Go version redux.
+- [elz](https://github.com/elz-lang/elz)
+    A modern programming language I design and implement.
+    Elz forcus on highly flexible user defined abstraction & productive
+    stack: go, antlr, c/c++, shell
 
-- [elz](https://github.com/elz-lang/elz)<br>
-A modern programming language I design and implement.
+- [redux](https://github.com/dannypsnl/redux)
+    A single flow state management library porting from JavaScript
+    [original project](https://github.com/reduxjs/redux)
+    stack: go
 
-- [呆呆](https://qr-official.line.me/M/JJgUuLg1zS.png)<br>
-A line-bot, it can execute JavaScript code if it's safety(Node.js).
+- [cdog](https://github.com/dannypsnl/cdog)
+    automatic build system for C++
+    stack: c++, cmake
 
-- [rocket](https://github.com/dannypsnl/rocket)<br>
-A lightweight web framework for Go.
+- [呆呆](https://qr-official.line.me/M/JJgUuLg1zS.png)
+    A line-bot can execute JavaScript if code is safety(Node.js).
+    stack: node.js
 
-- [todo-list](https://github.com/dannypsnl/todolist/tree/master/react-todo)<br>
-A practice help friend learning react & redux.
-
-- [language-learn](https://github.com/dannypsnl/languages-learn)
+- [rocket](https://github.com/dannypsnl/rocket)
+    A lightweight web framework for Go.
+    stack: go
 
 # About Me
 
-I am Danny Lin.<br>
-I am a software engineer, especially love compiler.<br>
-Also interesting about system software & networking.<br>
+Name: Danny Lin.
+
+I am a software engineer, especially love compiler. Also interesting about system software & networking.
+
 Tainan, Taiwan(09) 7582-2245, 10:00~19:00<br>
- Line id: dannypsnl
+Line id: dannypsnl
