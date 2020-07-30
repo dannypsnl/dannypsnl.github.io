@@ -8,7 +8,7 @@ tags:
   - fixed point
 ---
 
-This article is about how to get a fixed point in lambda calculus(utlc) system, if you didn't familiar with it, you can read [NOTE: what is lambda calculus](/blog/2020/01/01/cs/note-what-is-lambda-calculus/) to get start. What's a fixed point? When a function $f(x)$ has $x$ can make $f(x) = x$ then we say $x$ is the fixed point of $f$. Now we can get start to derive one.
+This article is about how to get a fixed point in lambda calculus(utlc) system, if you didn't familiar with it, you can read [NOTE: what is lambda calculus](/blog/2020/01/01/cs/note-what-is-lambda-calculus/) to get started. What's a fixed point? When a function $f(x)$ has $x$ can make $f(x) = x$ then we say $x$ is the fixed point of $f$. Now we can get started to derive one.
 
 In lambda calculus, Peano's number can be represented as:
 
@@ -74,11 +74,11 @@ $$
 mk \doteq (mkmk \; mkmk)
 $$
 
-With `mk` we can have `mult` by a different way.
+With `mk` we can have `mult` in a different way.
 
 $$
 mkmult' \doteq \lambda n . \lambda m . if \; (iszero \; n) \; 0 \; (add \; m \; (t \; (predecessor \; n) \; m)) \\
 mult \doteq (mk \; mkmult')
 $$
 
-`mk` can find out fixed point of any function. Which means `M (mk M) = (mk M)`. `mk` is not the only fixed point, the most famous fixed point is Y combinator, but I'm not going to talk about it here. At the end, thanks for the read and have a nice day.
+`mk` can find out the fixed point of any function. Which means `M (mk M) = (mk M)`. `mk` is not the only fixed point, the most famous fixed point is Y combinator, but I'm not going to talk about it here. In the end, thanks for the read and have a nice day.
