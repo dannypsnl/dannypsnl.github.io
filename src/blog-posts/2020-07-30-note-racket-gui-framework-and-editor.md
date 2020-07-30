@@ -14,7 +14,7 @@ tags:
 
 Whole GUI system based on a class hierarchy, therefore, let's inherit `racket:text%`:
 
-```rkt
+```racket
 (define editor%
   (class racket:text%
     (init)
@@ -25,7 +25,7 @@ Whole GUI system based on a class hierarchy, therefore, let's inherit `racket:te
 
 Override `on-char` can get [key-event%](https://docs.racket-lang.org/gui/key-event_.html):
 
-```rkt
+```racket
 (define editor%
   (class racket:text%
     (init)
@@ -47,7 +47,7 @@ An interesting thing was `send key-event% get-x` or `send key-event% get-y` won'
 
 Override `on-local-event` can get [mouse-event%](https://docs.racket-lang.org/gui/mouse-event_.html):
 
-```rkt
+```racket
 (define editor%
   (class racket:text%
     (init)
