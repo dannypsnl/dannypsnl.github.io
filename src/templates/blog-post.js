@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import { Disqus } from "gatsby-plugin-disqus"
 import SiteLink from "../components/site-link"
 
 import "../styles/code-block-theme.css"
@@ -34,11 +33,6 @@ export default ({ data }) => {
   )
 
   const post = data.markdownRemark
-  const disqusConfig = {
-    url: `${data.site.siteMetadata.siteUrl + post.slug}`,
-    identifier: post.id,
-    title: post.frontmatter.title,
-  }
   return (
     <Layout>
       <div>
@@ -71,7 +65,6 @@ export default ({ data }) => {
         />
         <BuyMeACoffee />
         <LicenseCC4 />
-        <Disqus config={disqusConfig} />
       </div>
     </Layout>
   )

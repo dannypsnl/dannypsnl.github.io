@@ -149,13 +149,6 @@ module.exports = {
         ],
       },
     },
-    // disqus
-    {
-      resolve: `gatsby-plugin-disqus`,
-      options: {
-        shortname: `https-dannypsnl-github-io`,
-      },
-    },
     // Google Analytics
     {
       resolve: `gatsby-plugin-google-analytics`,
