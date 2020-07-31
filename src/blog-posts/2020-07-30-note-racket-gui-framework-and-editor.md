@@ -3,6 +3,7 @@ title: "NOTE: Racket GUI framework and editor component"
 categories:
   - cs
 tags:
+  - note
   - racket
   - racket/gui
   - gui
