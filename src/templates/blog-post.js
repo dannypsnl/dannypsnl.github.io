@@ -35,9 +35,9 @@ export default ({ data }) => {
 
   const post = data.markdownRemark
   const disqusConfig = {
-    url: `${data.site.siteMetadata.siteUrl + post.slug}`,
+    url: `${data.site.siteMetadata.siteUrl + post.fields.slug}`,
     identifier: post.id,
-    title: post.title,
+    title: post.frontmatter.title,
   }
   return (
     <Layout>
