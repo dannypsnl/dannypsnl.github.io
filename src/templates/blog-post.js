@@ -40,7 +40,16 @@ export default ({ data }) => {
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <FooterSection>
           author:{" "}
-          <SiteLink url={`https://github.com/dannypsnl`}>dannypsnl</SiteLink>
+          <SiteLink url={`https://github.com/dannypsnl`}>
+            Lîm Tsú-thuàn/林子篆/Danny
+          </SiteLink>
+        </FooterSection>
+        <FooterSection>
+          <SiteLink
+            url={`https://github.com/dannypsnl/dannypsnl.github.io/issues/new`}
+          >
+            Suggest/Discuss/Comment
+          </SiteLink>{" "}
         </FooterSection>
         <FooterSection>
           category:
