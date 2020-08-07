@@ -30,7 +30,7 @@ With another hand represents `10 x n`, where `n` following the same rules, we ca
 3. `s n` and `s m` are the same, iff `n` and `m` are the same
 4. `s n` won't be `z` anyway
 
-Now we know how to find out next $\mathbb{Z}$, `\all n.(s n)` belongs to $\mathbb{Z}$. We call this countable infinite. The second step, we need to define how to compare infinite, idea was simple: we don't need to know 5(or 6) to know our hands have the same amount of finger! We mapping them, therefore, let us mapping numbers, we get an amazing result from this:
+Now we know how to find out next $\mathbb{Z}$, `\forall n.(s n)` belongs to $\mathbb{Z}$. We call this countable infinite. The second step, we need to define how to compare infinite, idea was simple: we don't need to know 5(or 6) to know our hands have the same amount of finger! We mapping them, therefore, let us mapping numbers, we get an amazing result from this:
 
 ```
 1 -> 2
