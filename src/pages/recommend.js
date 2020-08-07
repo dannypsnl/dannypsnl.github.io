@@ -5,22 +5,71 @@ import SiteLink from "../components/site-link"
 import { graphql } from "gatsby"
 
 export default ({ data }) => {
-  const sites = [
+  const recommends = [
     {
-      link: `http://dev.stephendiehl.com/hask/`,
-      name: `WHAT I WISH I KNEW WHEN LEARNING HASKELL`,
+      title: `Racket`,
+      sites: [
+        { link: `https://beautifulracket.com/`, name: `Beautiful Racket` },
+      ],
     },
     {
-      link: `https://people.inf.elte.hu/divip/AgdaTutorial/Symbols.html`,
-      name: `Agda symbols`,
+      title: `Blog`,
+      sites: [
+        {
+          link: `https://alex-hhh.github.io/index.html`,
+          name: `Alex Harsányi`,
+        },
+        { link: `https://ice1000.org/`, name: `ice1000` },
+        { link: `https://wusyong.github.io/`, name: `Ngo Iok Ui` },
+        { link: `https://franknine.github.io/`, name: `Northern Wind` },
+        { link: `https://viktorl.in/Blog/`, name: `Viktor Lin` },
+      ],
     },
     {
-      link: `https://coq.inria.fr/`,
-      name: `Coq proof assistant`,
+      title: `Arend`,
+      sites: [
+        {
+          link: `https://arend-lang.github.io/`,
+          name: `Arend theorem prover`,
+        },
+      ],
     },
     {
-      link: `https://homes.cs.washington.edu/~emina/doc/rosette.pldi14.pdf`,
-      name: `Rosette`,
+      title: `Agda`,
+      sites: [
+        {
+          link: `https://people.inf.elte.hu/divip/AgdaTutorial/Symbols.html`,
+          name: `Agda symbols`,
+        },
+      ],
+    },
+    {
+      title: `Haskell`,
+      sites: [
+        {
+          link: `http://dev.stephendiehl.com/hask/`,
+          name: `WHAT I WISH I KNEW WHEN LEARNING HASKELL`,
+        },
+        { link: `https://typeclasses.com/sitemap`, name: `typeclasses` },
+      ],
+    },
+    {
+      title: `Coq`,
+      sites: [
+        {
+          link: `https://coq.inria.fr/`,
+          name: `Coq proof assistant`,
+        },
+      ],
+    },
+    {
+      title: `Solver`,
+      sites: [
+        {
+          link: `https://homes.cs.washington.edu/~emina/doc/rosette.pldi14.pdf`,
+          name: `Rosette`,
+        },
+      ],
     },
   ]
 
@@ -28,13 +77,18 @@ export default ({ data }) => {
     <Layout pageTitle={`Recommend`}>
       <SEO title={`Recommend`} description={data.site.siteMetadata.title} />
       <div>
-        <ul>{sites.map((project) => ProjectLi({ project }))}</ul>
+        {recommends.map((recommend) => (
+          <>
+            <h3>{recommend.title}</h3>
+            <ul>{recommend.sites.map((site) => SiteLi({ site }))}</ul>
+          </>
+        ))}
       </div>
     </Layout>
   )
 }
 
-const ProjectLi = ({ project }) => (
+const SiteLi = ({ site }) => (
   <li>
     <div
       style={{
@@ -42,7 +96,7 @@ const ProjectLi = ({ project }) => (
         marginRight: `0.2em`,
       }}
     >
-      <SiteLink url={project.link}>{project.name}</SiteLink>
+      <SiteLink url={site.link}>{site.name}</SiteLink>
     </div>
   </li>
 )
