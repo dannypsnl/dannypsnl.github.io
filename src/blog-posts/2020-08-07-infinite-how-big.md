@@ -78,8 +78,8 @@ We might think, $\mathbb{R}$ can mapping to $\mathbb{Z}$, however, that's wrong.
    ...
    ```
 3. Every $r \in \mathbb{R}'$ can be represented as $0.a_{11} a_{12} a_{13} a_{14} ...$, $a_{ij}$ means a $j$th digit of the $i$th number in the mapping.
-4. There must a number $n \in \mathbb{R}'$ can be constructed from mapping, by selecting a digit that different than $a{ii}$ for every digit of $n$.
-5. For all index $i$, we cannot say $n$ has that index, because the $i$th digit of $n$ must different than $a{ii}$.
+4. There must a number $n \in \mathbb{R}'$ can be constructed from mapping, by selecting a digit that different than $a_{ii}$ for every digit of $n$.
+5. For all index $i$, we cannot say $n$ has that index, because the $i$th digit of $n$ must different than $a_{ii}$.
 6. Now we have evidence shows $n$ not in mapping but in $\mathbb{R}'$, which meaning such mapping won't be exhausted forever(we for sure can add $n$ into mapping to create a new one, however, the new one would have the same problem). Q.E.D.
 
 We call set like $\mathbb{R}$ uncountable. In fact, all points on a flat create the same set as $\mathbb{R}$. Proof also straightforward, extract any point of a line, its digits at odd and even index create two new $\mathbb{R}$, and must in a flat. Hope now you know more about infinite, have a nice day and see you next time.
