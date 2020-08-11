@@ -24,3 +24,7 @@ Blog posts put in `src/blog-posts/`
 
 - [Remark](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/)
 - [Prism](https://prismjs.com/)
+
+#### Comment
+
+[utteranc](https://utteranc.es/)

@@ -7,6 +7,7 @@ import "../styles/code-block-theme.css"
 import "../styles/code-block-hightlight.css"
 import { LicenseCC4 } from "../components/licensecc4"
 import { BuyMeACoffee } from "../components/buy-me-a-coffe"
+import Utterances from "../components/utterances"
 
 export default ({ data }) => {
   const FooterSection = ({ children }) => (
@@ -45,13 +46,6 @@ export default ({ data }) => {
           </SiteLink>
         </FooterSection>
         <FooterSection>
-          <SiteLink
-            url={`https://github.com/dannypsnl/dannypsnl.github.io/issues/new`}
-          >
-            Suggest/Discuss/Comment
-          </SiteLink>{" "}
-        </FooterSection>
-        <FooterSection>
           category:
           {post.frontmatter.categories.map((category) => (
             <ShowTag>{category}</ShowTag>
@@ -72,6 +66,7 @@ export default ({ data }) => {
           }}
           articles={data.allMarkdownRemark.edges.map((edge) => edge.node)}
         />
+        <Utterances />
         <BuyMeACoffee />
         <LicenseCC4 />
       </div>
