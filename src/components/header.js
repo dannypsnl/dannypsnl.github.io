@@ -34,7 +34,7 @@ const Header = ({ siteMetadata, pageTitle }) => {
           backgroundColor: `#635c5c`,
           padding: `0`,
           margin: `0`,
-          width: `6.6em`,
+          width: `16.0em`,
           // left, right, bottom-right, bottom-left
           borderRadius: `0 0 0 0.2em`,
         }}
@@ -84,11 +84,9 @@ const Header = ({ siteMetadata, pageTitle }) => {
 const TabLink = ({ children, to }) => (
   <Link
     to={to}
-    style={
-      {
-        // textDecoration: `none`,
-      }
-    }
+    style={{
+      textDecoration: `none`,
+    }}
   >
     <li
       style={{
@@ -96,6 +94,7 @@ const TabLink = ({ children, to }) => (
         textAlign: `left`,
         margin: `auto 0.5em auto 0.5em`,
         borderRadius: `0.2em`,
+        display: `inline`,
       }}
     >
       {children}
