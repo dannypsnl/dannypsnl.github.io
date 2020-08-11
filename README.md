@@ -28,3 +28,7 @@ Blog posts put in `src/blog-posts/`
 #### Comment
 
 [utteranc](https://utteranc.es/)
+
+#### Next Release
+
+1. switch to utteranc
