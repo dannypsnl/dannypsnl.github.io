@@ -32,3 +32,4 @@ Blog posts put in `src/blog-posts/`
 #### Next Release
 
 1. switch to utteranc
+2. horizontal navigation
