@@ -3,8 +3,6 @@ import { Link } from "gatsby"
 import { nameToYYYYMMDD } from "../utils/string-to-date"
 
 export default ({
-  categories,
-  addCategories,
   tags,
   addTags,
   blogURL,

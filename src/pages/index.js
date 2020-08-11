@@ -80,51 +80,47 @@ const IndexPage = ({ data }) => {
           Posts
         </h4>
 
-        {// all posts
-        edges.map(({ node }) => {
-          if (
-            matchFilter(
-              node.frontmatter.tags,
-              selectedTags,
-              node.frontmatter.categories,
-              selectedCategories
-            )
-          ) {
-            return (
-              <div key={node.id}>
-                <BlogPost
-                  categories={node.frontmatter.categories}
-                  addCategories={addTag(
-                    selectedCategories,
-                    setCategories,
-                    avoidDuplicate(categorySuggestions)
-                  )}
-                  tags={node.frontmatter.tags}
-                  addTags={addTag(
-                    selectedTags,
-                    setTags,
-                    avoidDuplicate(tagSuggestions)
-                  )}
-                  blogURL={node.fields.slug}
-                  title={node.frontmatter.title}
-                  timeToRead={node.timeToRead}
-                  fileName={node.parent.name}
-                  excerpt={node.excerpt}
-                  image={
-                    node.frontmatter.image &&
-                    node.frontmatter.image.childImageSharp ? (
-                      <Img
-                        fixed={node.frontmatter.image.childImageSharp.fixed}
-                      />
-                    ) : null
-                  }
-                />
-              </div>
-            )
-          } else {
-            return null
-          }
-        })}
+        {
+          // all posts
+          edges.map(({ node }) => {
+            if (
+              matchFilter(
+                node.frontmatter.tags,
+                selectedTags,
+                node.frontmatter.categories,
+                selectedCategories
+              )
+            ) {
+              return (
+                <div key={node.id}>
+                  <BlogPost
+                    tags={node.frontmatter.tags}
+                    addTags={addTag(
+                      selectedTags,
+                      setTags,
+                      avoidDuplicate(tagSuggestions)
+                    )}
+                    blogURL={node.fields.slug}
+                    title={node.frontmatter.title}
+                    timeToRead={node.timeToRead}
+                    fileName={node.parent.name}
+                    excerpt={node.excerpt}
+                    image={
+                      node.frontmatter.image &&
+                      node.frontmatter.image.childImageSharp ? (
+                        <Img
+                          fixed={node.frontmatter.image.childImageSharp.fixed}
+                        />
+                      ) : null
+                    }
+                  />
+                </div>
+              )
+            } else {
+              return null
+            }
+          })
+        }
       </div>
     </Layout>
   )
