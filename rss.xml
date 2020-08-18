@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Dan's Blog's RSS Feed]]></title><description><![CDATA[Programming Language Theory • System Programming]]></description><link>https://dannypsnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 11 Aug 2020 15:05:37 GMT</lastBuildDate><item><title><![CDATA[NOTE: how to setup a julia project]]></title><description><![CDATA[Tape  in shell, after getting into the interactive environment of Julia, tape  to get into pkg mode: In this mode tape:  In the current…]]></description><link>https://dannypsnl.github.io/blog/2020/08/07/cs/note-setup-a-julia-proj/</link><guid isPermaLink="false">https://dannypsnl.github.io/blog/2020/08/07/cs/note-setup-a-julia-proj/</guid><pubDate>Fri, 07 Aug 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Tape &lt;code class=&quot;language-text&quot;&gt;julia&lt;/code&gt; in shell, after getting into the interactive environment of &lt;a href=&quot;https://julialang.org/&quot;&gt;Julia&lt;/a&gt;, tape &lt;code class=&quot;language-text&quot;&gt;]&lt;/code&gt; to get into pkg mode:&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Dan's Blog's RSS Feed]]></title><description><![CDATA[Programming Language Theory • System Programming]]></description><link>https://dannypsnl.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 18 Aug 2020 16:13:23 GMT</lastBuildDate><item><title><![CDATA[NOTE: how to setup a julia project]]></title><description><![CDATA[Tape  in shell, after getting into the interactive environment of Julia, tape  to get into pkg mode: In this mode tape:  In the current…]]></description><link>https://dannypsnl.github.io/blog/2020/08/07/cs/note-setup-a-julia-proj/</link><guid isPermaLink="false">https://dannypsnl.github.io/blog/2020/08/07/cs/note-setup-a-julia-proj/</guid><pubDate>Fri, 07 Aug 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Tape &lt;code class=&quot;language-text&quot;&gt;julia&lt;/code&gt; in shell, after getting into the interactive environment of &lt;a href=&quot;https://julialang.org/&quot;&gt;Julia&lt;/a&gt;, tape &lt;code class=&quot;language-text&quot;&gt;]&lt;/code&gt; to get into pkg mode:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;               _
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
   (_)     | (_) (_)    |
@@ -7748,7 +7748,89 @@ raco pkg &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --aut
 &lt;p&gt;It gives a type after pretty print for input in REPL. Finally, we complete this journey.&lt;/p&gt;
 &lt;h3&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;I hope detailed implementation and examples show why we need the HM system, and how to make one, and where we would need it. I would be glad to hear you get help from this article. Have a nice day, and it&apos;s time for cookies!&lt;/p&gt;
-&lt;p&gt;p.s. This is probably the second-longest article I made XD.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C++ thread 基礎]]></title><description><![CDATA[使用標準庫的 thread 非常容易 1.引入標頭檔 2.宣告函式 3.建構一個物件…]]></description><link>https://dannypsnl.github.io/blog/2017/06/26/cs/cpp-thread-basic/</link><guid isPermaLink="false">https://dannypsnl.github.io/blog/2017/06/26/cs/cpp-thread-basic/</guid><pubDate>Mon, 26 Jun 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;使用標準庫的 thread 非常容易&lt;/p&gt;
+&lt;p&gt;p.s. This is probably the second-longest article I made XD.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[NOTE: Coq tactics]]></title><description><![CDATA[Quickly note some Coq.  introduces variable from environment, here introduce bound  from .  would try to reduce both sides of equation, in…]]></description><link>https://dannypsnl.github.io/blog/2020/08/19/cs/note-coq-tactics/</link><guid isPermaLink="false">https://dannypsnl.github.io/blog/2020/08/19/cs/note-coq-tactics/</guid><pubDate>Wed, 19 Aug 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Quickly note some Coq.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem plus_0_n : forall n:nat, 0 + n = n.
+Proof.
+  intros n. simpl. reflexivity.
+Qed.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;intros&lt;/code&gt; introduces variable from environment, here introduce bound &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt; from &lt;code class=&quot;language-text&quot;&gt;forall&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;simpl&lt;/code&gt; would try to reduce both sides of equation, in case &lt;code class=&quot;language-text&quot;&gt;0 + n&lt;/code&gt; should become &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;reflexivity&lt;/code&gt; check &lt;code class=&quot;language-text&quot;&gt;n = n&lt;/code&gt; which is true, put &lt;code class=&quot;language-text&quot;&gt;Qed&lt;/code&gt; in the end.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem plus_id : forall n m:nat,
+  (* -&amp;gt; constructs a function type, means implies *)
+  m = n -&amp;gt;
+  n + n = m + m.
+Proof.
+  (* introduce n m from forall first *)
+  intros n m.
+  (* introduce m = n as H*)
+  intros H.
+  (* rewrite n + n = m + m with m = n, got n + n = m + m *)
+  rewrite -&amp;gt; H.
+  reflexivity.
+Qed.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;rewrite&lt;/code&gt; do substitution, without it we would get &lt;code class=&quot;language-text&quot;&gt;Unable to unify &amp;quot;m + m&amp;quot; with &amp;quot;n + n&amp;quot;.&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem negb_involutive : forall b : bool,
+  negb (negb b) = b.
+Proof.
+  intros b. destruct b [] eqn : B.
+  (* b = true *)
+  - reflexivity.
+  (* b = false *)
+  - reflexivity.
+Qed.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;destruct&lt;/code&gt; makes subgoals, in this case &lt;code class=&quot;language-text&quot;&gt;bool&lt;/code&gt; constructors &lt;code class=&quot;language-text&quot;&gt;true&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;false&lt;/code&gt; has no arguments, therefore use &lt;code class=&quot;language-text&quot;&gt;[]&lt;/code&gt; since no identifiers has to bind. In fact, we can totally remove it: &lt;code class=&quot;language-text&quot;&gt;destruct b eqn : B.&lt;/code&gt;. &lt;code class=&quot;language-text&quot;&gt;eqn&lt;/code&gt; gives &lt;code class=&quot;language-text&quot;&gt;destruct&lt;/code&gt; equation a name, also can omit: &lt;code class=&quot;language-text&quot;&gt;destruct b.&lt;/code&gt;. We can make it even simpler: &lt;code class=&quot;language-text&quot;&gt;intros [].&lt;/code&gt; and remove &lt;code class=&quot;language-text&quot;&gt;destruct&lt;/code&gt;. &lt;code class=&quot;language-text&quot;&gt;-&lt;/code&gt; handles subgoals.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem andb_commutative : forall b c, andb b c = andb c b.
+Proof.
+  intros [] [].
+  - reflexivity.
+  - reflexivity.
+  - reflexivity.
+  - reflexivity.
+Qed&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This case shows how to handle combinations: &lt;code class=&quot;language-text&quot;&gt;true true&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;true false&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;false true&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;false false&lt;/code&gt;. To make &lt;code class=&quot;language-text&quot;&gt;destruct&lt;/code&gt; deeper, can use &lt;code class=&quot;language-text&quot;&gt;--&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;---&lt;/code&gt; and so on:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem andb_commutative : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  - destruct c.
+    -- reflexivity.
+    -- reflexivity.
+  - destruct c.
+    -- reflexivity.
+    -- reflexivity.
+Qed.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To prove &lt;code class=&quot;language-text&quot;&gt;n + 0&lt;/code&gt;, at first we might think it&apos;s easy.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem plus_n_0 : forall n : nat, n = n + 0.
+Proof.
+  intros [| n&amp;#39;]. (* n = 0 | S n&amp;#39;*)
+  - reflexivity.
+  - reflexivity.
+Qed&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We get two subgoals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;n = 0&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;reflexivity&lt;/code&gt; is enough here.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;n = S n&amp;#39;&lt;/code&gt;, but we have no idea what &lt;code class=&quot;language-text&quot;&gt;n&amp;#39;&lt;/code&gt; is, to prove it requires proving &lt;code class=&quot;language-text&quot;&gt;plus_n_0&lt;/code&gt; first! First we might think we can &lt;code class=&quot;language-text&quot;&gt;destruct n&amp;#39;&lt;/code&gt;, but &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt; can be infinite, we run out of ideas. Unless we have &lt;code class=&quot;language-text&quot;&gt;induction&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem plus_n_0 : forall n : nat, n = n + 0.
+Proof.
+  induction n as [| n&amp;#39; IHn&amp;#39;].
+  - reflexivity.
+  (* n = S n&amp;#39;
+     (n&amp;#39; + 0 = n&amp;#39;) = IHn&amp;#39; *)
+  - simpl. rewrite &amp;lt;- IHn&amp;#39;. reflexivity.
+Qed&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As we learn at before, prove &lt;code class=&quot;language-text&quot;&gt;P(0)&lt;/code&gt;, suppose &lt;code class=&quot;language-text&quot;&gt;P(n)&lt;/code&gt; is true then check &lt;code class=&quot;language-text&quot;&gt;P(S n)&lt;/code&gt; works.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;coq&quot;&gt;&lt;pre class=&quot;language-coq&quot;&gt;&lt;code class=&quot;language-coq&quot;&gt;Theorem mult_0_plus&amp;#39; : forall n m : nat,
+  (0 + n) * m = n * m.
+Proof.
+  intros n m.
+  assert (H : 0 + n = n). { reflexivity. }
+  rewrite -&amp;gt; H.
+  reflexivity.
+Qed.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;assert&lt;/code&gt; proves a sub theorem, here is &lt;code class=&quot;language-text&quot;&gt;0 + n = n&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;{ reflexivity. }&lt;/code&gt; is the proof of the sub theorem. Later we &lt;code class=&quot;language-text&quot;&gt;rewrite&lt;/code&gt; equation: &lt;code class=&quot;language-text&quot;&gt;(0 + n) * m = n * m&lt;/code&gt; with &lt;code class=&quot;language-text&quot;&gt;0 + n = n&lt;/code&gt;, then get &lt;code class=&quot;language-text&quot;&gt;n * m = n * m&lt;/code&gt;, finally, use &lt;code class=&quot;language-text&quot;&gt;reflexivity&lt;/code&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C++ thread 基礎]]></title><description><![CDATA[使用標準庫的 thread 非常容易 1.引入標頭檔 2.宣告函式 3.建構一個物件…]]></description><link>https://dannypsnl.github.io/blog/2017/06/26/cs/cpp-thread-basic/</link><guid isPermaLink="false">https://dannypsnl.github.io/blog/2017/06/26/cs/cpp-thread-basic/</guid><pubDate>Mon, 26 Jun 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;使用標準庫的 thread 非常容易&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;cpp&quot;&gt;&lt;pre class=&quot;language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&amp;lt;thread&gt;&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive keyword&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&amp;lt;iostream&gt;&lt;/span&gt;&lt;/span&gt;
 
