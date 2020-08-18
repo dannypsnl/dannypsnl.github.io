@@ -7,9 +7,21 @@ import { graphql } from "gatsby"
 export default ({ data }) => {
   const recommends = [
     {
-      title: `Racket`,
+      title: `Scheme/Racket`,
       sites: [
+        {
+          link: `http://cisco.github.io/ChezScheme/csug9.5/csug.html`,
+          name: `Chez Scheme Version 9 User's Guide`,
+        },
         { link: `https://beautifulracket.com/`, name: `Beautiful Racket` },
+        {
+          link: `https://www.scheme.com/tspl4/`,
+          name: `The Scheme Programming Language`,
+        },
+        {
+          link: `https://mlemmer.org/HowTo.html`,
+          name: `How To Use Scribble to Write your Academic Papers:`,
+        },
       ],
     },
     {
@@ -35,11 +47,42 @@ export default ({ data }) => {
       ],
     },
     {
+      title: `Isabelle`,
+      sites: [
+        {
+          link: `https://isabelle.in.tum.de/`,
+          name: `Isabelle`,
+        },
+      ],
+    },
+    {
+      title: `Coq`,
+      sites: [
+        {
+          link: `https://coq.inria.fr/`,
+          name: `Coq`,
+        },
+        {
+          link: `https://coq-zh.github.io/SF-zh/`,
+          name: `Software Foundations: Chinese Translation`,
+        },
+      ],
+    },
+    {
       title: `Agda`,
       sites: [
         {
           link: `https://people.inf.elte.hu/divip/AgdaTutorial/Symbols.html`,
           name: `Agda symbols`,
+        },
+      ],
+    },
+    {
+      title: `Idris`,
+      sites: [
+        {
+          link: `https://www.idris-lang.org/`,
+          name: `Idris`,
         },
       ],
     },
@@ -51,15 +94,6 @@ export default ({ data }) => {
           name: `WHAT I WISH I KNEW WHEN LEARNING HASKELL`,
         },
         { link: `https://typeclasses.com/sitemap`, name: `typeclasses` },
-      ],
-    },
-    {
-      title: `Coq`,
-      sites: [
-        {
-          link: `https://coq.inria.fr/`,
-          name: `Coq proof assistant`,
-        },
       ],
     },
     {
