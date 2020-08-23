@@ -29,12 +29,39 @@ export default ({ data }) => {
       sites: [
         {
           link: `https://alex-hhh.github.io/index.html`,
-          name: `Alex Harsányi`,
+          name: `[Racket] Alex Harsányi`,
         },
-        { link: `https://ice1000.org/`, name: `ice1000` },
+        { link: `https://ice1000.org/`, name: `[PLT] ice1000` },
         { link: `https://wusyong.github.io/`, name: `Ngo Iok Ui` },
         { link: `https://franknine.github.io/`, name: `Northern Wind` },
         { link: `https://viktorl.in/Blog/`, name: `Viktor Lin` },
+        {
+          link: `https://edwinb.wordpress.com/blog/`,
+          name: `[PLT] Edwin Brady`,
+        },
+        {
+          link: `http://davidchristiansen.dk/blog/`,
+          name: `[PLT] David Thrane Christiansen`,
+        },
+        { link: `http://matt.might.net/articles/`, name: `[PLT] matt might` },
+        {
+          link: `http://math.ucr.edu/home/baez/`,
+          name: `[Math] John Baez’s Stuff`,
+        },
+        { link: `https://desvl.xyz/archives/`, name: `[Math] Desvl` },
+        { link: `https://www.math3ma.com/`, name: `[Math] math3ma` },
+        {
+          link: `https://golem.ph.utexas.edu/category/`,
+          name: `[Math] The n-Category Café`,
+        },
+        {
+          link: `https://w3.math.sinica.edu.tw/mathmedia/default.jsp`,
+          name: `[Math] 數學傳播`,
+        },
+        {
+          link: `https://homes.cs.washington.edu/~emina/index.html`,
+          name: `[PLT] Emina Torlak`,
+        },
       ],
     },
     {
