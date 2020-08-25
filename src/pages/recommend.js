@@ -102,6 +102,10 @@ export default ({ data }) => {
           link: `https://people.inf.elte.hu/divip/AgdaTutorial/Symbols.html`,
           name: `Agda symbols`,
         },
+        {
+          link: `https://agda-zh.github.io/PLFA-zh/`,
+          name: `plfa: Chinese Translation`,
+        },
       ],
     },
     {
