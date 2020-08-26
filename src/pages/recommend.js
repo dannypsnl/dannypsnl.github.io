@@ -62,6 +62,7 @@ export default ({ data }) => {
           link: `https://homes.cs.washington.edu/~emina/index.html`,
           name: `[PLT] Emina Torlak`,
         },
+        { link: `https://www.lemonhx.tech/#/`, name: `[PLT] Lemon` },
       ],
     },
     {
