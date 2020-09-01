@@ -34,7 +34,7 @@ Then we have our scribble document.
  @elem[#:style (make-style "fontsize" '(exact-chars))]|{8pt}{12pt}|
  @elem[#:style "selectfont"]}
 
-test
+中文
 ```
 
 Using command: `scribble ++style style.tex --latex test.scrbl`, it should produce `test.tex`, then eval `xelatex test.tex` should produce `test.pdf`. That is!
