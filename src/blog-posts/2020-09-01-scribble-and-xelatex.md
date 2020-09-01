@@ -3,6 +3,7 @@ title: "NOTE: scribble and xelatex"
 categories:
   - cs
 tags:
+  - note
   - racket
   - scribble
   - latex
