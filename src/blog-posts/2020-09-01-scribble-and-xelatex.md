@@ -16,6 +16,11 @@ scribble is a useful tool to create nice documents, however, with Chinese(any un
 % style.tex
 \usepackage{fontspec}
 \setmainfont{Kaiti TC}
+
+% reduce word spacing
+\spaceskip \fontdimen 2 \font
+% auto line breaks
+\XeTeXlinebreaklocale "zh"
 ```
 
 `Kaiti TC` can be changed to any supported fonts on your machine.
