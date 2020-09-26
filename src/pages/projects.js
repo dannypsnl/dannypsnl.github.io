@@ -72,6 +72,11 @@ export default ({ data }) => {
   ]
   const editor = [
     {
+      link: `https://github.com/racket-tw/sauron`,
+      name: `sauron`,
+      description: `New IDE of Racket language`,
+    },
+    {
       link: `https://github.com/racket-tw/intellij-racket`,
       name: `intellij-racket`,
       description: `Support Racket language in Intellij IDE`,
