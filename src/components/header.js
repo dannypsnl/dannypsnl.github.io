@@ -34,11 +34,12 @@ const Header = ({ siteMetadata, pageTitle }) => {
           backgroundColor: `#635c5c`,
           padding: `0`,
           margin: `0`,
-          width: `16.0em`,
+          width: `21.0em`,
           // left, right, bottom-right, bottom-left
           borderRadius: `0 0 0 0.2em`,
         }}
       >
+        <TabLink to={`/research`}>Research</TabLink>
         <TabLink to={`/recommend`}>Recommend</TabLink>
         <TabLink to={`/projects`}>Projects</TabLink>
         <TabLink to={`/resume`}>Resume</TabLink>
