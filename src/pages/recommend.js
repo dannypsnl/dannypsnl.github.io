@@ -25,6 +25,20 @@ export default ({ data }) => {
       ],
     },
     {
+      title: `Math`,
+      sites: [
+        {
+          link: `https://www.quantamagazine.org/how-godels-incompleteness-theorems-work-20200714`,
+          name: `How Gödel’s Proof Works`,
+        },
+        {
+          link: `https://w3.math.sinica.edu.tw/mathmedia/default.jsp`,
+          name: `數學傳播`,
+        },
+        { link: `https://www.c82.net/euclid/`, name: `Byrne’S Euclid` },
+      ],
+    },
+    {
       title: `Blog`,
       sites: [
         {
@@ -53,10 +67,6 @@ export default ({ data }) => {
         {
           link: `https://golem.ph.utexas.edu/category/`,
           name: `[Math] The n-Category Café`,
-        },
-        {
-          link: `https://w3.math.sinica.edu.tw/mathmedia/default.jsp`,
-          name: `[Math] 數學傳播`,
         },
         {
           link: `https://homes.cs.washington.edu/~emina/index.html`,
