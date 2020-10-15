@@ -6,6 +6,10 @@ import { graphql } from "gatsby"
 export default ({ data }) => {
   const contributions = [
     {
+      link: `https://dannypsnl.github.io/plt-research/research/intro-elim-inductive.html`,
+      description: `Introduction/Elimination Rules of Inductive`,
+    },
+    {
       link: `https://dannypsnl.github.io/plt-research/research/linear-or-gc.html`,
       description: `Linear or GC`,
     },
