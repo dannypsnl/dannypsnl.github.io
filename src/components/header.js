@@ -34,7 +34,7 @@ const Header = ({ siteMetadata, pageTitle }) => {
           backgroundColor: `#635c5c`,
           padding: `0`,
           margin: `0`,
-          width: `21.0em`,
+          width: `16.2em`,
           // left, right, bottom-right, bottom-left
           borderRadius: `0 0 0 0.2em`,
         }}
