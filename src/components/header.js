@@ -41,7 +41,6 @@ const Header = ({ siteMetadata, pageTitle }) => {
       >
         <TabLink to={`/research`}>Research</TabLink>
         <TabLink to={`/recommend`}>Recommend</TabLink>
-        <TabLink to={`/projects`}>Projects</TabLink>
         <TabLink to={`/resume`}>Resume</TabLink>
       </ul>
       <div
