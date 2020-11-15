@@ -28,21 +28,6 @@ const Header = ({ siteMetadata, pageTitle }) => {
         marginBottom: `1.45rem`,
       }}
     >
-      <ul
-        style={{
-          float: `right`,
-          backgroundColor: `#635c5c`,
-          padding: `0`,
-          margin: `0`,
-          width: `16.2em`,
-          // left, right, bottom-right, bottom-left
-          borderRadius: `0 0 0 0.2em`,
-        }}
-      >
-        <TabLink to={`/research`}>Research</TabLink>
-        <TabLink to={`/recommend`}>Recommend</TabLink>
-        <TabLink to={`/resume`}>Resume</TabLink>
-      </ul>
       <div
         style={{
           textAlign: `center`,
@@ -77,6 +62,19 @@ const Header = ({ siteMetadata, pageTitle }) => {
           {siteMetadata.description}
         </h4>
       </div>
+      <ul
+        style={{
+          textAlign: `center`,
+          backgroundColor: `#635c5c`,
+          padding: `0`,
+          // top, right, bottom, left
+          margin: `0 37rem 0 37rem`,
+          // left, right, bottom-right, bottom-left
+          borderRadius: `0.2em`,
+        }}
+      >
+        <TabLink to={`/resume`}>Resume</TabLink>
+      </ul>
     </header>
   )
 }
