@@ -96,4 +96,3 @@ Now we know we don't need subtractive, it can be replaced with one's complement 
 Back to group, one's complement would waste place about encoding is a thing must happen, because in 3-bits encoding it maps `[111]` and `[000]`. In two's complement the axis of symmetry pass through `[000]`, therefore, we won't get repetitive representations of zero.
 
 Extend this `[001]` maps to `[111]` in two's complement, maps to `[110]` in one's complement. Therefore, one's complement plus one would be two's complement.
-

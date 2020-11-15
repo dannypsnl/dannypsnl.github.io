@@ -145,7 +145,9 @@ module.exports = {
             slug: node.fields.slug,
             tags: node.frontmatter.tags,
             categories: node.frontmatter.categories,
-            date: node.frontmatter.date ? node.frontmatter.date : nameToDate(node.parent.name),
+            date: node.frontmatter.date
+              ? node.frontmatter.date
+              : nameToDate(node.parent.name),
           })),
       },
     },

@@ -22,9 +22,9 @@ And we can use a graph version to simplify the problem.
 ![](../images/note-topology/simplify-konigsberg-bridges.png)
 
 [Euler](https://en.wikipedia.org/wiki/Leonhard_Euler) found, a walkthrough of a graph, traversing every edges exactly once,
-depends on the [degrees](https://en.wikipedia.org/wiki/Degree_(graph_theory)) of the nodes(vertex).
-The graph must be [connected](https://en.wikipedia.org/wiki/Connectivity_(graph_theory)) and have exactly zero or two nodes of odd degree.  
-This walk called **Eulerian path** or **Euler walk** in his honor.   
+depends on the [degrees](<https://en.wikipedia.org/wiki/Degree_(graph_theory)>) of the nodes(vertex).
+The graph must be [connected](<https://en.wikipedia.org/wiki/Connectivity_(graph_theory)>) and have exactly zero or two nodes of odd degree.  
+This walk called **Eulerian path** or **Euler walk** in his honor.
 
 ### Eulerian circuit
 

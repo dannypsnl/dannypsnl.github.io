@@ -10,17 +10,17 @@ tags:
 
 ```js
 function print() {
-  console.log(this.data);
+  console.log(this.data)
 }
 let obj = {
   data: "This is obj",
-  print
-};
-obj.print(); // Output: This is obj
+  print,
+}
+obj.print() // Output: This is obj
 // It's good. But if we send print to other place?
 
-let printClone = obj.print;
-printClone(); // Which `this` at here? You have to see `this` of this place then you will know
+let printClone = obj.print
+printClone() // Which `this` at here? You have to see `this` of this place then you will know
 // Ok, let me tell you true, you don't know where does the function be send, so you also can't know which this at there.
 // The behavior is totally can not be prediction.
 ```
@@ -37,8 +37,8 @@ print: print.bind(this),
 a null object at there! So you will get a null object out of your expected. What does bind do? Let me show it for you.
 
 ```js
-let printClone = print.bind(obj); // Or obj.print, understanding a truth: function has no relation with any object before we bind(and some other operation) it.
-printClone(); // `this` at here is `obj`
+let printClone = print.bind(obj) // Or obj.print, understanding a truth: function has no relation with any object before we bind(and some other operation) it.
+printClone() // `this` at here is `obj`
 // Output: This is obj
 ```
 
@@ -50,18 +50,18 @@ But we of course want to define function with it's user. How to do that?
 function NewCar() {
   let self = {
     name: "Tasla",
-    price: 100000
-  };
+    price: 100000,
+  }
   return {
     print() {
-      console.log(self);
-    }
-  };
+      console.log(self)
+    },
+  }
 }
-let car = NewCar();
-car.print(); // Output: { name: "Tasla", price: 100000 }
-let printClone = car.print;
-printClone(); // Output: { name: "Tasla", price: 100000 }
+let car = NewCar()
+car.print() // Output: { name: "Tasla", price: 100000 }
+let printClone = car.print
+printClone() // Output: { name: "Tasla", price: 100000 }
 ```
 
 Very interesting, right? Because we use closure at here. We reference the `self` in `NewCar`.
@@ -73,16 +73,16 @@ In ES6, we have `class`, but what does it real mean?
 
 ```javascript
 function Car() {
-  this.name = "Tasla";
-  this.price = 100000;
-  this.dump = function() {
-    console.log(this);
-  };
+  this.name = "Tasla"
+  this.price = 100000
+  this.dump = function () {
+    console.log(this)
+  }
 }
-var car = new Car();
-car.dump();
-var clone = car.dump;
-clone(); // Of course, error
+var car = new Car()
+car.dump()
+var clone = car.dump
+clone() // Of course, error
 ```
 
 `Car` call constructor in ES5, because we can use `new` ask JS `this` reference to the object we create.<br>
@@ -93,9 +93,9 @@ How we fix it in ES5?
 ```javascript
 function Car() {
   // ... ignore
-  this.dump = function() {
-    console.log(this);
-  }.bind(this);
+  this.dump = function () {
+    console.log(this)
+  }.bind(this)
 }
 ```
 
@@ -111,12 +111,12 @@ We have to understand what is `class` first.<br>
 ```javascript
 class Car {
   constructor() {
-    this.name = "Tasla";
-    this.price = 100000;
-    this.dump = this.dump.bind(this);
+    this.name = "Tasla"
+    this.price = 100000
+    this.dump = this.dump.bind(this)
   }
   dump() {
-    console.log(this);
+    console.log(this)
   }
 }
 ```
@@ -141,12 +141,12 @@ So we can write these:
 ```javascript
 class Car {
   constuctor() {
-    this.name = "Tasla";
-    this.price = 100000;
+    this.name = "Tasla"
+    this.price = 100000
   }
   dump = () => {
-    console.log(this);
-  };
+    console.log(this)
+  }
 }
 ```
 
