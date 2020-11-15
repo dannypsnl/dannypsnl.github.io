@@ -1,3 +1,10 @@
+function nameToYYYYMMDD(name) {
+  return name.split(`-`).slice(0, 3).join(`-`)
+}
+function nameToDate(name) {
+  return Date.parse(nameToYYYYMMDD(name))
+}
+
 module.exports = {
   siteMetadata: {
     title: `Dan's Blog`,
@@ -83,6 +90,63 @@ module.exports = {
         name: `blog-posts`,
         path: `${__dirname}/src/blog-posts`,
         ignore: [`**/\.*`], // ignore files starting with a dot
+      },
+    },
+    {
+      resolve: "gatsby-plugin-local-search",
+      options: {
+        name: "pages",
+        engine: "flexsearch",
+        query: `
+  query {
+    allMarkdownRemark {
+      edges {
+        node {
+          id
+          excerpt
+          timeToRead
+          frontmatter {
+            title
+            date
+            categories
+            tags
+          }
+          fields {
+            slug
+          }
+          parent {
+            ... on File {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`,
+        ref: "slug",
+        index: ["id", "title", "excerpt"],
+        store: [
+          "id",
+          "excerpt",
+          "title",
+          "timeToRead",
+          "slug",
+          "tags",
+          "categories",
+          "date",
+        ],
+        normalizer: ({ data }) =>
+          data.allMarkdownRemark.edges.map(({ node }) => ({
+            id: node.id,
+            excerpt: node.excerpt,
+            timeToRead: node.timeToRead,
+            title: node.frontmatter.title,
+            slug: node.fields.slug,
+            tags: node.frontmatter.tags,
+            categories: node.frontmatter.categories,
+            date: node.frontmatter.date ? node.frontmatter.date : nameToDate(node.parent.name),
+          })),
       },
     },
     // for rss feed
