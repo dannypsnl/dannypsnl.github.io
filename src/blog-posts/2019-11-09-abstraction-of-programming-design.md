@@ -68,7 +68,7 @@ Scheme 是相當小巧的語言，小巧到我可以寫個 [直譯器](https://g
 (define query-record 'empty)
 ```
 
-這些函式還沒有用處，它們必須操作某種裝態才能夠產生效果，而在這裡我們給予它們的目標就是交易紀錄(list of transaction)
+這些函式還沒有用處，它們必須操作某種狀態才能夠產生效果，而在這裡我們給予它們的目標就是交易紀錄(list of transaction)
 
 ```racket
 #lang racket
