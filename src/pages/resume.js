@@ -25,10 +25,10 @@ export default ({ data }) => {
         >
           <Section>Overview</Section>
           <p>
-            2+ years of development work experience, including networking,
+            3+ years of development work experience, including networking,
             compiler, and web application. In-depth knowledge of Kubernetes and
             Container networking. A programming language theory lover. Like
-            Racket, Haskell, OCaml, Rust, Agda, and Coq.
+            Racket, Rust, and Arend.
           </p>
         </div>
         <div>
