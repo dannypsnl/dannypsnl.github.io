@@ -19,7 +19,8 @@ const IndexPage = ({
     allMarkdownRemark: { edges },
   },
 }) => {
-  const { search } = window.location
+  const isBrowser = typeof window !== `undefined`
+  const { search } = isBrowser ? window.location : { search: null }
   const query = new URLSearchParams(search).get("s")
   const [searchQuery, setSearchQuery] = useState(query || "")
 
