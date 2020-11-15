@@ -125,7 +125,7 @@ module.exports = {
   }
 `,
         ref: "slug",
-        index: ["id", "title", "excerpt"],
+        index: ["id", "title", "excerpt", "tags", "categories"],
         store: [
           "id",
           "excerpt",

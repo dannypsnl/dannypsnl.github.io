@@ -1,13 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-export default ({
-  blogURL,
-  title,
-  timeToRead,
-  date,
-  excerpt,
-}) => (
+export default ({ blogURL, title, timeToRead, date, excerpt }) => (
   <div
     style={{
       margin: `2.7rem`,
