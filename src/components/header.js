@@ -67,10 +67,9 @@ const Header = ({ siteMetadata, pageTitle }) => {
           textAlign: `center`,
           backgroundColor: `#635c5c`,
           padding: `0`,
-          // top, right, bottom, left
-          margin: `0 37rem 0 37rem`,
-          // left, right, bottom-right, bottom-left
+          margin: `0 auto`,
           borderRadius: `0.2em`,
+          width: `7em`,
         }}
       >
         <TabLink to={`/resume`}>Resume</TabLink>

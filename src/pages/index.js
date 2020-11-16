@@ -45,7 +45,7 @@ const IndexPage = ({
     <Layout>
       <SEO title={title} description={description} />
       <div>
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <SearchBar style = {{ margin: `0 auto` }} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <h4 style={{ textAlign: `center` }}>{posts.length} Posts</h4>
         {
           // all posts
