@@ -146,7 +146,7 @@ module.exports = {
             tags: node.frontmatter.tags,
             categories: node.frontmatter.categories,
             date: node.frontmatter.date
-              ? node.frontmatter.date
+              ? Date.parse(node.frontmatter.date)
               : nameToDate(node.parent.name),
           })),
       },

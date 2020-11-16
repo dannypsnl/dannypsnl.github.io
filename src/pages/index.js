@@ -33,7 +33,9 @@ const IndexPage = ({
       slug: node.fields.slug,
       tags: node.frontmatter.tags,
       categories: node.frontmatter.categories,
-      date: nameToDate(node.parent.name),
+      date: node.frontmatter.date
+        ? Date.parse(node.frontmatter.date)
+        : nameToDate(node.parent.name),
     }))
 
   const results = useFlexSearch(searchQuery, index, store)
@@ -95,6 +97,7 @@ export const query = graphql`
           timeToRead
           frontmatter {
             title
+            date
             categories
             tags
             image {
