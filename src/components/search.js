@@ -6,7 +6,10 @@ export default ({ searchQuery, setSearchQuery }) => (
       margin: `0 auto`,
       width: `11em`,
     }}
-        action="/" method="get" autoComplete="off">
+    action="/"
+    method="get"
+    autoComplete="off"
+  >
     <label htmlFor="header-search">
       <span className="visually-hidden">Search blog posts</span>
     </label>
