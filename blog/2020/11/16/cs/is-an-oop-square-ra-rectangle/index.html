@@ -30,7 +30,7 @@
 </blockquote>
 <h3>What's the problem</h3>
 <p>Square is a special Rectangle where all four sides are equal in length. Thus we might write down:</p>
-<div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token punctuation">{</span>
+<div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token punctuation">{</span>
     <span class="token keyword">double</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
     <span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token keyword">double</span> initX<span class="token punctuation">,</span> <span class="token keyword">double</span> initY<span class="token punctuation">)</span> <span class="token punctuation">{</span> x <span class="token operator">=</span> initX<span class="token punctuation">;</span> y <span class="token operator">=</span> initY<span class="token punctuation">;</span> <span class="token punctuation">}</span>
 
@@ -50,7 +50,15 @@
 <div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token class-name">Square</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">Rectangle</span> r <span class="token operator">=</span> s<span class="token punctuation">;</span>
 r<span class="token punctuation">.</span><span class="token function">setX</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>Oops, <code class="language-text">s</code> is not a square anymore, this correctly follows <strong>LSP</strong> but incorrect generally.</p>
+<p>Oops, <code class="language-text">s</code> is not a square anymore, this correctly follows <strong>LSP</strong> but incorrect generally. To solve this, we revert the relationship between <strong>Square</strong> and <strong>Rectangle</strong>, now we have:</p>
+<div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> x<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token keyword">extends</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>Now <code class="language-text">setX</code> and <code class="language-text">setY</code> both will not affect the <strong>Square</strong>, imagine a method <code class="language-text">double area()</code>, <strong>LSP</strong> was broken(now <strong>Square</strong> returns <code class="language-text">x*x</code> and <strong>Rectangle</strong> returns <code class="language-text">x*y</code>). So now we have more problem.</p>
 <h3>Solution</h3>
 <p>Here is a solution: refinement type. By using refinement type, we can claim <code class="language-text">type Square = Rectangle when (x = y)</code>. Then problem solved, when programming if we can't proof <code class="language-text">x = y</code> this predicate then compiler won't think that is a <code class="language-text">Square</code> but a <code class="language-text">Rectangle</code>. Since <code class="language-text">Square</code> is a <code class="language-text">Rectangle</code>, method in <code class="language-text">Rectangle</code> still can be using by <code class="language-text">Square</code>, thus we didn't lose our power. However, program like <code class="language-text">s.setX(v)</code>, would need to prove <code class="language-text">v = y</code>, to prove it is a <code class="language-text">Square</code>. Here we have two choices:</p>
 <ol>
