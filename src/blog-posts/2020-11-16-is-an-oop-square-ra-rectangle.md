@@ -31,7 +31,7 @@ A common misunderstanding is OOP must have **subtyping** and **generic** at the 
 Square is a special Rectangle where all four sides are equal in length. Thus we might write down:
 
 ```java
-public class Rectangle {
+class Rectangle {
     double x, y;
     Rectangle(double initX, double initY) { x = initX; y = initY; }
 
@@ -57,7 +57,19 @@ Rectangle r = s;
 r.setX(10);
 ```
 
-Oops, `s` is not a square anymore, this correctly follows **LSP** but incorrect generally.
+Oops, `s` is not a square anymore, this correctly follows **LSP** but incorrect generally. To solve this, we revert the relationship between **Square** and **Rectangle**, now we have:
+
+```java
+class Square {
+    double x;
+}
+
+class Rectangle extends Square {
+    double y;
+}
+```
+
+Now `setX` and `setY` both will not affect the **Square**, imagine a method `double area()`, **LSP** was broken(now **Square** returns `x*x` and **Rectangle** returns `x*y`). So now we have more problem.
 
 ### Solution
 
