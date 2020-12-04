@@ -37,7 +37,7 @@ export default ({ blogURL, title, timeToRead, date, excerpt }) => (
         }}
       >
         {timeToRead} {" min read • "}
-        {date}
+        {(new Date(date)).toLocaleString()}
       </span>
 
       <p style={{ marginBottom: `0` }} />
