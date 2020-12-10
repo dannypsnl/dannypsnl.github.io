@@ -133,7 +133,7 @@ export const query = graphql`
         tags
       }
     }
-    allMarkdownRemark {
+    allMarkdownRemark(filter: { rawMarkdownBody: { ne: "" } }) {
       edges {
         node {
           id
