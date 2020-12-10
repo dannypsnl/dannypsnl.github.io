@@ -10,13 +10,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode })
-    const value = `/blog${slug
-      .split(`-`)
-      .slice(0, 3)
-      .join(`/`)}/${node.frontmatter.categories.join(`/`)}/${slug
-      .split(`-`)
-      .slice(3)
-      .join(`-`)}`
+    const value = node.frontmatter.iscard
+      ? `/card/${node.frontmatter.title}`
+      : `/blog${slug
+          .split(`-`)
+          .slice(0, 3)
+          .join(`/`)}/${node.frontmatter.categories.join(`/`)}/${slug
+          .split(`-`)
+          .slice(3)
+          .join(`-`)}`
     createNodeField({
       node,
       name: `slug`,
@@ -34,6 +36,9 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             fields {
               slug
+            }
+            frontmatter {
+              iscard
             }
           }
         }

@@ -110,6 +110,9 @@ module.exports = {
             date
             categories
             tags
+            iscard
+            text
+            link
           }
           fields {
             slug
@@ -135,6 +138,8 @@ module.exports = {
           "tags",
           "categories",
           "date",
+          // card
+          "text",
         ],
         normalizer: ({ data }) =>
           data.allMarkdownRemark.edges.map(({ node }) => ({
@@ -148,6 +153,10 @@ module.exports = {
             date: node.frontmatter.date
               ? Date.parse(node.frontmatter.date)
               : nameToDate(node.parent.name),
+            // card
+            iscard: node.frontmatter.iscard,
+            text: node.frontmatter.text,
+            link: node.frontmatter.link,
           })),
       },
     },
