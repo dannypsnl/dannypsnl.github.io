@@ -3,19 +3,18 @@ import React, { useState } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import BlogPost from "../components/blogPost"
 import { nameToDate } from "../utils/string-to-date"
 import SearchBar from "../components/search"
 import "./index.css"
 import "../styles/tags.css"
 import { useFlexSearch } from "react-use-flexsearch"
 
-const IndexPage = ({
+const RecommendPage = ({
   data: {
     site: {
-      siteMetadata: { title, description },
+      siteMetadata: { title },
     },
-    localSearchPages: { index, store },
+    localSearchRecommend: { index, store },
     allMarkdownRemark: { edges },
   },
 }) => {
@@ -27,49 +26,61 @@ const IndexPage = ({
   const normalize = (edges) =>
     edges.map(({ node }) => ({
       id: node.id,
-      excerpt: node.excerpt,
-      timeToRead: node.timeToRead,
       title: node.frontmatter.title,
-      slug: node.fields.slug,
-      tags: node.frontmatter.tags,
-      categories: node.frontmatter.categories,
       date: node.frontmatter.date
         ? Date.parse(node.frontmatter.date)
         : nameToDate(node.parent.name),
-      // card
-      iscard: node.frontmatter.iscard,
       text: node.frontmatter.text,
       link: node.frontmatter.link,
     }))
 
   const results = useFlexSearch(searchQuery, index, store)
-  const posts = searchQuery ? results : normalize(edges)
+  const recommends = searchQuery ? results : normalize(edges)
 
-  posts.sort((a, b) => b.date - a.date)
+  recommends.sort((a, b) => b.date - a.date)
 
   return (
-    <Layout>
-      <SEO title={title} description={description} />
+    <Layout pageTitle={`Recommend`}>
+      <SEO title={`Recommend`} description={title} />
       <div>
         <SearchBar
           style={{ margin: `0 auto` }}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
-        <h4 style={{ textAlign: `center` }}>{posts.length} Posts</h4>
+        <h4 style={{ textAlign: `center` }}>{recommends.length} Posts</h4>
         {
-          // all posts
-          posts.map((node) => {
+          // all recommends
+          recommends.map((node) => {
             return (
               <div key={node.id}>
-                <BlogPost
-                  tags={node.tags}
-                  blogURL={node.slug}
-                  title={node.title}
-                  timeToRead={node.timeToRead}
-                  date={node.date}
-                  excerpt={node.excerpt}
-                />
+                <div
+                  style={{
+                    margin: `2.7rem`,
+                  }}
+                >
+                  <a
+                    href={node.link}
+                    target={"_blank"}
+                    rel={"noreferrer"}
+                    style={{
+                      textDecoration: `none`,
+                    }}
+                  >
+                    <div>
+                      {/*  title*/}
+                      <h3
+                        style={{
+                          color: `rgb(25, 135, 153)`,
+                          marginBottom: `0.5rem`,
+                        }}
+                      >
+                        {node.title}
+                      </h3>
+                    </div>
+                  </a>
+                  <p>{node.text}</p>
+                </div>
               </div>
             )
           })
@@ -79,39 +90,28 @@ const IndexPage = ({
   )
 }
 
-export default IndexPage
+export default RecommendPage
 
 export const query = graphql`
   query {
-    localSearchPages {
+    localSearchRecommend {
       index
       store
     }
     site {
       siteMetadata {
         title
-        description
       }
     }
-    allMarkdownRemark(filter: { rawMarkdownBody: { ne: "" } }) {
+    allMarkdownRemark(filter: { rawMarkdownBody: { eq: "" } }) {
       edges {
         node {
           id
-          excerpt
-          timeToRead
           frontmatter {
             title
             date
-            categories
-            tags
-          }
-          fields {
-            slug
-          }
-          parent {
-            ... on File {
-              name
-            }
+            text
+            link
           }
         }
       }

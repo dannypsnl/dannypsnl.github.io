@@ -72,6 +72,7 @@ const Header = ({ siteMetadata, pageTitle }) => {
           width: `7em`,
         }}
       >
+        <TabLink to={`/recommend`}>Recommend</TabLink>
         <TabLink to={`/resume`}>Resume</TabLink>
       </ul>
     </header>

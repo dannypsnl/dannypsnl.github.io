@@ -99,7 +99,7 @@ module.exports = {
         engine: "flexsearch",
         query: `
   query {
-    allMarkdownRemark {
+    allMarkdownRemark(filter: {rawMarkdownBody: {ne: ""}}) {
       edges {
         node {
           id
@@ -110,9 +110,6 @@ module.exports = {
             date
             categories
             tags
-            iscard
-            text
-            link
           }
           fields {
             slug
@@ -138,8 +135,6 @@ module.exports = {
           "tags",
           "categories",
           "date",
-          // card
-          "text",
         ],
         normalizer: ({ data }) =>
           data.allMarkdownRemark.edges.map(({ node }) => ({
@@ -153,8 +148,46 @@ module.exports = {
             date: node.frontmatter.date
               ? Date.parse(node.frontmatter.date)
               : nameToDate(node.parent.name),
-            // card
-            iscard: node.frontmatter.iscard,
+          })),
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `recommend`,
+        path: `${__dirname}/src/recommend`,
+        ignore: [`**/\.*`], // ignore files starting with a dot
+      },
+    },
+    {
+      resolve: "gatsby-plugin-local-search",
+      options: {
+        name: "recommend",
+        engine: "flexsearch",
+        query: `
+  query {
+    allMarkdownRemark(filter: {rawMarkdownBody: {eq: ""}}) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date
+            text
+            link
+          }
+        }
+      }
+    }
+  }
+`,
+        ref: "id",
+        index: ["id", "title", "text", "link"],
+        store: ["id", "title", "date", "text", "link"],
+        normalizer: ({ data }) =>
+          data.allMarkdownRemark.edges.map(({ node }) => ({
+            id: node.id,
+            title: node.frontmatter.title,
             text: node.frontmatter.text,
             link: node.frontmatter.link,
           })),
