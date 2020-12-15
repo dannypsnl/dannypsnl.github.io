@@ -47,8 +47,9 @@ const ProjectPage = ({
           style={{ margin: `0 auto` }}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          placeholder={"Search Project"}
         />
-        <h4 style={{ textAlign: `center` }}>{recommends.length} Posts</h4>
+        <h4 style={{ textAlign: `center` }}>{recommends.length} Projects</h4>
         {
           // all recommends
           recommends.map((node) => (

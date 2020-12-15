@@ -170,11 +170,13 @@ module.exports = {
       edges {
         node {
           id
-          frontmatter {
-            title
-            date
-            text
-            link
+          childMarkdownRemark {
+            frontmatter {
+              title
+              date
+              text
+              link
+            }
           }
         }
       }
@@ -185,11 +187,11 @@ module.exports = {
         index: ["id", "title", "text", "link"],
         store: ["id", "title", "date", "text", "link"],
         normalizer: ({ data }) =>
-          data.allMarkdownRemark.edges.map(({ node }) => ({
+          data.allFile.edges.map(({ node }) => ({
             id: node.id,
-            title: node.frontmatter.title,
-            text: node.frontmatter.text,
-            link: node.frontmatter.link,
+            title: node.childMarkdownRemark.frontmatter.title,
+            text: node.childMarkdownRemark.frontmatter.text,
+            link: node.childMarkdownRemark.frontmatter.link,
           })),
       },
     },
@@ -212,11 +214,13 @@ module.exports = {
       edges {
         node {
           id
-          frontmatter {
-            title
-            date
-            text
-            link
+          childMarkdownRemark {
+            frontmatter {
+              title
+              date
+              text
+              link
+            }
           }
         }
       }
@@ -227,11 +231,11 @@ module.exports = {
         index: ["id", "title", "text", "link"],
         store: ["id", "title", "date", "text", "link"],
         normalizer: ({ data }) =>
-          data.allMarkdownRemark.edges.map(({ node }) => ({
+          data.allFile.edges.map(({ node }) => ({
             id: node.id,
-            title: node.frontmatter.title,
-            text: node.frontmatter.text,
-            link: node.frontmatter.link,
+            title: node.childMarkdownRemark.frontmatter.title,
+            text: node.childMarkdownRemark.frontmatter.text,
+            link: node.childMarkdownRemark.frontmatter.link,
           })),
       },
     },

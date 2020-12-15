@@ -1,6 +1,6 @@
 import React from "react"
 
-export default ({ searchQuery, setSearchQuery }) => (
+export default ({ searchQuery, setSearchQuery, placeholder }) => (
   <form
     style={{
       margin: `0 auto`,
@@ -18,7 +18,7 @@ export default ({ searchQuery, setSearchQuery }) => (
       onInput={(e) => setSearchQuery(e.target.value)}
       type="text"
       id="header-search"
-      placeholder="Search Posts"
+      placeholder={placeholder ? placeholder : "Search Posts"}
       name="s"
     />
   </form>

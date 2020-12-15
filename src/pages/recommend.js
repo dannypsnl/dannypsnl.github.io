@@ -47,8 +47,9 @@ const RecommendPage = ({
           style={{ margin: `0 auto` }}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          placeholder={"Search Recommend"}
         />
-        <h4 style={{ textAlign: `center` }}>{recommends.length} Posts</h4>
+        <h4 style={{ textAlign: `center` }}>{recommends.length} Recommend</h4>
         {
           // all recommends
           recommends.map((node) => (
