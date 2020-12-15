@@ -220,6 +220,7 @@ module.exports = {
               date
               text
               link
+              tags
             }
           }
         }
@@ -229,13 +230,14 @@ module.exports = {
 `,
         ref: "id",
         index: ["id", "title", "text", "link"],
-        store: ["id", "title", "date", "text", "link"],
+        store: ["id", "title", "date", "text", "link", "tags"],
         normalizer: ({ data }) =>
           data.allFile.edges.map(({ node }) => ({
             id: node.id,
             title: node.childMarkdownRemark.frontmatter.title,
             text: node.childMarkdownRemark.frontmatter.text,
             link: node.childMarkdownRemark.frontmatter.link,
+            tags: node.childMarkdownRemark.frontmatter.tags,
           })),
       },
     },

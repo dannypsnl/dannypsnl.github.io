@@ -24,15 +24,24 @@ const ProjectPage = ({
   const [searchQuery, setSearchQuery] = useState(query || "")
 
   const normalize = (edges) =>
-    edges.map(({ node }) => ({
-      id: node.id,
-      title: node.childMarkdownRemark.frontmatter.title,
-      date: node.childMarkdownRemark.frontmatter.date
-        ? Date.parse(node.childMarkdownRemark.frontmatter.date)
-        : nameToDate(node.parent.name),
-      text: node.childMarkdownRemark.frontmatter.text,
-      link: node.childMarkdownRemark.frontmatter.link,
-    }))
+    edges.map(
+      ({
+        node: {
+          id,
+          parent,
+          childMarkdownRemark: {
+            frontmatter: { title, date, text, link, tags },
+          },
+        },
+      }) => ({
+        id,
+        title,
+        date: date ? Date.parse(date) : nameToDate(parent.name),
+        text,
+        link,
+        tags,
+      })
+    )
 
   const results = useFlexSearch(searchQuery, index, store)
   const recommends = searchQuery ? results : normalize(edges)
@@ -58,7 +67,11 @@ const ProjectPage = ({
               style={{
                 margin: `2rem auto`,
                 padding: `0.6rem`,
-                border: `0.15rem solid #655`,
+                border: `0.15rem solid ${
+                  node.tags !== null && node.tags.includes("working")
+                    ? `#ffbe0b`
+                    : `#655`
+                }`,
                 borderRadius: `0.5rem`,
                 width: `20rem`,
                 alignSelf: `center`,
@@ -75,14 +88,34 @@ const ProjectPage = ({
                 <h3
                   style={{
                     color: `rgb(25, 135, 153)`,
+                    marginBottom: `0.5rem`,
                   }}
                 >
                   {node.title}
                 </h3>
               </a>
+              {node.tags ? (
+                node.tags.map((tag) => (
+                  <small
+                    key={tag}
+                    style={{
+                      margin: `0.6rem 0`,
+                      padding: `0.3rem`,
+                      border: `0.15rem solid #655`,
+                      borderRadius: `0.5rem`,
+                      width: `auto`,
+                    }}
+                  >
+                    {tag}
+                  </small>
+                ))
+              ) : (
+                <></>
+              )}
               <p
                 style={{
-                  marginBottom: `0.2rem`,
+                  marginTop: `0.5rem`,
+                  marginBottom: 0,
                 }}
               >
                 {node.text}
@@ -118,6 +151,7 @@ export const query = graphql`
               date
               text
               link
+              tags
             }
           }
         }
