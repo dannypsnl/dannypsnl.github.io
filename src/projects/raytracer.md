@@ -1,5 +1,8 @@
 ---
 iscard: "true"
+tags:
+  - racket
+  - graph
 title: "raytracer"
 text: "racket raytracer"
 link: "https://github.com/dannypsnl/raytracer"

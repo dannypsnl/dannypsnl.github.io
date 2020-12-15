@@ -1,5 +1,8 @@
 ---
 iscard: "true"
+tags:
+  - rust
+  - compiler
 title: "elz"
 text: "A programming language"
 link: "https://github.com/dannypsnl/elz"

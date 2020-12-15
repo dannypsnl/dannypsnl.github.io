@@ -1,5 +1,9 @@
 ---
 iscard: "true"
+tags:
+  - c
+  - brainfuck
+  - interpreter
 title: "cbf"
 text: "C brainfuck interpreter"
 link: "https://github.com/dannypsnl/cbf"

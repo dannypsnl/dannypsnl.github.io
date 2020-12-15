@@ -1,5 +1,8 @@
 ---
 iscard: "true"
+tags:
+  - racket
+  - dependent type
 title: "incr"
 text: "inductive based on intro/elim rules"
 link: "https://github.com/dannypsnl/incr"

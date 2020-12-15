@@ -1,5 +1,8 @@
 ---
 iscard: "true"
+tags:
+  - go
+  - redux
 title: "redux"
 text: "redux in Go"
 link: "https://github.com/dannypsnl/redux"

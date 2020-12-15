@@ -1,5 +1,8 @@
 ---
 iscard: "true"
+tags:
+  - racket
+  - dependent type
 title: "inductive"
 text: "try to build inductive language"
 link: "https://github.com/dannypsnl/inductive"

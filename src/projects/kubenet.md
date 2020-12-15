@@ -1,5 +1,9 @@
 ---
 iscard: "true"
+tags:
+  - go
+  - kubernetes
+  - networking
 title: "kubenet"
 text: "Tiny Kubernetes to show how its network work"
 link: "https://github.com/dannypsnl/kubenet"

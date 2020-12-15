@@ -1,5 +1,8 @@
 ---
 iscard: "true"
+tags:
+  - go
+  - web
 title: "rocket"
 text: "Light-weight web framework for Go"
 link: "https://github.com/dannypsnl/rocket"

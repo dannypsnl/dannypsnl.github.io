@@ -1,5 +1,9 @@
 ---
 iscard: "true"
+tags:
+  - haskell
+  - scheme
+  - interpreter
 title: "little scheme"
 text: "A little scheme for playing SICP"
 link: "https://github.com/dannypsnl/little-scheme"
