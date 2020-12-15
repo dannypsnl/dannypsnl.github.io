@@ -51,39 +51,43 @@ const RecommendPage = ({
         <h4 style={{ textAlign: `center` }}>{recommends.length} Posts</h4>
         {
           // all recommends
-          recommends.map((node) => {
-            return (
-              <div key={node.id}>
-                <div
+          recommends.map((node) => (
+            <div
+              key={node.id}
+              style={{
+                margin: `2.7rem auto 2.7rem auto`,
+                padding: `0.6rem`,
+                border: `0.15rem solid #655`,
+                borderRadius: `0.5rem`,
+                width: `40rem`,
+                alignSelf: `center`,
+              }}
+            >
+              <a
+                href={node.link}
+                target={"_blank"}
+                rel={"noreferrer"}
+                style={{
+                  textDecoration: `none`,
+                }}
+              >
+                <h3
                   style={{
-                    margin: `2.7rem`,
+                    color: `rgb(25, 135, 153)`,
                   }}
                 >
-                  <a
-                    href={node.link}
-                    target={"_blank"}
-                    rel={"noreferrer"}
-                    style={{
-                      textDecoration: `none`,
-                    }}
-                  >
-                    <div>
-                      {/*  title*/}
-                      <h3
-                        style={{
-                          color: `rgb(25, 135, 153)`,
-                          marginBottom: `0.5rem`,
-                        }}
-                      >
-                        {node.title}
-                      </h3>
-                    </div>
-                  </a>
-                  <p>{node.text}</p>
-                </div>
-              </div>
-            )
-          })
+                  {node.title}
+                </h3>
+              </a>
+              <p
+                style={{
+                  marginBottom: `0.2rem`,
+                }}
+              >
+                {node.text}
+              </p>
+            </div>
+          ))
         }
       </div>
     </Layout>
