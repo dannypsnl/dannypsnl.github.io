@@ -55,11 +55,11 @@ const ProjectPage = ({
             <div
               key={node.id}
               style={{
-                margin: `2.7rem auto 2.7rem auto`,
+                margin: `2rem auto`,
                 padding: `0.6rem`,
                 border: `0.15rem solid #655`,
                 borderRadius: `0.5rem`,
-                width: `40rem`,
+                width: `20rem`,
                 alignSelf: `center`,
               }}
             >
