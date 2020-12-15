@@ -229,7 +229,7 @@ module.exports = {
   }
 `,
         ref: "id",
-        index: ["id", "title", "text", "link"],
+        index: ["id", "title", "text", "link", "tags"],
         store: ["id", "title", "date", "text", "link", "tags"],
         normalizer: ({ data }) =>
           data.allFile.edges.map(({ node }) => ({
