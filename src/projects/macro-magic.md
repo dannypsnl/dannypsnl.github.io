@@ -1,7 +1,6 @@
 ---
 iscard: "true"
 tags:
-  - working
   - racket
   - macro
 title: "macro is not magic"
