@@ -69,10 +69,11 @@ const Header = ({ siteMetadata, pageTitle }) => {
           padding: `0`,
           margin: `0 auto`,
           borderRadius: `0.2em`,
-          width: `11.2rem`,
+          width: `18rem`,
         }}
       >
         <TabLink to={`/recommend`}>Recommend</TabLink>
+        <TabLink to={`/project`}>Project</TabLink>
         <TabLink to={`/resume`}>Resume</TabLink>
       </ul>
     </header>

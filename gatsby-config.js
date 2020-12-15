@@ -166,7 +166,49 @@ module.exports = {
         engine: "flexsearch",
         query: `
   query {
-    allMarkdownRemark(filter: {rawMarkdownBody: {eq: ""}}) {
+    allFile(filter: {sourceInstanceName: {eq: "recommend"}}) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date
+            text
+            link
+          }
+        }
+      }
+    }
+  }
+`,
+        ref: "id",
+        index: ["id", "title", "text", "link"],
+        store: ["id", "title", "date", "text", "link"],
+        normalizer: ({ data }) =>
+          data.allMarkdownRemark.edges.map(({ node }) => ({
+            id: node.id,
+            title: node.frontmatter.title,
+            text: node.frontmatter.text,
+            link: node.frontmatter.link,
+          })),
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `project`,
+        path: `${__dirname}/src/projects`,
+        ignore: [`**/\.*`], // ignore files starting with a dot
+      },
+    },
+    {
+      resolve: "gatsby-plugin-local-search",
+      options: {
+        name: "project",
+        engine: "flexsearch",
+        query: `
+  query {
+    allFile(filter: {sourceInstanceName: {eq: "project"}}) {
       edges {
         node {
           id

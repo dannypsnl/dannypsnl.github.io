@@ -9,12 +9,12 @@ import "./index.css"
 import "../styles/tags.css"
 import { useFlexSearch } from "react-use-flexsearch"
 
-const RecommendPage = ({
+const ProjectPage = ({
   data: {
     site: {
       siteMetadata: { title },
     },
-    localSearchRecommend: { index, store },
+    localSearchProject: { index, store },
     allFile: { edges },
   },
 }) => {
@@ -40,8 +40,8 @@ const RecommendPage = ({
   recommends.sort((a, b) => b.date - a.date)
 
   return (
-    <Layout pageTitle={`Recommend`}>
-      <SEO title={`Recommend`} description={title} />
+    <Layout pageTitle={`Project`}>
+      <SEO title={`Project`} description={title} />
       <div>
         <SearchBar
           style={{ margin: `0 auto` }}
@@ -94,11 +94,11 @@ const RecommendPage = ({
   )
 }
 
-export default RecommendPage
+export default ProjectPage
 
 export const query = graphql`
   query {
-    localSearchRecommend {
+    localSearchProject {
       index
       store
     }
@@ -107,7 +107,7 @@ export const query = graphql`
         title
       }
     }
-    allFile(filter: { sourceInstanceName: { eq: "recommend" } }) {
+    allFile(filter: { sourceInstanceName: { eq: "project" } }) {
       edges {
         node {
           id
