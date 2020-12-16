@@ -33,7 +33,7 @@ const IndexPage = ({
           excerpt,
           timeToRead,
           childMarkdownRemark: {
-            frontmatter: { title, tags, categories, date, text, link },
+            frontmatter: { title, tags, categories, date },
             fields: { slug },
           },
         },
@@ -46,9 +46,6 @@ const IndexPage = ({
         tags,
         categories,
         date: date ? Date.parse(date) : nameToDate(name),
-        // card
-        text,
-        link,
       })
     )
 
