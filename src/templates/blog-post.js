@@ -64,7 +64,9 @@ export default ({ data }) => {
             categories: post.frontmatter.categories,
             tags: post.frontmatter.tags,
           }}
-          articles={data.allMarkdownRemark.edges.map((edge) => edge.node)}
+          articles={data.allFile.edges.map(
+            (edge) => edge.node.childMarkdownRemark
+          )}
         />
         <Utterances />
         <BuyMeACoffee />
@@ -133,17 +135,18 @@ export const query = graphql`
         tags
       }
     }
-    allMarkdownRemark(filter: { rawMarkdownBody: { ne: "" } }) {
+    allFile(filter: { sourceInstanceName: { eq: "blog-posts" } }) {
       edges {
         node {
-          id
-          frontmatter {
-            title
-            categories
-            tags
-          }
-          fields {
-            slug
+          childMarkdownRemark {
+            frontmatter {
+              title
+              categories
+              tags
+            }
+            fields {
+              slug
+            }
           }
         }
       }
