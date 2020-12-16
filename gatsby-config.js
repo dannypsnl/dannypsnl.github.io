@@ -99,24 +99,20 @@ module.exports = {
         engine: "flexsearch",
         query: `
   query {
-    allMarkdownRemark(filter: {rawMarkdownBody: {ne: ""}}) {
+    allFile(filter: {sourceInstanceName: {eq: "blog-posts"}}) {
       edges {
         node {
           id
-          excerpt
-          timeToRead
-          frontmatter {
-            title
-            date
-            categories
-            tags
-          }
-          fields {
-            slug
-          }
-          parent {
-            ... on File {
-              name
+          name
+          childMarkdownRemark {
+            frontmatter {
+              title
+              date
+              categories
+              tags
+            }
+            fields {
+              slug
             }
           }
         }
@@ -137,17 +133,17 @@ module.exports = {
           "date",
         ],
         normalizer: ({ data }) =>
-          data.allMarkdownRemark.edges.map(({ node }) => ({
+          data.allFile.edges.map(({ node }) => ({
             id: node.id,
             excerpt: node.excerpt,
             timeToRead: node.timeToRead,
-            title: node.frontmatter.title,
-            slug: node.fields.slug,
-            tags: node.frontmatter.tags,
-            categories: node.frontmatter.categories,
-            date: node.frontmatter.date
-              ? Date.parse(node.frontmatter.date)
-              : nameToDate(node.parent.name),
+            title: node.childMarkdownRemark.frontmatter.title,
+            slug: node.childMarkdownRemark.fields.slug,
+            tags: node.childMarkdownRemark.frontmatter.tags,
+            categories: node.childMarkdownRemark.frontmatter.categories,
+            date: node.childMarkdownRemark.frontmatter.date
+              ? Date.parse(node.childMarkdownRemark.frontmatter.date)
+              : nameToDate(node.name),
           })),
       },
     },

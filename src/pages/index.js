@@ -16,7 +16,7 @@ const IndexPage = ({
       siteMetadata: { title, description },
     },
     localSearchPages: { index, store },
-    allMarkdownRemark: { edges },
+    allFile: { edges },
   },
 }) => {
   const isBrowser = typeof window !== `undefined`
@@ -25,22 +25,32 @@ const IndexPage = ({
   const [searchQuery, setSearchQuery] = useState(query || "")
 
   const normalize = (edges) =>
-    edges.map(({ node }) => ({
-      id: node.id,
-      excerpt: node.excerpt,
-      timeToRead: node.timeToRead,
-      title: node.frontmatter.title,
-      slug: node.fields.slug,
-      tags: node.frontmatter.tags,
-      categories: node.frontmatter.categories,
-      date: node.frontmatter.date
-        ? Date.parse(node.frontmatter.date)
-        : nameToDate(node.parent.name),
-      // card
-      iscard: node.frontmatter.iscard,
-      text: node.frontmatter.text,
-      link: node.frontmatter.link,
-    }))
+    edges.map(
+      ({
+        node: {
+          id,
+          name,
+          excerpt,
+          timeToRead,
+          childMarkdownRemark: {
+            frontmatter: { title, tags, categories, date, text, link },
+            fields: { slug },
+          },
+        },
+      }) => ({
+        id,
+        excerpt,
+        timeToRead,
+        title,
+        slug,
+        tags,
+        categories,
+        date: date ? Date.parse(date) : nameToDate(name),
+        // card
+        text,
+        link,
+      })
+    )
 
   const results = useFlexSearch(searchQuery, index, store)
   const posts = searchQuery ? results : normalize(edges)
@@ -93,24 +103,20 @@ export const query = graphql`
         description
       }
     }
-    allMarkdownRemark(filter: { rawMarkdownBody: { ne: "" } }) {
+    allFile(filter: { sourceInstanceName: { eq: "blog-posts" } }) {
       edges {
         node {
           id
-          excerpt
-          timeToRead
-          frontmatter {
-            title
-            date
-            categories
-            tags
-          }
-          fields {
-            slug
-          }
-          parent {
-            ... on File {
-              name
+          name
+          childMarkdownRemark {
+            frontmatter {
+              title
+              date
+              categories
+              tags
+            }
+            fields {
+              slug
             }
           }
         }
