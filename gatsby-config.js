@@ -255,40 +255,43 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
+            serialize: ({ query: { site, allFile } }) => {
               const nameToYYYYMMDD = (name) =>
                 name.split(`-`).slice(0, 3).join(`-`)
               const nameToDate = (name) => Date.parse(nameToYYYYMMDD(name))
-              return allMarkdownRemark.edges.map((edge) => {
-                return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
-                  date: nameToDate(edge.node.parent.name),
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ "content:encoded": edge.node.html }],
-                })
-              })
+              return allFile.edges.map(
+                ({
+                  node: {
+                    name,
+                    childMarkdownRemark: {
+                      excerpt,
+                      html,
+                      fields: { slug },
+                      frontmatter,
+                    },
+                  },
+                }) => {
+                  return Object.assign({}, frontmatter, {
+                    description: excerpt,
+                    date: nameToDate(name),
+                    url: site.siteMetadata.siteUrl + slug,
+                    guid: site.siteMetadata.siteUrl + slug,
+                    custom_elements: [{ "content:encoded": html }],
+                  })
+                }
+              )
             },
             query: `
               {
-                allMarkdownRemark(
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                ) {
+                allFile(filter: {sourceInstanceName: {eq: "blog-posts"}}, sort: {order: DESC, fields: childMarkdownRemark___frontmatter___date}) {
                   edges {
                     node {
-                      excerpt
-                      html
-                      fields { slug }
-                      frontmatter {
-                        title
-                      }
-                      fields {
-                        slug
-                      }
-                      parent {
-                        ... on File {
-                          name
-                        }
+                      name
+                      childMarkdownRemark {
+                        excerpt
+                        html
+                        fields { slug }
+                        frontmatter { title }
                       }
                     }
                   }
