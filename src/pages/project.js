@@ -30,16 +30,17 @@ const ProjectPage = ({
           id,
           parent,
           childMarkdownRemark: {
-            frontmatter: { title, date, text, link, tags },
+            html,
+            frontmatter: { title, date, link, tags },
           },
         },
       }) => ({
         id,
         title,
         date: date ? Date.parse(date) : nameToDate(parent.name),
-        text,
         link,
         tags,
+        html,
       })
     )
 
@@ -66,7 +67,7 @@ const ProjectPage = ({
               key={node.id}
               style={{
                 margin: `2rem auto`,
-                padding: `0.6rem`,
+                padding: `0.9rem 0.9rem 0rem 0.9rem`,
                 border: `0.15rem solid ${
                   node.tags !== null && node.tags.includes("working")
                     ? `#ffbe0b`
@@ -99,7 +100,7 @@ const ProjectPage = ({
                   <small
                     key={tag}
                     style={{
-                      margin: `0.6rem 0`,
+                      margin: `0.6rem 0.1rem`,
                       padding: `0.3rem`,
                       border: `0.15rem solid #655`,
                       borderRadius: `0.5rem`,
@@ -112,14 +113,13 @@ const ProjectPage = ({
               ) : (
                 <></>
               )}
-              <p
+              <div
                 style={{
-                  marginTop: `0.5rem`,
+                  marginTop: `0.8rem`,
                   marginBottom: 0,
                 }}
-              >
-                {node.text}
-              </p>
+                dangerouslySetInnerHTML={{ __html: node.html }}
+              />
             </div>
           ))
         }
@@ -146,10 +146,10 @@ export const query = graphql`
         node {
           id
           childMarkdownRemark {
+            html
             frontmatter {
               title
               date
-              text
               link
               tags
             }
