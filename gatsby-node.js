@@ -8,17 +8,15 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `MarkdownRemark` && !node.frontmatter.iscard) {
     const slug = createFilePath({ node, getNode })
-    const value = node.frontmatter.iscard
-      ? `/card/${node.frontmatter.title}`
-      : `/blog${slug
-          .split(`-`)
-          .slice(0, 3)
-          .join(`/`)}/${node.frontmatter.categories.join(`/`)}/${slug
-          .split(`-`)
-          .slice(3)
-          .join(`-`)}`
+    const value = `/blog${slug
+      .split(`-`)
+      .slice(0, 3)
+      .join(`/`)}/${node.frontmatter.categories.join(`/`)}/${slug
+      .split(`-`)
+      .slice(3)
+      .join(`-`)}`
     createNodeField({
       node,
       name: `slug`,
@@ -31,25 +29,27 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(`
     query {
-      allMarkdownRemark(filter: { rawMarkdownBody: { ne: "" } }) {
+      allFile(filter: { sourceInstanceName: { eq: "blog-posts" } }) {
         edges {
           node {
-            fields {
-              slug
+            childMarkdownRemark {
+              fields {
+                slug
+              }
             }
           }
         }
       }
     }
   `)
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  result.data.allFile.edges.forEach(({ node }) => {
     createPage({
-      path: node.fields.slug,
+      path: node.childMarkdownRemark.fields.slug,
       component: path.resolve(`./src/templates/blog-post.js`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
-        slug: node.fields.slug,
+        slug: node.childMarkdownRemark.fields.slug,
       },
     })
   })
