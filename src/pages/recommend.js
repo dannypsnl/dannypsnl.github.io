@@ -24,15 +24,25 @@ const RecommendPage = ({
   const [searchQuery, setSearchQuery] = useState(query || "")
 
   const normalize = (edges) =>
-    edges.map(({ node }) => ({
-      id: node.id,
-      title: node.childMarkdownRemark.frontmatter.title,
-      date: node.childMarkdownRemark.frontmatter.date
-        ? Date.parse(node.childMarkdownRemark.frontmatter.date)
-        : nameToDate(node.parent.name),
-      text: node.childMarkdownRemark.frontmatter.text,
-      link: node.childMarkdownRemark.frontmatter.link,
-    }))
+    edges.map(
+      ({
+        node: {
+          id,
+          parent,
+          childMarkdownRemark: {
+            html,
+            frontmatter: { title, date, link, tags },
+          },
+        },
+      }) => ({
+        id,
+        title,
+        date: date ? Date.parse(date) : nameToDate(parent.name),
+        link,
+        tags,
+        html,
+      })
+    )
 
   const results = useFlexSearch(searchQuery, index, store)
   const recommends = searchQuery ? results : normalize(edges)
@@ -62,7 +72,6 @@ const RecommendPage = ({
                 borderRadius: `0.5rem`,
                 width: `20rem`,
                 alignSelf: `center`,
-                textAlign: `center`,
               }}
             >
               <a
@@ -76,18 +85,37 @@ const RecommendPage = ({
                 <h3
                   style={{
                     color: `rgb(25, 135, 153)`,
+                    marginBottom: `0.5rem`,
                   }}
                 >
                   {node.title}
                 </h3>
               </a>
-              <p
+              {node.tags ? (
+                node.tags.map((tag) => (
+                  <small
+                    key={tag}
+                    style={{
+                      margin: `0.6rem 0.1rem`,
+                      padding: `0.3rem`,
+                      border: `0.15rem solid #655`,
+                      borderRadius: `0.5rem`,
+                      width: `auto`,
+                    }}
+                  >
+                    {tag}
+                  </small>
+                ))
+              ) : (
+                <></>
+              )}
+              <div
                 style={{
+                  marginTop: `0.8rem`,
                   marginBottom: `0.2rem`,
                 }}
-              >
-                {node.text}
-              </p>
+                dangerouslySetInnerHTML={{ __html: node.html }}
+              />
             </div>
           ))
         }
@@ -114,11 +142,12 @@ export const query = graphql`
         node {
           id
           childMarkdownRemark {
+            html
             frontmatter {
               title
               date
-              text
               link
+              tags
             }
           }
         }

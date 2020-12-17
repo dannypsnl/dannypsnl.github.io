@@ -1,7 +1,9 @@
 ---
 iscard: "true"
 title: "Desvl"
-text: "blog: Math"
+tags:
+  - blog
+  - math
 link: "https://desvl.xyz/archives/"
 date: "Thu Dec 10 12:57:28 CST 2020"
 ---

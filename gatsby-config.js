@@ -167,11 +167,12 @@ module.exports = {
         node {
           id
           childMarkdownRemark {
+            html
             frontmatter {
               title
               date
-              text
               link
+              tags
             }
           }
         }
@@ -180,14 +181,15 @@ module.exports = {
   }
 `,
         ref: "id",
-        index: ["id", "title", "text", "link"],
-        store: ["id", "title", "date", "text", "link"],
+        index: ["id", "title", "link", "tags", "html"],
+        store: ["id", "title", "date", "link", "tags", "html"],
         normalizer: ({ data }) =>
           data.allFile.edges.map(({ node }) => ({
             id: node.id,
             title: node.childMarkdownRemark.frontmatter.title,
-            text: node.childMarkdownRemark.frontmatter.text,
             link: node.childMarkdownRemark.frontmatter.link,
+            tags: node.childMarkdownRemark.frontmatter.tags,
+            html: node.childMarkdownRemark.html,
           })),
       },
     },
