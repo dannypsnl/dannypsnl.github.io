@@ -3,7 +3,6 @@ import React, { useState } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import { nameToDate } from "../utils/string-to-date"
 import SearchBar from "../components/search"
 import "./index.css"
 import "../styles/tags.css"
@@ -31,13 +30,12 @@ const ProjectPage = ({
           parent,
           childMarkdownRemark: {
             html,
-            frontmatter: { title, date, link, tags },
+            frontmatter: { title, link, tags },
           },
         },
       }) => ({
         id,
         title,
-        date: date ? Date.parse(date) : nameToDate(parent.name),
         link,
         tags,
         html,
@@ -46,8 +44,6 @@ const ProjectPage = ({
 
   const results = useFlexSearch(searchQuery, index, store)
   const recommends = searchQuery ? results : normalize(edges)
-
-  recommends.sort((a, b) => b.date - a.date)
 
   return (
     <Layout pageTitle={`Project`}>
@@ -149,7 +145,6 @@ export const query = graphql`
             html
             frontmatter {
               title
-              date
               link
               tags
             }

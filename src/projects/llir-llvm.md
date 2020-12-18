@@ -7,7 +7,6 @@ tags:
   - go
 title: "llir/llvm"
 link: "https://github.com/llir/llvm"
-date: "Wed Dec 16 22:35:21 CST 2020"
 ---
 
 Library for interacting with LLVM IR in pure Go.

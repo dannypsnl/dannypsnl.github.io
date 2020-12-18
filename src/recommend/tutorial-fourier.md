@@ -6,5 +6,4 @@ tags:
   - math
   - fourier
 link: "http://www.jezzamon.com/fourier/zh-tw.html"
-date: "Thu Dec 10 13:02:27 CST 2020"
 ---

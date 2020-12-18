@@ -215,7 +215,6 @@ module.exports = {
             html
             frontmatter {
               title
-              date
               link
               tags
             }
@@ -227,7 +226,7 @@ module.exports = {
 `,
         ref: "id",
         index: ["id", "title", "link", "tags", "html"],
-        store: ["id", "title", "date", "link", "tags", "html"],
+        store: ["id", "title", "link", "tags", "html"],
         normalizer: ({ data }) =>
           data.allFile.edges.map(({ node }) => ({
             id: node.id,
