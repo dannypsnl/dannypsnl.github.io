@@ -30,9 +30,9 @@ const IndexPage = ({
         node: {
           id,
           name,
-          excerpt,
-          timeToRead,
           childMarkdownRemark: {
+            excerpt,
+            timeToRead,
             frontmatter: { title, tags, categories, date },
             fields: { slug },
           },
@@ -106,6 +106,8 @@ export const query = graphql`
           id
           name
           childMarkdownRemark {
+            excerpt
+            timeToRead
             frontmatter {
               title
               date
