@@ -8,6 +8,7 @@ import "../styles/code-block-hightlight.css"
 import { LicenseCC4 } from "../components/licensecc4"
 import { BuyMeACoffee } from "../components/buy-me-a-coffe"
 import Utterances from "../components/utterances"
+import SEO from "../components/seo"
 
 export default ({ data }) => {
   const FooterSection = ({ children }) => (
@@ -35,7 +36,8 @@ export default ({ data }) => {
 
   const post = data.markdownRemark
   return (
-    <Layout>
+    <Layout headerTitle={post.frontmatter.title}>
+      <SEO title={post.frontmatter.title} description={post.excerpt} />
       <div>
         <h1>{post.frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
@@ -129,6 +131,7 @@ export const query = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      excerpt
       frontmatter {
         title
         categories

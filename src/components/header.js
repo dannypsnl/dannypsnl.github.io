@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import Img from "gatsby-image"
 
-const Header = ({ siteMetadata, pageTitle }) => {
+const Header = ({ siteMetadata, pageTitle, headerTitle }) => {
   const data = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "lambda-icon.png" }) {
@@ -28,6 +28,7 @@ const Header = ({ siteMetadata, pageTitle }) => {
         marginBottom: `1.45rem`,
       }}
     >
+      <title>{headerTitle ? headerTitle : "Dan's Blog"}</title>
       <div
         style={{
           textAlign: `center`,
