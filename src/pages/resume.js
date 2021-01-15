@@ -11,7 +11,7 @@ export default ({ data }) => {
       <div>
         <div>
           <h2>Lîm Tsú-thuàn/林子篆/Danny</h2>
-          <div>System Software Engineer</div>
+          <div>Programmer</div>
           <div>@Tainan, Taiwan</div>
           <div>
             Github: <SiteLink url={`https://github.com/dannypsnl`} />
@@ -25,58 +25,35 @@ export default ({ data }) => {
         >
           <Section>Overview</Section>
           <p>
-            3+ years of development work experience, including networking,
-            compiler, and web application. In-depth knowledge of Kubernetes and
-            Container networking. A programming language theory lover. Like
-            Racket, Rust, and Arend.
+            3+ years of development work experience, including compiler,
+            networking, and web application. In-depth knowledge of Kubernetes
+            and Container networking. A programming language theory lover and
+            create several dependent type languages for fun. Use Racket and
+            Arend in daily development.
           </p>
         </div>
         <div>
           <Section>Work Experience</Section>
-          <Position
-            title={`Sky Mirror(software engineer)`}
-            companySite={`https://www.skymirror.com.tw/`}
-          >
-            Maintaining a future trading system.
-          </Position>
-          <Position
-            title={`Glasnostic(system software engineer)`}
-            companySite={`https://glasnostic.com`}
-          >
-            Create the networking filter & analyzer which easy to use(only four
-            norms: request, bandwidth, concurrency and latency) for nowadays
-            complex backend system.
-          </Position>
-          <Position
-            title={`AndroVideo(back-end engineer)`}
-            companySite={`http://www.androvideo.com/`}
-          >
-            Developing cloud web service with container-solution. Maintaining
-            the device(camera) HMI system by communicating with the Android
-            system.
-          </Position>
-          <Position title={`Mapacode(fullstack engineer)`}>
-            Developing HMI of CNC by React.js & Rust working with Rust & a
-            little C++ to interact with CNC
-          </Position>
+          <ul>
+            <li>
+              Deeply work with nowadays networking fundamental(include but not
+              limited to eBPF, DPDK) to maintain the product: a network
+              filter/analyzer only need four norms: request, bandwidth,
+              concurrency, and latency but able to manage complex
+              infrastructure.
+            </li>
+            <li>
+              Developing cloud web service with container-solution, and
+              maintaining the device(camera) HMI system by communicating with
+              the Android system.
+            </li>
+            <li>Developing Human Machine Interface to interact with CNC.</li>
+          </ul>
         </div>
       </div>
     </Layout>
   )
 }
-
-const Position = ({ title, companySite, children }) => (
-  <div>
-    <b>{title}</b>
-    {companySite ? (
-      <>
-        {" "}
-        <SiteLink url={companySite} />
-      </>
-    ) : null}
-    <p>{children}</p>
-  </div>
-)
 
 const Section = ({ children }) => (
   <h2
