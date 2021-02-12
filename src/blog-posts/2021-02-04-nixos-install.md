@@ -5,6 +5,7 @@ categories:
   - cs
 tags:
   - note
+  - nix
   - nixos
 ---
 
