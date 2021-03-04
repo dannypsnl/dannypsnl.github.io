@@ -36,18 +36,20 @@ export default ({ data }) => {
           <Section>Work Experience</Section>
           <ul>
             <li>
-              Deeply work with nowadays networking fundamental(include but not
-              limited to eBPF, DPDK) to maintain the product: a network
-              filter/analyzer only need four norms: request, bandwidth,
-              concurrency, and latency but able to manage complex
+              Glasnostic: Deeply work with nowadays networking
+              fundamental(include but not limited to eBPF, DPDK) to maintain the
+              product: a network filter/analyzer only need four norms: request,
+              bandwidth, concurrency, and latency but able to manage complex
               infrastructure.
             </li>
             <li>
-              Developing cloud web service with container-solution, and
-              maintaining the device(camera) HMI system by communicating with
-              the Android system.
+              AndroVideo: Developing cloud web service with container-solution,
+              and maintaining the device(camera) HMI system by communicating
+              with the Android system.
             </li>
-            <li>Developing Human Machine Interface to interact with CNC.</li>
+            <li>
+              Mapacode: Developing Human Machine Interface to interact with CNC.
+            </li>
           </ul>
         </div>
       </div>
