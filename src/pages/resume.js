@@ -35,27 +35,55 @@ export default ({ data }) => {
         <div>
           <Section>Work Experience</Section>
           <ul>
-            <li>
-              Glasnostic: Deeply work with nowadays networking
-              fundamental(include but not limited to eBPF, DPDK) to maintain the
-              product: a network filter/analyzer only need four norms: request,
-              bandwidth, concurrency, and latency but able to manage complex
+            <Job company="Glasnostic">
+              Deeply work with nowadays networking fundamental(include but not
+              limited to eBPF, DPDK) to maintain the product: a network
+              filter/analyzer only need four norms: request, bandwidth,
+              concurrency, and latency but able to manage complex
               infrastructure.
-            </li>
-            <li>
-              AndroVideo: Developing cloud web service with container-solution,
-              and maintaining the device(camera) HMI system by communicating
-              with the Android system.
-            </li>
-            <li>
-              Mapacode: Developing Human Machine Interface to interact with CNC.
-            </li>
+            </Job>
+            <Job company="AndroVideo">
+              Developing cloud web service with container-solution, and
+              maintaining the device(camera) HMI system by communicating with
+              the Android system.
+            </Job>
+            <Job company="Mapacode">
+              Developing Human Machine Interface to interact with CNC.
+            </Job>
           </ul>
         </div>
       </div>
     </Layout>
   )
 }
+
+const Job = ({ company, children }) => (
+  <li
+    style={{
+      margin: `2rem auto`,
+      padding: `0.9rem 0.9rem 0rem 0.9rem`,
+      border: `0.15rem solid`,
+      borderRadius: `0.5rem`,
+      width: `50rem`,
+      alignSelf: `center`,
+    }}
+  >
+    <h3
+      style={{
+        color: `#04043`,
+      }}
+    >
+      {company}
+    </h3>
+    <p
+      style={{
+        margin: `1.2rem 0rem`,
+      }}
+    >
+      {children}
+    </p>
+  </li>
+)
 
 const Section = ({ children }) => (
   <h2
