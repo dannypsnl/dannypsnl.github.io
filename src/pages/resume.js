@@ -39,7 +39,11 @@ export default ({ data }) => {
         >
           <Section>Talks</Section>
           <ul>
-            <li>racket fest 2021: macro as type</li>
+            <li>
+              <SiteLink url={`https://racketfest.com/`}>
+                racket fest 2021: macro as type
+              </SiteLink>
+            </li>
           </ul>
         </div>
         <div>
