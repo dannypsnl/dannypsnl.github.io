@@ -32,6 +32,16 @@ export default ({ data }) => {
             Arend in daily development.
           </p>
         </div>
+        <div
+          style={{
+            marginTop: `1em`,
+          }}
+        >
+          <Section>Talks</Section>
+          <ul>
+            <li>racket fest 2021: macro as type</li>
+          </ul>
+        </div>
         <div>
           <Section>Work Experience</Section>
           <ul>
@@ -60,21 +70,18 @@ export default ({ data }) => {
 const Job = ({ company, children }) => (
   <li
     style={{
-      margin: `2rem auto`,
-      padding: `0.9rem 0.9rem 0rem 0.9rem`,
-      border: `0.15rem solid`,
-      borderRadius: `0.5rem`,
-      width: `50rem`,
+      margin: `0rem`,
+      padding: `0.1rem`,
       alignSelf: `center`,
     }}
   >
-    <h3
+    <h4
       style={{
         color: `#04043`,
       }}
     >
       {company}
-    </h3>
+    </h4>
     <p
       style={{
         margin: `1.2rem 0rem`,
