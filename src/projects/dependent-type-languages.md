@@ -10,6 +10,8 @@ link: "https://github.com/dannypsnl/typical"
 
 The followings are dependent type languages I try to create.
 
+- [semi](https://github.com/dannypsnl/semi)
+  - macro as type for dependent type theory work, by using `local-expand` and `syntax-property`
 - [typical](https://github.com/dannypsnl/typical)
   - try macro as type
   - termination check
