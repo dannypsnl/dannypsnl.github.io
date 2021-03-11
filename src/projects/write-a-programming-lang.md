@@ -1,7 +1,6 @@
 ---
 iscard: "true"
 tags:
-  - working
   - language
   - plt
 title: "write a programming language"
