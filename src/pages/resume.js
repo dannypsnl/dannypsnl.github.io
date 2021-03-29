@@ -40,7 +40,7 @@ export default ({ data }) => {
           <Section>Talks</Section>
           <ul>
             <li>
-              <SiteLink url={`https://racketfest.com/`}>
+              <SiteLink url={`https://youtu.be/BLHxUzj7F-Q`}>
                 racket fest 2021: macro as type
               </SiteLink>
             </li>
