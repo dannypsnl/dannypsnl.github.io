@@ -32,11 +32,7 @@ export default ({ data }) => {
             Arend in daily development.
           </p>
         </div>
-        <div
-          style={{
-            marginTop: `1em`,
-          }}
-        >
+        <div>
           <Section>Talks</Section>
           <ul>
             <li>
