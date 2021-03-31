@@ -8,4 +8,4 @@ title: "cbf"
 link: "https://github.com/dannypsnl/cbf"
 ---
 
-C brainfuck interpreter
+Brainfuck interpreter written in C
