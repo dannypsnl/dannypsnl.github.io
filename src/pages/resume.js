@@ -36,6 +36,14 @@ export default ({ data }) => {
           <Section>Talks</Section>
           <ul>
             <li>
+              {"2021/04 "}
+              <SiteLink
+                url={`https://www.meetup.com/Clojure-tw/events/277419019/`}
+              >
+                Clojure Taiwan: Clojure isn't Lisp enough
+              </SiteLink>
+            </li>
+            <li>
               {"2021/03 "}
               <SiteLink url={`https://youtu.be/BLHxUzj7F-Q`}>
                 racket fest: macro as type
