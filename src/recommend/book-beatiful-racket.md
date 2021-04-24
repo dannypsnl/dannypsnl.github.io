@@ -2,6 +2,7 @@
 iscard: "true"
 title: "Beautiful Racket"
 tags:
+  - book
   - racket
 link: "https://beautifulracket.com/"
 ---
