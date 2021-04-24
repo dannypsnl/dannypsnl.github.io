@@ -25,28 +25,26 @@ const Layout = ({ children, pageTitle, headerTitle }) => {
         pageTitle={pageTitle}
         headerTitle={headerTitle}
       />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
+      <div>
         <main>{children}</main>
-        <footer>
-          <div>
-            ©{new Date().getFullYear()} dannypsnl(林子篆)
-            <div
-              style={{
-                display: `inline`,
-                float: `right`,
-              }}
-            >
-              <SocialIcon url="https://github.com/dannypsnl" />
-              <SocialIcon url="https://twitter.com/dannypsnl" />
-            </div>
+        <div
+          style={{
+            margin: `5rem auto 0 auto`,
+            // alignSelf: `center`,
+            maxWidth: `18rem`,
+          }}
+        >
+          ©{new Date().getFullYear()} dannypsnl(林子篆)
+          <div
+            style={{
+              display: `inline`,
+              float: `right`,
+            }}
+          >
+            <SocialIcon url="https://github.com/dannypsnl" />
+            <SocialIcon url="https://twitter.com/dannypsnl" />
           </div>
-        </footer>
+        </div>
       </div>
     </>
   )

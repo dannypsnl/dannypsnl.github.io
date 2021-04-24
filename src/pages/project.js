@@ -48,7 +48,7 @@ const ProjectPage = ({
   return (
     <Layout pageTitle={`Project`}>
       <SEO title={`Project`} description={title} />
-      <div>
+      <div style={{ margin: `0` }}>
         <SearchBar
           style={{ margin: `0 auto` }}
           searchQuery={searchQuery}
@@ -62,16 +62,16 @@ const ProjectPage = ({
             <div
               key={node.id}
               style={{
-                margin: `2rem auto`,
-                padding: `0.9rem 0.9rem 0rem 0.9rem`,
-                border: `0.15rem solid ${
+                margin: `0.2rem`,
+                padding: `0.6rem 0.6rem 0rem 0.6rem`,
+                border: `0.1rem solid ${
                   node.tags !== null && node.tags.includes("working")
                     ? `#ffbe0b`
                     : `#655`
                 }`,
-                borderRadius: `0.5rem`,
-                width: `20rem`,
-                alignSelf: `center`,
+                borderRadius: `0.4rem`,
+                width: `19.5rem`,
+                float: `left`,
               }}
             >
               <a
@@ -97,8 +97,8 @@ const ProjectPage = ({
                     key={tag}
                     style={{
                       margin: `0.6rem 0.1rem`,
-                      padding: `0.3rem`,
-                      border: `0.15rem solid #655`,
+                      padding: `0.2rem`,
+                      border: `0.1rem solid #655`,
                       borderRadius: `0.5rem`,
                       width: `auto`,
                     }}

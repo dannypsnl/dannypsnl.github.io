@@ -57,7 +57,13 @@ const IndexPage = ({
   return (
     <Layout>
       <SEO title={title} description={description} />
-      <div>
+      <div
+        style={{
+          margin: `0 auto`,
+          padding: `0 1.0875rem 1.45rem`,
+          maxWidth: 960,
+        }}
+      >
         <SearchBar
           style={{ margin: `0 auto` }}
           searchQuery={searchQuery}
