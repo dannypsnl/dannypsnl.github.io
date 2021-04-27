@@ -8,7 +8,12 @@ export default ({ data }) => {
   return (
     <Layout pageTitle={`Resume`}>
       <SEO title={`Resume`} description={data.site.siteMetadata.title} />
-      <div>
+      <div
+        style={{
+          maxWidth: 960,
+          margin: `0 auto`,
+        }}
+      >
         <div>
           <h2>Lîm Tsú-thuàn/林子篆/Danny</h2>
           <div>Programmer</div>
