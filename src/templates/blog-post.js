@@ -38,7 +38,12 @@ export default ({ data }) => {
   return (
     <Layout headerTitle={post.frontmatter.title}>
       <SEO title={post.frontmatter.title} description={post.excerpt} />
-      <div>
+      <div
+        style={{
+          margin: `0 auto`,
+          maxWidth: 960,
+        }}
+      >
         <h1>{post.frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <FooterSection>
