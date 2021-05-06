@@ -5,7 +5,7 @@ tags:
   - racket
   - dependent type
 title: "dependent type languages"
-link: "https://github.com/dannypsnl/typical"
+link: "https://github.com/dannypsnl/radiance"
 ---
 
 The followings are dependent type languages I try to create.
