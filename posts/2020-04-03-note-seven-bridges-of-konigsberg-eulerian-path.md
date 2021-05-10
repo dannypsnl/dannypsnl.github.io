@@ -15,11 +15,11 @@ tags:
 The seven bridges of Königsberg is a notable problem in mathematics.
 The following picture shows the actual layer of the seven bridges.
 
-![](../images/note-topology/konigsberg_bridges.png)
+![](../src/images/note-topology/konigsberg_bridges.png)
 
 And we can use a graph version to simplify the problem.
 
-![](../images/note-topology/simplify-konigsberg-bridges.png)
+![](../src/images/note-topology/simplify-konigsberg-bridges.png)
 
 [Euler](https://en.wikipedia.org/wiki/Leonhard_Euler) found, a walkthrough of a graph, traversing every edges exactly once,
 depends on the [degrees](<https://en.wikipedia.org/wiki/Degree_(graph_theory)>) of the nodes(vertex).

@@ -88,7 +88,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `blog-posts`,
-        path: `${__dirname}/src/blog-posts`,
+        path: `${__dirname}/posts`,
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },
@@ -151,7 +151,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `recommend`,
-        path: `${__dirname}/src/recommend`,
+        path: `${__dirname}/resource/recommend`,
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },
@@ -196,7 +196,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `project`,
-        path: `${__dirname}/src/projects`,
+        path: `${__dirname}/resource/projects`,
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },

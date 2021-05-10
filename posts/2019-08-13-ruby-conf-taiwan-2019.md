@@ -147,11 +147,11 @@ Why we need compaction? Without compaction, we can have out of memory due to the
 
 This is:
 
-![](../images/ruby_conf_2019/dirty_room.jpg)
+![](../src/images/ruby_conf_2019/dirty_room.jpg)
 
 After compaction:
 
-![](../images/ruby_conf_2019/clean_room.jpeg)
+![](../src/images/ruby_conf_2019/clean_room.jpeg)
 
 Without compaction, we would find there still has enough space but is not contiguous space so can't allocate the object.
 

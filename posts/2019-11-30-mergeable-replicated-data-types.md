@@ -32,7 +32,7 @@ struct
 end
 ```
 
-![](../images/mergeable-replicate-data-type/mrdts-fig-2.jpeg)
+![](../src/images/mergeable-replicate-data-type/mrdts-fig-2.jpeg)
 
 If there has a initial state with integer `5`, and it has two child versions occured by `*2`(to make it more clear for non-cs people, this equal to `x2`) and `-1`. `*2` occurs version one `10`, `-1` occurs version two `4`. Now we merge version one and version two: merge `10` `4`, we can find the LCA of them are `5`, now let's define our merge function:
 
@@ -46,7 +46,7 @@ The result is: `merge 5 10 15` which is `25`, not `5 * 2 * 3 = 30`, but it guara
 
 Next we have a new thing: relational domain:
 
-![](../images/mergeable-replicate-data-type/mrdts-fig-3.jpeg)
+![](../src/images/mergeable-replicate-data-type/mrdts-fig-3.jpeg)
 
 > The semantics of a merge in the relational set domain, albeit non-trivial, is nonetheless standard in the sense that it is independent of the concrete interpretations (in the data type domain) of the merging relations, and hence can be defined once and for all.
 
@@ -61,15 +61,15 @@ Consider LCA of queue Q and two concurrent versions v1 and v2 to be merged. What
 
 Now that we know how to map queues to the relational domain, we define the three-way merge operation in that domain as:
 
-![](../images/mergeable-replicate-data-type/mrdts-fig-4.png)
+![](../src/images/mergeable-replicate-data-type/mrdts-fig-4.png)
 
 and
 
-![](../images/mergeable-replicate-data-type/mrdts-fig-5.png)
+![](../src/images/mergeable-replicate-data-type/mrdts-fig-5.png)
 
 After merging states in the relational domain according to rules, we can make it back into the queue domain.
 
-![](../images/mergeable-replicate-data-type/mrdts-fig-6.jpeg)
+![](../src/images/mergeable-replicate-data-type/mrdts-fig-6.jpeg)
 
 Functions that compute Rmem and Rob relations for a list. The syntax is stylized to aid comprehension:
 
@@ -84,13 +84,13 @@ let rec Rob = function
 
 An implementation strategy of the queue state from relations $$R_{mem}$$ and $$R_{ob}$$ is constructing a directed graph with vertices $$R_{mem}(v)$$ and edges $$R_{ob}(v)$$, and ties broken with additional arbitration edges. A topological ordering of the graph then yields the queue.
 
-![](../images/mergeable-replicate-data-type/mrdts-fig-7.jpeg)
+![](../src/images/mergeable-replicate-data-type/mrdts-fig-7.jpeg)
 
 > We have generalized the aforementioned graph-based approach for concretizing ordering relations and abstracted it away as a library function $$\gamma_{ord}$$. Give ord, an arbitration order the function $$\gamma_{ord}$$ concretizes an ordering relation of a data structure (not necessarily a total order) as a graph isomorphic to that structure, using the arbitration order to break ties…
 
 Now we are getting closer to the general MRDT approach now. For each data type can define characteristic relations that define representation in the relational domain(like $$R_{mem}$$ and $$R_{ob}$$ in the queue), The following table shows the characteristic relations for a range of data types.
 
-![](../images/mergeable-replicate-data-type/mrdts-table-1.jpeg)
+![](../src/images/mergeable-replicate-data-type/mrdts-table-1.jpeg)
 
 I haven't read whole content in MRDT, it seems like they are going to create atomically derive merge specification for an MRDT given the characteristic relations and the abstraction/concretization functions.
 
