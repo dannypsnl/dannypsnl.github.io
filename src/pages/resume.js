@@ -38,6 +38,15 @@ export default ({ data }) => {
           </p>
         </div>
         <div>
+          <Section>Skills</Section>
+          <p>Languages: Go, Java, Erlang/Elixir, JS, Racket, Haskell</p>
+          <p>Frontend: React, Vue</p>
+          <p>Backend: Phoenix, Go</p>
+          <p>
+            Extra: Kubernetes, DPDK, eBPF, networking, compiler, type theory
+          </p>
+        </div>
+        <div>
           <Section>Talks</Section>
           <ul>
             <li>
