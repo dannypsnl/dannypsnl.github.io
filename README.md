@@ -10,9 +10,12 @@ npm run deploy
 
 ### Edit
 
-Blog posts put in `src/blog-posts/`
+Blog posts put in `posts/`
 
 [Supported language highlight](https://prismjs.com/#supported-languages) in Markdown files.
+
+- Recommend: `resource/recommend`
+- Project: `resource/projects`
 
 ### NOTE
 
@@ -28,8 +31,3 @@ Blog posts put in `src/blog-posts/`
 #### Comment
 
 [utteranc](https://utteranc.es/)
-
-#### Next Release
-
-1. switch to utteranc
-2. horizontal navigation
