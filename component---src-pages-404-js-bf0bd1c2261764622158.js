@@ -1,0 +1,2 @@
+(self.webpackChunkdannypsnl_github_io=self.webpackChunkdannypsnl_github_io||[]).push([[883],{9616:function(e,t,n){"use strict";n.r(t);var u=n(7294),l=n(5127),a=n(4745);t.default=function(){return u.createElement(l.Z,null,u.createElement(a.Z,{title:"404: Not found"}),u.createElement("h1",null,"NOT FOUND"),u.createElement("p",null,"You just hit a route that doesn't exist... the sadness."))}}}]);
+//# sourceMappingURL=component---src-pages-404-js-bf0bd1c2261764622158.js.map
