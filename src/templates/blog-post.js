@@ -10,7 +10,7 @@ import { BuyMeACoffee } from "../components/buy-me-a-coffe"
 import Utterances from "../components/utterances"
 import SEO from "../components/seo"
 
-export default ({ data }) => {
+const BlogPosts = ({ data }) => {
   const FooterSection = ({ children }) => (
     <p
       style={{
@@ -127,8 +127,10 @@ const SimilarArticlesComponent = ({ currentArticle, articles }) => {
   )
 }
 
+export default BlogPosts
+
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     site {
       siteMetadata {
         siteUrl

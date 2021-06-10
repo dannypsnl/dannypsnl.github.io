@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import SiteLink from "../components/site-link"
 import { graphql } from "gatsby"
 
-export default ({ data }) => {
+const ResumePage = ({ data }) => {
   return (
     <Layout pageTitle={`Resume`}>
       <SEO title={`Resume`} description={data.site.siteMetadata.title} />
@@ -118,6 +118,8 @@ const Section = ({ children }) => (
     {children}
   </h2>
 )
+
+export default ResumePage
 
 export const query = graphql`
   query {

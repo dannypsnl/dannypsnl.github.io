@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-export default ({ blogURL, title, timeToRead, date, excerpt }) => (
+const BlogPost = ({ blogURL, title, timeToRead, date, excerpt }) => (
   <div
     style={{
       margin: `2.7rem`,
@@ -46,3 +46,5 @@ export default ({ blogURL, title, timeToRead, date, excerpt }) => (
     <p>{excerpt}</p>
   </div>
 )
+
+export default BlogPost

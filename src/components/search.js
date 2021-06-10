@@ -1,6 +1,6 @@
 import React from "react"
 
-export default ({ searchQuery, setSearchQuery, placeholder }) => (
+const Search = ({ searchQuery, setSearchQuery, placeholder }) => (
   <form
     style={{
       margin: `0 auto`,
@@ -23,3 +23,5 @@ export default ({ searchQuery, setSearchQuery, placeholder }) => (
     />
   </form>
 )
+
+export default Search
