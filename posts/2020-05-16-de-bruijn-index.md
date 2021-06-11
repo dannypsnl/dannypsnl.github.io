@@ -8,7 +8,7 @@ tags:
   - racket
 ---
 
-At the beginning of learning PLT, everyone would likely be confused by some program that didn't have a variable! Will, I mean they didn't use `String`, `Text` or something like that to define a variable. A direct mapping definition of lambda calculus(we would use **LC** as the short name in the following context, and if you unfamiliar with **LC**, you can read [this article](/blog/2020/01/01/cs/note-what-is-lambda-calculus/) first) usually looks like this:
+At the beginning of learning PLT, everyone could be confused by program that didn't have a variable! Will, I mean they didn't use `String`, `Text` or something like that to define a variable. A direct mapping definition of lambda calculus(a.k.a. **LC**, if you haven't been familiar with **LC**, you can read [this article](/blog/2020/01/01/cs/note-what-is-lambda-calculus/) first) usually look like this:
 
 ```racket
 #lang typed/racket
@@ -19,7 +19,7 @@ At the beginning of learning PLT, everyone would likely be confused by some prog
 (struct term:application term [(t1 : term) (t2 : term)] #:transparent)
 ```
 
-But what we may find some definitions look like this:
+However, we may find some definitions look like this:
 
 ```racket
 #lang typed/racket
@@ -30,16 +30,18 @@ But what we may find some definitions look like this:
 (struct bterm:application bterm [(t1 : bterm) (t2 : bterm)] #:transparent)
 ```
 
-There has two significant different:
+There has two significant differences:
 
 1. variable is an `Integer`.
 2. lambda does not contain `x`(which means parameter in high-level languages' concept).
 
-This is De Bruijn index(we would use **DBI** as short name in the following context), we can write it out, for example, **id** function `λx.x` can be rewritten with `λ0`, Y combinator `λf.(λx.f (x x)) (λx.f (x x))` can be rewritten with `λ(λ0 (1 1))(λ0 (1 1))`, but why? To understand **DBI**, we need to know what was the problem in **LC**.
+This is De Bruijn index(a.k.a. **DBI**). We can write it out, for example, **id** function `λx.x` can be rewritten with `λ0`; Y combinator `λf.(λx.f (x x)) (λx.f (x x))` can be rewritten with `λ(λ0 (1 1))(λ0 (1 1))`. To understand why using **DBI**, we need to know what was the problem in **LC**.
 
 ### $\alpha$-conversion
 
-Usually, two **id** functions considered the same function. However, if we encode **LC** as the first definition written in **racket**, we would get into trouble: We may say `λx.x` is not the same function as `λy.y`, when they are the same. To solve this problem, we developed a conversion called **$\alpha$-conversion**(or **$\alpha$-renaming**), which renaming `λx.x` and `λy.y` to `λa.a`(`a` is an abstraction variable, we can use any, any character to replace it) let's say. Looks good, any problem else? Emm...yes, as we know, the real world never make thing easier, but that also means a challenge is coming, and we all love the challenge! When a `λy.λx.x` be renamed to `λa.λa.a` is fine, because of every programmer work with variable-shadowing for a long-long time. However, there has a possible dangerous conversion is the renamed variable existed! For example, `λx.λa.x` should not simply be rewritten with `λa.λa.a`, because later when we rename `a`, we would get `λa.λb.b`, oops. `λx.λa.x` definitely is not `λa.λb.b`. To correct **$\alpha$-conversion** is really hard, that's the main reason we introducing the De Bruijn index.
+Usually, two **id** functions considered the same function. However, if we encode **LC** in the first way, we will get into trouble. We may say `λx.x` is not the same function as `λy.y`, when they are the same. To solve this problem, we develop a conversion called **$\alpha$-conversion**(a.k.a. **$\alpha$-renaming**), which renaming `λx.x` and `λy.y` to `λa.a` let's say.
+
+Looks good, any problem else? Emm...yes. As we know, the real world never make thing easier, but that also means a challenge is coming, hope we all love this challenge! When `λy.λx.x` be renamed to `λa.λa.a` is fine, because of all of us work with variable-shadowing for a long-long time. However, there has a possible dangerous conversion is the renamed variable existed! For example, `λx.λa.x` should not simply be rewritten with `λa.λa.a`, because later when we rename `a`, we would get `λa.λb.b`, oops. `λx.λa.x` definitely is not `λa.λb.b`. To correct **$\alpha$-conversion** is really hard, that's a good point to introduce the De Bruijn index.
 
 ### De Bruijn Index
 
