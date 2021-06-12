@@ -6,14 +6,9 @@ tags:
   - golang
 ---
 
-Sort is an operation very often to use.
-Although a `quick-sort` isn't too long. We still don't want to create it again and again.
-It also don't have the value to copy it.
+Sort is an operation very often to use. Although a `quick-sort` isn't too long. We still don't want to create it again and again. It also doesn't have the value to copy it.
 
-Good news is standard package `sort` provide a lots of sort function.
-Unlike most language do, it's no association with type or data structure.
-Function `sort.Sort` do not have any expected to it's target.
-It use `sort.Interface` to detect how to work.
+Good news is standard package `sort` provide a lots of sort function. Unlike most language do, it's no association with type or data structure. Function `sort.Sort` do not have any expected to its target. It use `sort.Interface` to detect how to work.
 
 ```go
 package sort
@@ -48,9 +43,7 @@ func Sort(data Interface) {
 // ps. No real 500
 ```
 
-`Sort` is easier than my imagine. Awesome!
-
-From this, we know have to go into `quicksort`.
+`Sort` is easier than my imagine. Awesome! From this, we know we have to go into `quicksort`.
 
 ```go
 package sort
@@ -85,11 +78,7 @@ func quickSort(data Interface, a, b, maxDepth int) {
 // 下略５００行...
 ```
 
-`maxDepth` detect the size should use heap sort or not.
-
-The more you should go to read algorithm. But you can get the unusual theory from Go's design of `sort` package.
-
-Thank for read.
+`maxDepth` detect the size should use heap sort or not. The more you should go to read algorithm. However, you can get the unusual theory from Go's design of `sort` package. Thanks for read.
 
 ### References:
 
