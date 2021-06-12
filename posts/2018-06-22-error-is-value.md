@@ -7,27 +7,13 @@ tags:
   - errors
 ---
 
-I think most of Gopher had read [error-handling-and-go](https://blog.golang.org/error-handling-and-go)
-
-Has anyone had watched [Go Lift](https://www.youtube.com/watch?v=1B71SL6Y0kA)?
-
-Let's getting start from **Go Lift**!
-
-The point of **Go Lift** is: Error is Value.
-
-Of course, we know this fact. But do you really understand what that means?
-
-In **Go Lift**, **John Cinnamond** mentions a trick about wrapping the error by command executor.
-
-For example, we create a connection to `server:6666` by TCP.
+I think most Gopher had read [error-handling-and-go](https://blog.golang.org/error-handling-and-go). Has anyone had watched [Go Lift](https://www.youtube.com/watch?v=1B71SL6Y0kA)? Let's getting start from **Go Lift**! The point of **Go Lift** is: Error is Value. Of course, we know this fact. Do you really understand what that means? In **Go Lift**, **John Cinnamond** mentions a trick about wrapping the error by command executor. For example, we create a connection to `server:6666` by TCP.
 
 ```go
 conn := net.Dial("tcp", "server:6666")
 ```
 
-Can we? Ah..., No!
-
-Correct code is
+Can we? Ah..., No! The correct code is:
 
 ```go
 conn, err := net.Dial("tcp", "server:6666")
@@ -36,13 +22,13 @@ if err != nil {
 }
 ```
 
-Then we writing something to the connection.
+Then we write something through the connection.
 
 ```go
 nBtye := conn.Write([]byte{`command`})
 ```
 
-We want that, but the real code is
+We want that, but the real code is:
 
 ```go
 nBtye, err := conn.Write([]byte{`command`})
@@ -69,11 +55,7 @@ if err != nil {
 // using response
 ```
 
-But the thing hasn't ended yet if we have to rewrite the command if response tells us the command fail?
-
-If we are working for a server, we can't just panic?
-
-So **Go Lift** has a solution:
+Howver, the thing hasn't ended yet if we have to rewrite the command if response tells us the command fail? If we are working for a server, we can't just panic? So **Go Lift** has a solution:
 
 ```go
 func newSafeConn(network, host string) *safeConn {
@@ -123,9 +105,7 @@ if conn.err != nil {
 // else, do following logic
 ```
 
-But can we do much more than this?
-
-Yes! We can have an error wrapper for executing the task.
+Can we do much more than this? Yes! We can have an error wrapper for executing the task.
 
 ```go
 type ErrorWrapper struct {
@@ -153,9 +133,7 @@ w.Then(func() error {
 })
 ```
 
-Wait! But we need to send the connection to next task without an outer scope variable. But how to?
-
-Now let's get into `reflect` magic.
+Wait! We need to send the connection to next task without an outer scope variable. But how to? Now let's get into `reflect` magic.
 
 ```go
 type ErrorWrapper struct {
@@ -198,7 +176,7 @@ func (w *ErrorWrapper) Final(catch func(error)) {
 }
 ```
 
-Now, we coding like
+Now, we're coding like:
 
 ```go
 w := NewErrorWrapper("tcp", "server:6666")
