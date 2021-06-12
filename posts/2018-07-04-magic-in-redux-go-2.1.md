@@ -7,11 +7,7 @@ tags:
   - redux
 ---
 
-A few days ago, I release the redux-go v2.1
-
-The purpose is: create reducer & action then manage relationships between them is pretty hard!
-
-Let's getting start from basic v2 store
+A few days ago, I release the redux-go v2.1. The purpose is: create reducer & action then manage relationships between them is pretty hard! Let's start from basic v2 store.
 
 ```go
 // package reducer
@@ -32,11 +28,7 @@ store.Dispatch("INCREASE")
 store.StateOf(reducer.Counter)
 ```
 
-When you got 30 reducers, each contains 3 actions, how to manage this complex?
-
-In the traditional way, we follow a restrict naming rule.
-
-For example:
+When you got 30 reducers, each contains 3 actions, how to manage this complex? In the traditional way, we follow a restriction naming rule. For example:
 
 ```go
 // package reducer/counter
@@ -54,11 +46,7 @@ store.Dispatch(counter.Increase)
 store.StateOf(reducer.Counter)
 ```
 
-How to spread these actions is not important, the point is we manage them by handcraft! And handcraft cause unstable!
-
-That's why we need package Rematch.
-
-It creates a more native way to manage your reducer-action relationship.
+How to spread these actions is not important, the point is we manage them by handcraft! Handcraft cause unstable! That's why we need package Rematch. It creates a more native way to manage your reducer-action relationship.
 
 ```go
 // package reducer/todo
@@ -100,11 +88,7 @@ store.Dispatch(addTodo.With("second todo"))
 store.StateOf(todo.Reducer)
 ```
 
-It takes more code but also more restrictive than the manual way to create it.
-
-Now, let's take a look at what made these happened.
-
-First, we start from `store.New`(base on v2.1.1)
+It takes more code but also more restrictive than the manual way to create it. Now, let's take a look at what made these happened. First, we start from `store.New`(base on v2.1.1)
 
 ```go
 // package store
@@ -137,7 +121,7 @@ for _, reducer := range reducers {
 return newStore
 ```
 
-We still checking reducer, let's view it
+Let's check reducer.
 
 ```go
 // func checkReducer, adding part
@@ -149,13 +133,7 @@ if r.Kind() == reflect.Ptr {
 }
 ```
 
-We add checking `Kind` is `Ptr`, because of `rematch.Reducer` sends a pointer of it into the store!
-
-If we can't find field `State`, we say the reducer is invalid and panic(this is a protocol really missing, but only the writer has to worry about, the user only need to know they have to create this field). So we can promise we don't have to check these at the following flow.
-
-Then we check the state already exist or not in the store. If the answer is yes, we panic it.
-
-Final, we have to get initial state and actual reducer, why it called `actual reducer`? Because we can't really execute a structure! The reducer will execute in progress is another thing. It created by package rematch. So let's dig into `getReducerAndInitState` this function to understanding how it works and why we have to change the type of `Store.reducers`.
+We add checking `Kind` is `Ptr`, because of `rematch.Reducer` sends a pointer of it into the store! If we can't find field `State`, we say the reducer is invalid and panic(this is a protocol really missing, but only the writer has to worry about, the user only need to know they have to create this field). So we can promise we don't have to check these at the following flow. Then we check the state already exist or not in the store. If the answer is yes, we panic it. Final, we have to get initial state and actual reducer, why it called `actual reducer`? Because we can't really execute a structure! The reducer will execute in progress is another thing. It created by package rematch. So let's dig into `getReducerAndInitState` this function to understanding how it works and why we have to change the type of `Store.reducers`.
 
 ```go
 // func getReducerAndInitState
@@ -174,15 +152,7 @@ return r, r.Call(
     )[0] // 0 at here is because checkReducer promise that we will only receive one return
 ```
 
-The same, Kind is Ptr means it's `rematch.Reducer`.
-
-Remember `actualReducer, initState := getReducerAndInitState(r)` this line, we got `(reducer, state)` pair.
-
-Now, when we receive a `rematch.Reducer`, `reducer` produce by `InsideReducer`, where is it? We do not see it at any user's code, right? Because it's defined at package `rematch`, export it is because reflection can only take exported member!
-
-Else it's original reducer(a normal function apply reducer required), we won't talk about it again, you can refer to [design-of-redux-go-v2](/blog/2018/05/17/cs/design-of-redux-go-v2/) to getting more information.
-
-Back to InsideReducer
+The same, Kind is Ptr means it's `rematch.Reducer`. Remember `actualReducer, initState := getReducerAndInitState(r)` this line, we got `(reducer, state)` pair. Now, when we receive a `rematch.Reducer`, `reducer` produce by `InsideReducer`, where is it? We do not see it at any user's code, right? Because it's defined at package `rematch`, export it is because reflection can only take exported member! Else its original reducer(a normal function apply reducer required), we won't talk about it again, you can refer to [design-of-redux-go-v2](/blog/2018/05/17/cs/design-of-redux-go-v2/) to getting more information. Back to InsideReducer.
 
 ```go
 // package rematch
@@ -221,21 +191,13 @@ func (r Reducer) methods(v interface{}) map[string]reflect.Value {
 }
 ```
 
-`methods` get user-defined rematcher(back to `InsideReducer` & `getReducerAndInitState`, you will find this passing flow), overviewing every method, if anything looks like an inside reducer, put it into method map.
-
-Now you could have several confused points.
+`methods` get user-defined rematcher(back to `InsideReducer` & `getReducerAndInitState`, you will find this passing flow), overviewing every method, if anything looks like an inside reducer, put it into method map. Now you could have several confused points.
 
 1. why using `m.Name`, not address
 2. why using `mt.In(1)`, not `mt.In(0)`
 3. why `NumIn()` should be 3
 
-First question's answer is, instance to method & type to method has the different address! It's not hard to understand when you know that there has no `user-type` in final machine code. We will create a table(or other things, not important) to represent `user-type`. But we can get the same name(type info will store it).
-
-Second's answer and third's are same, reflection type of structure's method `Method` return an underlying function of method.
-
-For example, we have a type `K`, `K` has a method `foo()`, there has no `K.foo()` in this world, we have `foo(*K)` actually, and that's what `rt.Method(i)` gave you!
-
-Finally, let's take a look at `action`. The last puzzle of this crazy tutorial.
+First question's answer is, instance to method & type to method has the different address! It's not hard to understand when you know that there has no `user-type` in final machine code. We will create a table(or other things, not important) to represent `user-type`. But we can get the same name(type info will store it). Second's answer and third's are same, reflection type of structure's method `Method` return an underlying function of method. For example, we have a type `K`, `K` has a method `foo()`, there has no `K.foo()` in this world, we have `foo(*K)` actually, and that's what `rt.Method(i)` gave you! Finally, let's take a look at `action`. The last puzzle of this crazy tutorial.
 
 ```go
 // package rematch
@@ -245,9 +207,7 @@ type action struct {
 }
 ```
 
-This is how it looks like. We store method's name & payload named as `with`.
-
-We used `Action` to create our action
+This is how it looks like. We store method's name & payload named as `with`. We used `Action` to create our action.
 
 ```go
 // package rematch
@@ -258,9 +218,7 @@ func (r Reducer) Action(method interface{}) *action {
 }
 ```
 
-Now, we believing `getReducerName` work correctly first, and mention it later.
-
-As your expected, `With` just set up the payload.
+Now, we're believing `getReducerName` work correctly first, and mention it later. As your expected, `With` just set up the payload.
 
 ```go
 // package rematch
@@ -297,8 +255,4 @@ func getReducerName(r interface{}) string {
 }
 ```
 
-But why is `len(fullName)-3`? The reason is that you can have `Foo` & `Foo(*K)` at the same time! The solution Go pick is suffixed all method by `-fm`!
-
-Now you know why we cut it. Because of the type of method.Name does not have this suffix, we want to map them, so we have to follow their rules.
-
-With these change, now we can work with a native relationship between reducer & action! And a nice sleep I guess?
+But why is `len(fullName)-3`? The reason is that you can have `Foo` & `Foo(*K)` at the same time! The solution Go pick is suffixed all method by `-fm`! Now you know why we cut it. Because of the type of method.Name does not have this suffix, we want to map them, so we have to follow their rules. With these change, now we can work with a native relationship between reducer & action! And a nice sleep I guess?
