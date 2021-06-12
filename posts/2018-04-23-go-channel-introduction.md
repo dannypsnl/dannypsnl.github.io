@@ -125,20 +125,20 @@ go 關鍵字會啟動一個 goroutine 處理這些程序，而至此我們將失
 | operation          | channel state                               | result |
 | ------------------ | ------------------------------------------- | ------ |
 | Read               | nil                                         | Block  |
-| open and not empty | Value                                       |
-| open and empty     | Block                                       |
-| Closed             | default value, false                        |
-| Write Only         | Compilation Error                           |
+| open and not empty | Value                                       |        |
+| open and empty     | Block                                       |        |
+| Closed             | default value, false                        |        |
+| Write Only         | Compilation Error                           |        |
 | Write              | nil                                         | Block  |
-| Open and full      | Block                                       |
-| Open and not full  | Write Value                                 |
-| Closed             | panic                                       |
-| Receive Only       | Compilation Error                           |
+| Open and full      | Block                                       |        |
+| Open and not full  | Write Value                                 |        |
+| Closed             | panic                                       |        |
+| Receive Only       | Compilation Error                           |        |
 | close              | nil                                         | panic  |
-| Open and not empty | closed channel, can read until it's drained |
-| Open and empty     | closed channel, read false                  |
-| Closed             | panic                                       |
-| Receive Only       | Compilation Error                           |
+| Open and not empty | closed channel, can read until it's drained |        |
+| Open and empty     | closed channel, read false                  |        |
+| Closed             | panic                                       |        |
+| Receive Only       | Compilation Error                           |        |
 
 你會發現一個有趣的地方，`channel` 有所謂的 full !?沒錯，`channel` 可以設定長度給它，通常我們可以利用這個特性限制一次可執行任務的數量 etc
 
