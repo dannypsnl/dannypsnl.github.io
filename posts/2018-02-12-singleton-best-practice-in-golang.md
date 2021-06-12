@@ -13,10 +13,7 @@ It's really a problem at there. And worth to think about it.
 
 ### Start
 
-Let's consider how to create a singleton?
-We need a reference can't be change by anyone at all the time except initialize.
-
-It's possible in Go? Yes, package level reference.
+Let's consider how to create a singleton? We need a reference can't be change by anyone at all the time except initialize. Is that possible in Go? Yes, package level reference.
 
 ```go
 var s *singleton
@@ -33,14 +30,7 @@ func GetInstance() *singleton {
 }
 ```
 
-Seems perfect, but buggy actually. Why?
-
-Because the check can facing the race condition when using a lot goroutine access our singleton.
-
-Now we know the problem, how to solve it?
-
-We have two choices. One is `init` God function, another is `sync.Once` let only do once all the time.
-Let's start from first solution.
+Seems perfect, but buggy actually. Why? Because the check can facing the race condition when using a lot goroutine access our singleton. Now we know the problem, how to solve it? We have two choices. One is `init` God function, another is `sync.Once` let only do once all the time. Let's start from first solution.
 
 ```go
 func init() {
@@ -52,8 +42,7 @@ func GetInstance() *singleton {
 }
 ```
 
-Why this will work? Because `init` must be execute after anything trying to using anything in a package.
-So here `s` will be initialize before this package be using. And the race condition won't exist by Go's guarantee.
+Why this will work? Because `init` must be executed after anything trying to using anything in a package. So here `s` will be initialized before this package be using, and the race condition won't exist by Go's guarantee.
 
 Second way is `sync.Once`.
 
