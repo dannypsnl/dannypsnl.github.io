@@ -1,5 +1,5 @@
 ---
-title: "How to getting start with Rust"
+title: "How to get start with Rust"
 categories:
   - cs
 tags:
@@ -7,8 +7,6 @@ tags:
 ---
 
 Rust is a strange language.
-
-Let's start!
 
 ## Moving
 
@@ -22,9 +20,7 @@ fn main() {
 }
 ```
 
-What do you expect? `t` & `u` is `s`? No!
-
-`rustc` says:
+What do you expect? `t` & `u` is `s`? No! `rustc` says:
 
 ```
 error[E0382]: use of moved value: `s`
@@ -38,15 +34,11 @@ error[E0382]: use of moved value: `s`
   = note: move occurs because `s` has type `std::string::String`, which does not implement the `Copy` trait
 ```
 
-These error tell you why you got a fail.
-
-In Rust, you should expect default behavior of assign is moving!
+This error tell you why you got a fail. In Rust, you should expect default behavior of assign is moving!
 
 ### Copy
 
-And you can expect if any type implement the `Copy` trait, will be copied.
-
-That's why these code will work:
+You can expect if any type implement the `Copy` trait, will be copied. That's why these code will work:
 
 ```rust
 let s = 1;
@@ -63,11 +55,7 @@ struct Foo {
 }
 ```
 
-Notice that `Clone` is required.
-
-But a type implement `Copy` can't have a field do not implement `Copy`!!!
-
-So following code will fail.
+Notice that `Clone` is required. However, a type implement `Copy` can't have a field do not implement `Copy`!!! So following code will fail.
 
 ```rust
 #[derive(Clone, Copy)]
@@ -114,13 +102,7 @@ Because `String::push_str` borrow `&mut self`, it can't be used by an immutable 
 
 ## Reference
 
-We already seen `String`, it's called **owning pointer**, others are `Vec`, `Box`, etc.
-
-But these pointer will move data. Sometime, we don't need to moving data, but also don't want to copy it.
-
-It's reference showtime!
-
-Rust's reference has some points.
+We have already seen `String`, it's called **owning pointer**, others are `Vec`, `Box`, etc. However, these pointers will move data. Sometime, we don't need to moving data, but also don't want to copy it. It's reference showtime! Rust's reference has some points.
 
 1. explicitly using thing it point to
 
@@ -169,13 +151,7 @@ That mean a dangling pointer. Rust disallowed it.
 
 ## Conclusion
 
-I think these are the most hard part when you're beginner of Rust.
-
-Because Rust chooses a new way to handle it's memory, move default, checking live-time, sharing data by reference.
-
-Understanding these things is most important to get familiar with Rust.
-
-Hope you like it & can get some help from this.
+I think these are the hardest part when you are beginner of Rust. Because Rust chooses a new way to handle its memory, move default, checking live-time, sharing data by reference. Understanding these things is most important to get familiar with Rust. Hope you like it & can get some help from this.
 
 ### References:
 
