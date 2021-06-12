@@ -7,24 +7,18 @@ tags:
   - redux
 ---
 
-Redux is a single flow state manager. I porting it from JS to Go at last year.
-
-But there had one thing make me can't familiar with it, that is type of state!
-
-In Redux, we have store combined by many reducers. Then we dispatch action into store to updating our state. That means our state could be anything.
-
-In JS, we have a reducer like:
+Redux is a single flow state manager. I porting it from JS to Go at last year. However, there had one thing make me can't familiar with it, that is type of state! In Redux, we have store combined by many reducers. Then we dispatch action into store to updating our state. That means our state could be anything. In JS, we have a reducer like:
 
 ```javascript
 const counter = (state = 0, action) => {
-    switch action.type {
+  switch (action.type) {
     case "INC":
-        return state + action.payload
+      return state + action.payload
     case "DEC":
-        return state - action.payload
+      return state - action.payload
     default:
-        return state
-    }
+      return state
+  }
 }
 ```
 
@@ -46,9 +40,7 @@ func counter(state interface{}, action action.Action) interface{} {
 }
 ```
 
-Look at those assertion, of course it's safe because you should know which type are you using. But just so ugly.
-
-So I decide to change this. In v2, we have:
+Look at those assertions, of course it's safe because you should know which type are you using. So ugly, I decide to change them. Therefore, in v2, we have:
 
 ```go
 func counter(state int, payload int) int {
@@ -56,21 +48,13 @@ func counter(state int, payload int) int {
 }
 ```
 
-Wait, what!!!?
-
-So I have to explain the magic behind it.
-
-First is how to got user wanted type of state. The answer is `reflect` package.
-
-But how? Let's dig in `v2/store` function: `New`.
+Wait, what!!!? So I have to explain the magic behind it. First is how to get user wanted type of state. The answer is `reflect` package. How? Let's dig in `v2/store` function: `New`.
 
 ```go
 func New(reducers ...interface{}) *Store
 ```
 
-As you see, we have to accept any type been a reducer at parameters part.
-
-Then let's see type: `Store`(only core part)
+As you see, we have to accept any type been a reducer at parameters part. Then let's see type: `Store`(only core part)
 
 ```go
 type Store struct {
@@ -79,13 +63,7 @@ type Store struct {
 }
 ```
 
-Yp, we store the reflect result that type is `reflect.Value`.
-
-But why? Because if we store `interface{}`, we have to call `reflect.ValueOf` each time we want to call it! That will become too slow.
-
-And `state` will have an exlpanation later.
-
-So in the `New` body.
+Yp, we store the reflection result that type is `reflect.Value`. Why? Because if we store `interface{}`, we have to call `reflect.ValueOf` each time we want to call it! That will become too slow, `state` will have an explanation later. So in the `New` body.
 
 ```go
 func New(reducers ...interface{}) *Store {
@@ -152,15 +130,7 @@ return newStore
 // ...
 ```
 
-So that's how `state` work, using a address of reducer mapping it's state.
-
-`reflect.Value.Call` this method allow you invoke a `reflect.Value` from a function.
-
-It's parameter types required by signature. It always return several `refelct.Value`, but because we just very sure we only reutrn one thing, so we can just extract index 0.
-
-Then is `state`, why I choose to using pointer but not function name this time?
-
-Thinking about this:
+So that's how `state` work, using a address of reducer mapping its state.`reflect.Value.Call` this method allow you invoke a `reflect.Value` from a function. It's parameter types required by signature. It always return several `refelct.Value`, but because we just very sure we only reutrn one thing, so we can just extract index 0. Then is `state`, why I choose to using pointer but not function name this time? Thinking about this:
 
 ```go
 // pkg a
@@ -173,9 +143,7 @@ func main() {
 }
 ```
 
-Which one should we pick? Of course we can trying to left package name make it can be identified.
-
-But next is the really hard:
+Which one should we pick? Of course, we can try to left package name make it can be identified. But next is the really hard:
 
 ```go
 func main() {
@@ -184,9 +152,7 @@ func main() {
 }
 ```
 
-If you think counter name is counter, that is totally wrong, it's name is **func1**.
-
-So, I decide using function itself to get mapping state. That is new API: `StateOf`
+If you think counter name is counter, that is totally wrong, it's name is **func1**. So, I decide using function itself to get mapping state. That is new API: `StateOf`
 
 ```go
 func (s *Store) StateOf(reducer interface{}) interface{} {
@@ -195,11 +161,7 @@ func (s *Store) StateOf(reducer interface{}) interface{} {
 }
 ```
 
-The point is `reflect.Value.Interface`, this method return the value it owns.
-
-The reason we return `interface{}` at here is because, we have no way to convert to user wanted type, and user is always know what them get actually, just for convience we let user can use any type for their state, so they don't need to do `state.(int)` these assertion.
-
-Now, you just work like this:
+The point is `reflect.Value.Interface`, this method return the value it owns. The reason we return `interface{}` at here is because, we have no way to convert to user wanted type, and user is always know what them get actually. For convenience we let users use any type for their state, so they don't need to do `state.(int)` these assertions. Now, you just work like this:
 
 ```go
 func main() {
@@ -214,4 +176,4 @@ func main() {
 }
 ```
 
-These are biggest break through for v2, thanks for read
+These are the biggest break through for v2.
