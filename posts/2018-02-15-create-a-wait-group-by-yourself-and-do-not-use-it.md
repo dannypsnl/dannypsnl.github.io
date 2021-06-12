@@ -7,13 +7,9 @@ tags:
   - concurrency
 ---
 
-If you had wrote any concurrency code in Go.
-I think you could seems `sync.WaitGroup` before.
-And today point is focus on create a wait group by channel trick.
+If you had written any concurrency code in Go, I think you could seem `sync.WaitGroup` before. Today's we will focus on create a wait group by channel trick.
 
-How?
-
-First you need a channel without buffer.
+How? First, you need a channel without buffer.
 
 ```go
 func main() {
@@ -21,9 +17,7 @@ func main() {
 }
 ```
 
-Then get something from it so if there has no value in `wait`, process keep going.
-But if just trying to get something from a empty channel. You will get block and cause deadlock.
-Then go will panic it. So we have to change the code a little bit but also be more extendable for next iteration.
+Then get something from it so if there has no value in `wait`, process keep going. But if just trying to get something from a empty channel. You will get block and cause deadlock. Then go will panic it. So we have to change the code a little bit but also be more extendable for next iteration.
 
 ```go
 // ...
@@ -59,27 +53,17 @@ for i := 0; i < n; i++ {
 
 ps. These code has a little bug(you can try to find it, or read the answer at the end)
 
-Now we can see it work. The reason of these code can work is because size n is our expected amount of workers.
-After each worker done their jobs. They will send something(here is `struct{}{}`, but exactly is doesn't matter thing) into our `wait` channel.
-We only read `n` things from `wait`.
+Now we can see it work. The reason of these code can work is because size n is our expected amount of workers. After each worker done their jobs. They will send something(here is `struct{}{}`, but exactly is doesn't matter thing) into our `wait` channel. We only read `n` things from `wait`.
 
-So after `n` things be read. We won't be block any more even `wait` got new thing. Else we have to waiting `wait`.
+So after `n` things be read. We won't be blocked anymore even `wait` got new thing. Else we have to waiting `wait`.
 
-Whole code dependent on this fact.
-Having these knowledge, we can create ours `WaitGroup` now.
+Whole code dependent on this fact. Having this knowledge, we can create ours `WaitGroup` now.
 
 <script src="https://gist.github.com/dannypsnl/da6eee69239111ef025a6f00bf73faaf.js"></script>
 
 As you can see, we use a type wrapping all the thing we need.(It's a basic idiom, so I don't want to say why)
 
-Then method `Add` is preparing for `n` we talk before. Adding these thing in dynamic way.
-
-Next `Done` do the thing as we manually do in previous code.
-
-And `Wait` is read amount of things equal final `n`.
-
-The end let's say what happened in previous code. You should closing the `channel` always.
-So the code will be:
+Then method `Add` is preparing for `n` we talk before. Adding these things in dynamic way. Next `Done` do the thing as we manually do in previous code, and `Wait` is read amount of things equal final `n`. Let's say what happened in previous code. You should close the `channel` always. So the code will be:
 
 ```go
 // ...
