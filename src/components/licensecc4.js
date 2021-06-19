@@ -1,7 +1,7 @@
 import React from "react"
 
 export const LicenseCC4 = () => (
-  <div>
+  <React.Fragment>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
       <img
         alt="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
@@ -19,5 +19,5 @@ export const LicenseCC4 = () => (
       Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
     </a>{" "}
     License.
-  </div>
+  </React.Fragment>
 )

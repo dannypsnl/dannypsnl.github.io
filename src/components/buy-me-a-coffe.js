@@ -2,7 +2,7 @@ import SiteLink from "./site-link"
 import React from "react"
 
 export const BuyMeACoffee = () => (
-  <div>
+  <React.Fragment>
     <SiteLink className="bmc-button" url="https://www.buymeacoffee.com/zclIv4D">
       <img
         src="https://cdn.buymeacoffee.com/buttons/default-white.png"
@@ -15,5 +15,5 @@ export const BuyMeACoffee = () => (
         }}
       />
     </SiteLink>
-  </div>
+  </React.Fragment>
 )
