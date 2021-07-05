@@ -23,20 +23,20 @@
     • <span class="token constant">In</span> <span class="token hvariable">the</span> <span class="token hvariable">expression</span><span class="token operator">:</span> <span class="token constant">Just</span> <span class="token hvariable">x</span>
       <span class="token constant">In</span> <span class="token hvariable">an</span> <span class="token hvariable">equation</span> <span class="token hvariable">for</span> ‘<span class="token hvariable">x</span>’<span class="token operator">:</span> <span class="token hvariable">x</span> <span class="token operator">=</span> <span class="token constant">Just</span> <span class="token hvariable">x</span>
     • <span class="token constant">Relevant</span> <span class="token hvariable">bindings</span> <span class="token hvariable">include</span> <span class="token hvariable">x</span> <span class="token operator">::</span> <span class="token hvariable">a</span> <span class="token punctuation">(</span><span class="token hvariable">bound</span> <span class="token hvariable">at</span> <span class="token operator">&lt;</span><span class="token hvariable">interactive</span><span class="token operator">>:</span><span class="token number">2</span><span class="token operator">:</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre></div>
-<p>At here, the type of <code class="language-text">x</code> was <code class="language-text">Maybe a</code> after the first command; into the second command, it became <code class="language-text">Maybe Maybe Maybe &lt;... infinite Maybe&gt;</code> so we would never know when can we construct the type. So semantic checker or type checker would invent a rule call occurs check. In this case, <code class="language-text">x</code> has a type <code class="language-text">Maybe a</code> at the first step, into the second step it tries to construct a new type <code class="language-text">Maybe Maybe a</code> and unify <code class="language-text">Maybe a</code> with <code class="language-text">Maybe Maybe a</code>, that means found an infinite type definition and it would reject such program.</p>
+<p>At here, the type of <code class="language-text">x</code> was <code class="language-text">Maybe a</code> after the first command; into the second command, it became <code class="language-text">Maybe Maybe Maybe &lt;... infinite Maybe></code> so we would never know when can we construct the type. So semantic checker or type checker would invent a rule call occurs check. In this case, <code class="language-text">x</code> has a type <code class="language-text">Maybe a</code> at the first step, into the second step it tries to construct a new type <code class="language-text">Maybe Maybe a</code> and unify <code class="language-text">Maybe a</code> with <code class="language-text">Maybe Maybe a</code>, that means found an infinite type definition and it would reject such program.</p>
 <p>But thought again, do we really didn't want infinite type? Or we are only didn't want the infinite construction? I thought the answer is we are trying to prevent infinite construction which we have no idea how big it's.</p>
 <p>So let's dig into mud with curiosity, consider the following program(syntax is pesudo language):</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class Option[T]
 // &lt;: represents inherit/subtype
-// and I&#39;m comment
+// and I'm comment
 class Some[T](value: T) &lt;: Option[T]
-// ? explicit tell compiler it&#39;s a fresh free variable type
+// ? explicit tell compiler it's a fresh free variable type
 class None &lt;: Option[?]</code></pre></div>
 <p>We can to pattern matching for everytime we want to do operations on <code class="language-text">Option[T]</code>, like:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">foo(x: Option[int], y: Option[int]): Option[int] {
   match (x, y) {
-    (Some(lv), Some(rv)) =&gt; return Some(lv + rv)
-    _ =&gt; return None
+    (Some(lv), Some(rv)) => return Some(lv + rv)
+    _ => return None
   }
 }</code></pre></div>
 <p>It's really annoying and makes us upset. So we invent infinite definition. Wait! You say we cannot measure how big the infinite type was! Yes, but what we are going to do is have an infinite definition for any construction, but we still only allow the finite construction.</p>
@@ -52,8 +52,8 @@ class int &lt;: Add {
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class Option[T &lt;: Add] &lt;: Add {
   +(x: Option[T], y: Option[T]): Option[T] {
     match (x, y) {
-      (Some(lv), Some(rv)) =&gt; return Some(lv + rv)
-      None =&gt; None
+      (Some(lv), Some(rv)) => return Some(lv + rv)
+      None => None
     }
   }
 }</code></pre></div>

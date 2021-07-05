@@ -19,15 +19,15 @@
     return parse_expression_1(parse_primary(), 0)
 parse_expression_1(lhs, min_precedence)
     lookahead := peek next token
-    while lookahead is a binary operator whose precedence is &gt;= min_precedence
+    while lookahead is a binary operator whose precedence is >= min_precedence
         op := lookahead
         advance to next token
         rhs := parse_primary ()
         lookahead := peek next token
         while lookahead is a binary operator whose precedence is greater
-                 than op&#39;s, or a right-associative operator
-                 whose precedence is equal to op&#39;s
-            rhs := parse_expression_1 (rhs, lookahead&#39;s precedence)
+                 than op's, or a right-associative operator
+                 whose precedence is equal to op's
+            rhs := parse_expression_1 (rhs, lookahead's precedence)
             lookahead := peek next token
         lhs := the result of applying op with operands lhs and rhs
     return lhs</code></pre></div>
@@ -62,30 +62,30 @@ AdditionExpr \rightarrow MultipleExpr \; + \; MultipleExpr</annotation></semanti
   <span class="token punctuation">(</span><span class="token function">or/p</span> <span class="token punctuation">(</span><span class="token function">one-of/p</span> op-list<span class="token punctuation">)</span>
         void/p<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> factor/p
-  <span class="token punctuation">(</span><span class="token keyword">do</span> [expr &lt;- integer/p]
+  <span class="token punctuation">(</span><span class="token keyword">do</span> <span class="token punctuation">[</span><span class="token function">expr</span> &lt;- integer/p<span class="token punctuation">]</span>
     <span class="token punctuation">(</span><span class="token function">lexeme/p</span><span class="token punctuation">)</span>
     <span class="token punctuation">(</span><span class="token function">pure</span> expr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">binary/p</span> high-level/p op-list<span class="token punctuation">)</span>
-  <span class="token punctuation">(</span><span class="token keyword">do</span> [e &lt;- high-level/p]
+  <span class="token punctuation">(</span><span class="token keyword">do</span> <span class="token punctuation">[</span><span class="token function">e</span> &lt;- high-level/p<span class="token punctuation">]</span>
     <span class="token comment">; `es` parse operator then high-level unit, for example, `* 1`.</span>
     <span class="token comment">; therefore, this parser would stop when the operator is not expected(aka. operator is in op-list)</span>
     <span class="token comment">; rely on this fact we can leave this loop</span>
-    [es &lt;- <span class="token punctuation">(</span><span class="token function">many/p</span> <span class="token punctuation">(</span><span class="token keyword">do</span> [op &lt;- <span class="token punctuation">(</span><span class="token function">op/p</span> op-list<span class="token punctuation">)</span>]
+    <span class="token punctuation">[</span><span class="token function">es</span> &lt;- <span class="token punctuation">(</span><span class="token function">many/p</span> <span class="token punctuation">(</span><span class="token keyword">do</span> <span class="token punctuation">[</span><span class="token function">op</span> &lt;- <span class="token punctuation">(</span><span class="token function">op/p</span> op-list<span class="token punctuation">)</span><span class="token punctuation">]</span>
                      <span class="token punctuation">(</span><span class="token function">lexeme/p</span><span class="token punctuation">)</span>
-                     [e &lt;- high-level/p]
-                     <span class="token punctuation">(</span><span class="token function">pure</span> <span class="token punctuation">(</span><span class="token builtin">list</span> op e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]
+                     <span class="token punctuation">[</span><span class="token function">e</span> &lt;- high-level/p<span class="token punctuation">]</span>
+                     <span class="token punctuation">(</span><span class="token function">pure</span> <span class="token punctuation">(</span><span class="token builtin">list</span> op e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
     <span class="token punctuation">(</span><span class="token function">pure</span> <span class="token punctuation">(</span><span class="token function">foldl</span>
            <span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">op+rhs</span> lhs<span class="token punctuation">)</span>
              <span class="token punctuation">(</span><span class="token function">match</span> op+rhs
-               [<span class="token punctuation">(</span><span class="token builtin">list</span> op rhs<span class="token punctuation">)</span>
-                <span class="token punctuation">(</span><span class="token builtin">list</span> op lhs rhs<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+               <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token builtin">list</span> op rhs<span class="token punctuation">)</span>
+                <span class="token punctuation">(</span><span class="token builtin">list</span> op lhs rhs<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
            e es<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> mul:div/p
   <span class="token punctuation">(</span><span class="token function">binary/p</span> factor/p <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token character string">#\*</span> <span class="token character string">#\/</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> add:sub/p
   <span class="token punctuation">(</span><span class="token function">binary/p</span> mul:div/p <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token character string">#\+</span> <span class="token character string">#\-</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> expr/p add:sub/p<span class="token punctuation">)</span></code></pre></div>
-<p>Let's check its result: <code class="language-text">(parse-string expr/p &quot;1 + 2 * 3 / 4 - 5&quot;)</code> generate: <code class="language-text">(success &#39;(#\- (#\+ 1 (#\/ (#\* 2 3) 4)) 5))</code> just as expected. Seems like <code class="language-text">expr/p</code> is our target, but it still is a little massive, doesn't it? We have to modify the definition of each small parser once we need to insert more infix operators. To avoid this, finally going to the purpose of this article, we need an automatic way to do this for us. Observing the definition of parsers, there has a pattern: every infix operator layer can be a <code class="language-text">(binary/p high-level/p op-list)</code>. Using this fact we can create a recursive function:</p>
+<p>Let's check its result: <code class="language-text">(parse-string expr/p "1 + 2 * 3 / 4 - 5")</code> generate: <code class="language-text">(success '(#\- (#\+ 1 (#\/ (#\* 2 3) 4)) 5))</code> just as expected. Seems like <code class="language-text">expr/p</code> is our target, but it still is a little massive, doesn't it? We have to modify the definition of each small parser once we need to insert more infix operators. To avoid this, finally going to the purpose of this article, we need an automatic way to do this for us. Observing the definition of parsers, there has a pattern: every infix operator layer can be a <code class="language-text">(binary/p high-level/p op-list)</code>. Using this fact we can create a recursive function:</p>
 <div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">table/p</span> base/p list-of-op-list<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">empty?</span> list-of-op-list<span class="token punctuation">)</span>
       base/p

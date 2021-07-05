@@ -19,10 +19,10 @@
 
 <span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">fib</span> n<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token function">match</span> n
-    [0 1]
-    [1 1]
-    [n <span class="token punctuation">(</span><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-          <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">[</span><span class="token number">0</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token punctuation">[</span><span class="token function">n</span> <span class="token punctuation">(</span><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token number">3</span><span class="token punctuation">)</span></code></pre></div>
 <p>However, some questions aren't that easy to be resolved since need some synthesis, but we can take a look at how to resolve the Fibonacci problem via logic programming(use <code class="language-text">Datalog</code>):</p>

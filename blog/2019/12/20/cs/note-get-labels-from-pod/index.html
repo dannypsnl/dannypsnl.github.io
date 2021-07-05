@@ -19,7 +19,7 @@
 	Watch<span class="token punctuation">:</span>         <span class="token boolean">true</span><span class="token punctuation">,</span>
 	LabelSelector<span class="token punctuation">:</span> <span class="token string">"xxx=yyy"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
-<p>But this causes a problem, you can see that string <code class="language-text">&quot;xxx=yyy&quot;</code>, we have no graceful way to avoid the repeating of label selector in Kubernetes config(for Kubernetes) and environment variable(for our program). And one day they would outdated.</p>
+<p>But this causes a problem, you can see that string <code class="language-text">"xxx=yyy"</code>, we have no graceful way to avoid the repeating of label selector in Kubernetes config(for Kubernetes) and environment variable(for our program). And one day they would outdated.</p>
 <p>In the beginning, we have a discussion and thought that it would unlikely to have the access to label selector value in Pod. Then start searching in the document. You know what? Surprisingly we can! Even have a few ways can choose! Let's take a look at them:</p>
 <ol>
 <li>

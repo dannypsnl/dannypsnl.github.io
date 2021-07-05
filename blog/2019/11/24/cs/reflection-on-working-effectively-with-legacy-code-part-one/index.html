@@ -85,7 +85,7 @@
 mockStdout<span class="token punctuation">.</span><span class="token function">setExpectation</span><span class="token punctuation">(</span><span class="token string">"println"</span><span class="token punctuation">,</span> <span class="token string">"hello, world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">TestTarget</span> testTarget <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TestTarget</span><span class="token punctuation">(</span>mockStdout<span class="token punctuation">)</span><span class="token punctuation">;</span>
 testTarget<span class="token punctuation">.</span><span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>In the test, we says that <code class="language-text">println</code> would be called with argument <code class="language-text">&quot;hello, world&quot;</code>.</p>
+<p>In the test, we says that <code class="language-text">println</code> would be called with argument <code class="language-text">"hello, world"</code>.</p>
 <p>Chapter 4: Seam model</p>
 <p>Seam: a special point that we can change its behavior without change that code.</p>
 <p>For example, a global function was called in a method:</p>
@@ -101,8 +101,8 @@ testTarget<span class="token punctuation">.</span><span class="token function">s
   virutal <span class="token keyword">void</span> <span class="token function">global_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">void</span> <span class="token class-name">Foo</span><span class="token operator">::</span><span class="token function">global_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token operator">::</span><span class="token function">global_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token class-name">Foo</span><span class="token double-colon punctuation">::</span><span class="token function">global_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token double-colon punctuation">::</span><span class="token function">global_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>And create a subclass of <code class="language-text">Foo</code> then override <code class="language-text">global_function()</code></p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">TestFoo</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Foo</span></span> <span class="token punctuation">{</span>

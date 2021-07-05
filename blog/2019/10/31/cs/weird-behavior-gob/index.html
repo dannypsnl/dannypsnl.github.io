@@ -40,7 +40,7 @@
 	decBuf <span class="token operator">:=</span> bytes<span class="token punctuation">.</span><span class="token function">NewBuffer</span><span class="token punctuation">(</span>buf<span class="token punctuation">.</span><span class="token function">Bytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 	dec <span class="token operator">:=</span> gob<span class="token punctuation">.</span><span class="token function">NewDecoder</span><span class="token punctuation">(</span>decBuf<span class="token punctuation">)</span>
 	dec<span class="token punctuation">.</span><span class="token function">Decode</span><span class="token punctuation">(</span>unmarshalFoo<span class="token punctuation">)</span></code></pre></div>
-<p>Guess what, the field <code class="language-text">AState</code> has <code class="language-text">nil</code> value. This is out of expected. A least, I thought it should be a pointer to <code class="language-text">S1</code> as what <code class="language-text">&quot;encoding/json&quot;</code> does.</p>
+<p>Guess what, the field <code class="language-text">AState</code> has <code class="language-text">nil</code> value. This is out of expected. A least, I thought it should be a pointer to <code class="language-text">S1</code> as what <code class="language-text">"encoding/json"</code> does.</p>
 <p>We have two ways to solve this.</p>
 <p>First, remove the pointer from the field type.</p>
 <div class="gatsby-highlight" data-language="go"><pre class="language-go"><code class="language-go"><span class="token keyword">type</span> Foo <span class="token keyword">struct</span> <span class="token punctuation">{</span>

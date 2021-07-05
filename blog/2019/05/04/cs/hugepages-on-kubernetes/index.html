@@ -23,7 +23,7 @@
 <p>According to <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/">feature-gates</a> description. If your kubernetes version >= 1.10, then HugePages default on, else you have to enable it by yourself.</p>
 <p>Log in to your kubernetes node machine. Open and edit <code class="language-text">/etc/default/kubelet</code> this file, find <code class="language-text">-—feature-gates=</code> these texts, add some text to make it looks like <code class="language-text">-—feature-gates=HugePages=true</code>.</p>
 <blockquote>
-<p>p.s. If you want to add more than one feature, use <code class="language-text">,</code> separate the option, e.g. <code class="language-text">--feature-gates=&quot;...,DynamicKubeletConfig=true&quot;</code></p>
+<p>p.s. If you want to add more than one feature, use <code class="language-text">,</code> separate the option, e.g. <code class="language-text">--feature-gates="...,DynamicKubeletConfig=true"</code></p>
 </blockquote>
 <p>Save and close editor, now run the following commands:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token comment"># according to your environment, this is optional</span>

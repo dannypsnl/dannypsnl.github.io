@@ -34,7 +34,7 @@ extra-source-files:  CHANGELOG.md
 common shared-properties
   default-language: Haskell2010
   build-depends:
-    base == 4.*, mtl &gt;= 2.2
+    base == 4.*, mtl >= 2.2
   ghc-options:
     -Wall</code></pre></div>
 <p>Then we can add <code class="language-text">test-suite</code> block like this:</p>
@@ -53,8 +53,8 @@ test-suite spec
   other-modules: YourModuleSpec SpecHelper
   hs-source-dirs: test
   main-is: Spec.hs
-  build-depends: hspec &gt;= 2.7
-                 , hspec-discover &gt;= 2.7
+  build-depends: hspec >= 2.7
+                 , hspec-discover >= 2.7
                  , your-module
   default-language:    Haskell2010</code></pre></div>
 <p>Create <code class="language-text">$project-path/test/Spec.hs</code> and put:</p>

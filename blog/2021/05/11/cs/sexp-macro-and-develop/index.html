@@ -34,10 +34,10 @@
 </td>
 <td>
 <div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token function">match</span> n
-  [0 1]
-  [1 1]
-  [else <span class="token punctuation">(</span><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-           <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span></code></pre></div>
+  <span class="token punctuation">[</span><span class="token number">0</span> <span class="token number">1</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">1</span><span class="token punctuation">]</span>
+  <span class="token punctuation">[</span><span class="token keyword">else</span> <span class="token punctuation">(</span><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+           <span class="token punctuation">(</span><span class="token function">fib</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div>
 </td>
 </tr>
 <tr>
@@ -48,8 +48,8 @@
   <span class="token punctuation">(</span><span class="token keyword">+</span> x y<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
 </td>
 <td>
-<div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token function">[x</span> n]
-      [y 2]<span class="token punctuation">)</span>
+<div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">x</span> n<span class="token punctuation">]</span>
+      <span class="token punctuation">[</span><span class="token function">y</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token operator">+</span> x y<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
 </td>
 </tr>
@@ -127,41 +127,41 @@
 <p>前面說了這麼多，那 Racket/Scheme 又擁有怎樣的能力呢？1975 年最早的 <code class="language-text">syntax-rules</code> 其實只有完成新語法的能力，並不能做更多事情。</p>
 <div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define-syntax</span> let
   <span class="token punctuation">(</span><span class="token keyword">syntax-rules</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
-    [<span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token function">[var</span> rhs] ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
+    <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">var</span> rhs<span class="token punctuation">]</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
      <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">var</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
-      rhs ...<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+      rhs ...<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
 <p>到了 1988 年，<code class="language-text">syntax-case</code> 引入了驗證語法的概念。</p>
 <div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define-syntax</span> <span class="token punctuation">(</span><span class="token keyword">let</span> stx<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token keyword">syntax-case</span> stx <span class="token punctuation">(</span><span class="token punctuation">)</span>
-    [<span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token function">[var</span> rhs] ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
+    <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">var</span> rhs<span class="token punctuation">]</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
      <span class="token punctuation">(</span><span class="token builtin">not</span> <span class="token punctuation">(</span><span class="token function">check-duplicate-identifier</span> <span class="token punctuation">(</span><span class="token function">syntax->list</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>var ...<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
      #<span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">var</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
-        rhs ...<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+        rhs ...<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
 <p>我們可以用 <code class="language-text">raise-syntax-error</code> 稍加改進</p>
 <div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define-syntax</span> <span class="token punctuation">(</span><span class="token keyword">let</span> stx<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token keyword">syntax-case</span> stx <span class="token punctuation">(</span><span class="token punctuation">)</span>
-    [<span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token function">[var</span> rhs] ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
+    <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">var</span> rhs<span class="token punctuation">]</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
      <span class="token punctuation">(</span><span class="token keyword">begin</span>
-       <span class="token punctuation">(</span><span class="token function">for</span> <span class="token punctuation">(</span><span class="token function">[var</span> <span class="token punctuation">(</span><span class="token function">syntax->list</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>var ...<span class="token punctuation">)</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span>
+       <span class="token punctuation">(</span><span class="token function">for</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">var</span> <span class="token punctuation">(</span><span class="token function">syntax->list</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>var ...<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
          <span class="token punctuation">(</span><span class="token keyword">unless</span> <span class="token punctuation">(</span><span class="token function">identifier?</span> var<span class="token punctuation">)</span>
            <span class="token punctuation">(</span><span class="token function">raise-syntax-error</span> <span class="token symbol">'not-identifier</span> <span class="token string">"expected identifier"</span> stx var<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-       <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token function">[dup</span> <span class="token punctuation">(</span><span class="token function">check-duplicate-identifier</span> <span class="token punctuation">(</span><span class="token function">syntax->list</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>var ...<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span>
+       <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">dup</span> <span class="token punctuation">(</span><span class="token function">check-duplicate-identifier</span> <span class="token punctuation">(</span><span class="token function">syntax->list</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>var ...<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
          <span class="token punctuation">(</span><span class="token keyword">when</span> dup
            <span class="token punctuation">(</span><span class="token function">raise-syntax-error</span> <span class="token symbol">'dup</span> <span class="token string">"duplicate variable name"</span> stx<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
      #<span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">var</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
-        rhs ...<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+        rhs ...<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
 <p>但這樣實在太麻煩也太醜了，所以 1993 年加入了 <code class="language-text">syntax-parse</code>。</p>
 <div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define-syntax</span> <span class="token punctuation">(</span><span class="token keyword">let</span> stx<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token function">syntax-parse</span> stx
-    [<span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token function">[var:id</span> rhs:expr] ...<span class="token punctuation">)</span> body:expr<span class="token punctuation">)</span>
+    <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token function">_</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">var:id</span> rhs:expr<span class="token punctuation">]</span> ...<span class="token punctuation">)</span> body:expr<span class="token punctuation">)</span>
      <span class="token punctuation">(</span><span class="token function">check-duplicate-identifier</span> <span class="token punctuation">(</span><span class="token function">syntax->list</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>var ...<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
      #<span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">var</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
-        rhs ...<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+        rhs ...<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
 <p>其中 <code class="language-text">var:id</code> 會自動檢查 <code class="language-text">var</code> 是不是 <code class="language-text">identifer?</code>，也就不需要像 <code class="language-text">syntax-case</code> 那樣大費周章只是為了驗證語法的類型。<code class="language-text">id</code> 是 <code class="language-text">syntax-class</code>，我們其實可以自己定義。</p>
 <div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define-syntax</span> <span class="token punctuation">(</span><span class="token keyword">let</span> stx<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token function">define-syntax-class</span> binding
     #:description <span class="token string">"binding pair"</span>
-    <span class="token punctuation">(</span><span class="token function">pattern</span> [var:id rhs:expr]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">pattern</span> <span class="token punctuation">[</span><span class="token function">var:id</span> rhs:expr<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token function">define-syntax-class</span> distinct-bindings
     #:description <span class="token string">"sequence of binding pairs"</span>
     <span class="token punctuation">(</span><span class="token function">pattern</span> <span class="token punctuation">(</span><span class="token function">b*:binding</span> ...<span class="token punctuation">)</span>
@@ -169,16 +169,16 @@
              #:with <span class="token punctuation">(</span><span class="token function">var</span> ...<span class="token punctuation">)</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>b*.var ...<span class="token punctuation">)</span>
              #:with <span class="token punctuation">(</span><span class="token function">rhs</span> ...<span class="token punctuation">)</span> #<span class="token punctuation">'</span><span class="token punctuation">(</span>b*.rhs ...<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token function">syntax-parse</span> stx
-    [<span class="token punctuation">(</span><span class="token function">_</span> d:distinct-bindings body:expr<span class="token punctuation">)</span>
+    <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token function">_</span> d:distinct-bindings body:expr<span class="token punctuation">)</span>
      #<span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">d.var</span> ...<span class="token punctuation">)</span> body<span class="token punctuation">)</span>
-        d.rhs ...<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+        d.rhs ...<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
 <p><code class="language-text">syntax-parse</code> 這個名字其實已經說明了很多：這是一個完整的 parsing 工具。它甚至有 error selection 機制。</p>
 <h3>Racket macro 現代模型</h3>
 <p>正如前一節所述，Racket macro 並不是突然就這麼厲害的，其中經過多年中許多人的改進才成為今天的樣貌。其中最重要的要屬 1986 年的 Hygienic Expansion，這是第一個解決 macro 展開後與目標環境變數衝突的機制。</p>
 <p>但 1986 年的 Hygienic Expansion 有一些問題，這時的 Hygienic 是靠簡單的 renaming 實現的。</p>
 <ol>
 <li>不善應付遞迴定義的環境，假設 macro 引用到自己，正確實作的難度就很高，展開的 macro 也很笨重又難以反追蹤原本的程式</li>
-<li>面對 hygiene bending(e.g. <code class="language-text">datum-&gt;syntax</code>) 沒有效率又很難實作</li>
+<li>面對 hygiene bending(e.g. <code class="language-text">datum->syntax</code>) 沒有效率又很難實作</li>
 </ol>
 <p>直到 2016 年的 <a href="https://www.cs.utah.edu/plt/publications/popl16-f.pdf">Binding as Sets of Scopes</a> 才提出了新的模型：Scope sets。</p>
 <p>其模型概念非常簡單：</p>
@@ -188,7 +188,7 @@
 <li>參考往外尋找綁定處參考，擁有最大子集的綁定就是當前應該參照到的定義</li>
 <li>syntax 擁有的是一個標籤函數，端看展開位置(<code class="language-text">eval</code>)決定函數要帶入什麼</li>
 </ul>
-<div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token function">[x</span> 1]<span class="token punctuation">)</span>  <span class="token comment">; x{let1}</span>
+<div class="gatsby-highlight" data-language="scheme"><pre class="language-scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">x</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment">; x{let1}</span>
   <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">x</span><span class="token punctuation">)</span> <span class="token comment">; x{lambda1}</span>
     x<span class="token punctuation">)</span><span class="token punctuation">)</span>       <span class="token comment">; x{let1, lamdba1}</span></code></pre></div>
 <p>上面列出了各個 identifier 的 scope sets 做為參考。希望有助於理解 scope sets 的概念。</p>

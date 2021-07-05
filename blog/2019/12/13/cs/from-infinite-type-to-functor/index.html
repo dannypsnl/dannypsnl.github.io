@@ -23,7 +23,7 @@
 bar: Bar = foo.bar();</code></pre></div>
 <p>Once we put <code class="language-text">Foo</code> into the box, it became:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">foo: Option[Foo] = Some(Foo());
-// we say use Option[Foo] as Foo, so foo.bar should be supported just like it&#39;s existed under Option[Foo]
+// we say use Option[Foo] as Foo, so foo.bar should be supported just like it's existed under Option[Foo]
 bar: Bar = foo.bar();</code></pre></div>
 <p>It seems easy at first look, but consider this case:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">foo: Option[Foo] = None;
@@ -74,14 +74,14 @@ class Option[Foo] &lt;: Foo {
 <span class="token builtin">fmap</span> <span class="token punctuation">(</span><span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
 <span class="token comment">-- (3, 7)</span></code></pre></div>
 <p>In this case, <code class="language-text">f a</code> &#x3C;=> <code class="language-text">f</code> is <code class="language-text">(,) a</code>, <code class="language-text">a</code> is <code class="language-text">b</code>.</p>
-<p>Now, let's make a mind blow up. I say that binary operator in <strong>Haskell</strong> is all modeling like a function, so <code class="language-text">a -&gt; b</code> is <code class="language-text">(-&gt;) a b</code>, in fact, I thought people who familiar with <strong>Lisp</strong> would not feel it weird.</p>
-<p>According to <code class="language-text">(a -&gt; b) -&gt; f a -&gt; f b</code>, first, to make symbol would not conflict, we use: <code class="language-text">(b -&gt; c) -&gt; f b -&gt; f c</code>. Then use <code class="language-text">(-&gt;) a</code> to replace <code class="language-text">f</code>: <code class="language-text">(b -&gt; c) -&gt; ((-&gt;) a b) -&gt; ((-&gt;) a c)</code>, then normalize it: <code class="language-text">(b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)</code>. Those knows <strong>Haskell</strong> now should jump and say: Compose! Yes, let's see the definition:</p>
+<p>Now, let's make a mind blow up. I say that binary operator in <strong>Haskell</strong> is all modeling like a function, so <code class="language-text">a -> b</code> is <code class="language-text">(->) a b</code>, in fact, I thought people who familiar with <strong>Lisp</strong> would not feel it weird.</p>
+<p>According to <code class="language-text">(a -> b) -> f a -> f b</code>, first, to make symbol would not conflict, we use: <code class="language-text">(b -> c) -> f b -> f c</code>. Then use <code class="language-text">(->) a</code> to replace <code class="language-text">f</code>: <code class="language-text">(b -> c) -> ((->) a b) -> ((->) a c)</code>, then normalize it: <code class="language-text">(b -> c) -> (a -> b) -> (a -> c)</code>. Those knows <strong>Haskell</strong> now should jump and say: Compose! Yes, let's see the definition:</p>
 <div class="gatsby-highlight" data-language="hs"><pre class="language-hs"><code class="language-hs"><span class="token keyword">instance</span> <span class="token constant">Functor</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-></span><span class="token punctuation">)</span> <span class="token hvariable">a</span><span class="token punctuation">)</span> <span class="token keyword">where</span>
   <span class="token builtin">fmap</span> <span class="token hvariable">f</span> <span class="token hvariable">fa</span> <span class="token operator">=</span> <span class="token hvariable">f</span><span class="token operator"> . </span><span class="token hvariable">fa</span></code></pre></div>
 <p>I hope you have enough fun with <strong>Functor</strong> X).</p>
 <p>Let's back to the problem: How to use <code class="language-text">Option[Foo]</code> as <code class="language-text">Foo</code>?</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">trait Functor[a] {
-  // let&#39;s assuming we have a syntax like this which would require `self` is a type that takes one type parameter and export the type binding to `f` and `a`(and `a` would cause a unification here, since `Functor` have one also, so `a` already bound, `self` has to satisfy it).
+  // let's assuming we have a syntax like this which would require `self` is a type that takes one type parameter and export the type binding to `f` and `a`(and `a` would cause a unification here, since `Functor` have one also, so `a` already bound, `self` has to satisfy it).
   f[a] = self;
   fmap[b](self, (a): b): f[b];
 }
@@ -89,10 +89,10 @@ class Option[Foo] &lt;: Foo {
 class Option[T] &lt;: Functor[T] {
   fmap[b](self: Option[T], func: (T): b): Option[b] {
     match self {
-      Some(v) =&gt; {
+      Some(v) => {
         return func(v);
       }
-      None =&gt; {
+      None => {
         return None;
       }
     }

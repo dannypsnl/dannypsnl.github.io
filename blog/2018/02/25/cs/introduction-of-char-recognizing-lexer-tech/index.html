@@ -37,24 +37,24 @@
 <p><code class="language-text">s0</code>是我們的初始狀態，紅色代表接受狀態，所謂接受狀態你也可以說是辨識成功，一般來說我們會省略錯誤狀態，你只要找不到對應的<code class="language-text">edge</code>我們就會移至錯誤狀態</p>
 <p>那麼我們再看與規則<code class="language-text">night</code>結合後的圖</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">   n     e     w
-s0 -&gt; s1 -&gt; s2 -&gt; s3(sª)
+s0 -> s1 -> s2 -> s3(sª)
          i     g     h     t
-         -&gt; s4 -&gt; s5 -&gt; s6 -&gt; s7(sª)</code></pre></div>
+         -> s4 -> s5 -> s6 -> s7(sª)</code></pre></div>
 <p>所以所謂的多種線路移至同一狀態是什麼意思呢？假設我們要辨識一個英文單字，我們只需要是<code class="language-text">a..z</code>(不管大小寫)都接受，所以圖就是：</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">   a     a
-s0 -&gt; s1 -&gt; s1 -&gt; ... -&gt; s1
+s0 -> s1 -> s1 -> ... -> s1
    b
-   -&gt; s1
+   -> s1
    c
-   -&gt; s1
+   -> s1
    ...
    ...
    ...
    z
-   -&gt; s1</code></pre></div>
+   -> s1</code></pre></div>
 <p>可以發現模式是重複而無限的，所以我們可以簡化成：</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">  a..z
-s0 -&gt; s1 &lt;--
+s0 -> s1 &lt;--
       |    | a..z
        \__/</code></pre></div>
 <p>ps. 這裡的<code class="language-text">s1</code>是<code class="language-text">sª</code></p>
@@ -71,11 +71,11 @@ s0 -&gt; s1 &lt;--
 ∑ = {n, e, w}
 ∂ = {
      n
-  s0 -&gt; s1,
+  s0 -> s1,
      e
-  s1 -&gt; s2,
+  s1 -> s2,
      w
-  s2 -&gt; s3,
+  s2 -> s3,
 }
 s0 = s0
 Sª = {s3}</code></pre></div>
@@ -83,7 +83,7 @@ Sª = {s3}</code></pre></div>
 我不贅述怎麼寫正規表達式，有很多專門介紹正規表達式的文章了</p>
 <p>以<code class="language-text">Antlr</code>的<code class="language-text">new</code>為例：</p>
 <div class="gatsby-highlight" data-language="antlr4"><pre class="language-antlr4"><code class="language-antlr4"><span class="token definition token constant">NEW</span><span class="token punctuation">:</span> <span class="token string">'new'</span><span class="token punctuation">;</span></code></pre></div>
-<p><code class="language-text">&#39;</code>中就是正規表達式了</p>
+<p><code class="language-text">'</code>中就是正規表達式了</p>
 <p>像上面辨識單字的程式可以表示成</p>
 <div class="gatsby-highlight" data-language="antlr4"><pre class="language-antlr4"><code class="language-antlr4"><span class="token definition token constant">WORD</span><span class="token punctuation">:</span> <span class="token character-class regex"><span class="token punctuation">[</span>a<span class="token range punctuation">-</span>zA<span class="token range punctuation">-</span>Z<span class="token punctuation">]</span></span><span class="token operator">+</span><span class="token punctuation">;</span></code></pre></div>
 <p><code class="language-text">[]</code>中是字元集，<code class="language-text">+</code>表示至少 match 一個</p>

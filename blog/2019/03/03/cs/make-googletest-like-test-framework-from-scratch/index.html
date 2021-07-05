@@ -48,7 +48,7 @@
 
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span></code></pre></div>
 <p>So we can have a <code class="language-text">main.cpp</code> with code:</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">#include &quot;./unittest.hpp&quot;
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">#include "./unittest.hpp"
 
 TEST(Arithmetic, Integer)</code></pre></div>
 <p>Then compile: <code class="language-text">g++ main.cpp</code>, this should fine now.</p>
@@ -67,31 +67,31 @@ TEST(Arithmetic, Integer) {}
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;functional></span> <span class="token comment">// for std::function</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span> <span class="token comment">// for std::vector</span></span>
 
-std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>std<span class="token operator">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">>></span> all_test<span class="token punctuation">;</span></code></pre></div>
+std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">>></span> all_test<span class="token punctuation">;</span></code></pre></div>
 <p>And add an insertion call in macro <code class="language-text">TEST</code>:</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">TEST</span><span class="token expression"><span class="token punctuation">(</span>suit<span class="token punctuation">,</span> test<span class="token punctuation">)</span>                                                       </span><span class="token punctuation">\</span>
   <span class="token expression"><span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                                  </span><span class="token punctuation">\</span>
   <span class="token expression">all_test<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>                                                     </span><span class="token punctuation">\</span>
   <span class="token expression"><span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span></span></code></pre></div>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">$ g++ -std=c++11 main.cpp
-main.cpp:3:1: error: unknown type name &#39;all_test&#39;
+main.cpp:3:1: error: unknown type name 'all_test'
 TEST(Arithmetic, Integer) {}
 ^
-././unittest.hpp:11:3: note: expanded from macro &#39;TEST&#39;
+././unittest.hpp:11:3: note: expanded from macro 'TEST'
   all_test.push_back(foo);                                                     \
   ^
 main.cpp:3:1: error: cannot use dot operator on a type
-././unittest.hpp:11:11: note: expanded from macro &#39;TEST&#39;
+././unittest.hpp:11:11: note: expanded from macro 'TEST'
   all_test.push_back(foo);                                                     \
           ^
 2 errors generated.</code></pre></div>
 <p>But it won't work, let's see what happened here. The error message is about compiler expects there is a type <code class="language-text">all_test</code> but didn't, then it complains a type name can't contain <code class="language-text">.</code>.</p>
 <p>To bypass the error and get expected insertion call we need some interesting trick. It's all about C++ constructor promised to be called while the structure is created.</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">unittest_insert</span> <span class="token punctuation">{</span>
-  <span class="token function">unittest_insert</span><span class="token punctuation">(</span>std<span class="token operator">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token operator">&amp;&amp;</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">unittest_insert</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token operator">&amp;&amp;</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-unittest_insert<span class="token operator">::</span><span class="token function">unittest_insert</span><span class="token punctuation">(</span>std<span class="token operator">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token operator">&amp;&amp;</span>f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+unittest_insert<span class="token double-colon punctuation">::</span><span class="token function">unittest_insert</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> <span class="token operator">&amp;&amp;</span>f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   all_test<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
@@ -105,8 +105,8 @@ unittest_insert<span class="token operator">::</span><span class="token function
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"./unittest.hpp"</span></span>
 
 <span class="token function">TEST</span><span class="token punctuation">(</span>Arithmetic<span class="token punctuation">,</span> Integer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"test "</span>
-            <span class="token operator">&lt;&lt;</span> <span class="token string">"test"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+  std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"test "</span>
+            <span class="token operator">&lt;&lt;</span> <span class="token string">"test"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -150,13 +150,13 @@ That's why we need assertion macros. Here is an example of testing:</p>
   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> test <span class="token operator">:</span> all_test<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">try</span> <span class="token punctuation">{</span>
       <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"test pass"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+      std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"test pass"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token keyword">const</span> <span class="token operator">*</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> e <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>std<span class="token operator">::</span>exception <span class="token operator">&amp;</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+      std<span class="token double-colon punctuation">::</span>cerr <span class="token operator">&lt;&lt;</span> e <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>exception <span class="token operator">&amp;</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      std<span class="token double-colon punctuation">::</span>cerr <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> <span class="token string">"test failed: unknown exception"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+      std<span class="token double-colon punctuation">::</span>cerr <span class="token operator">&lt;&lt;</span> <span class="token string">"test failed: unknown exception"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>

@@ -18,7 +18,7 @@
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-<span class="token keyword">using</span> std<span class="token operator">::</span>cout<span class="token punctuation">;</span>
+<span class="token keyword">using</span> std<span class="token double-colon punctuation">::</span>cout<span class="token punctuation">;</span>
 
 <span class="token keyword">void</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     cout <span class="token operator">&lt;&lt;</span> <span class="token string">"hello"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span>
@@ -26,7 +26,7 @@
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    std<span class="token operator">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span>hello<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span>hello<span class="token punctuation">)</span><span class="token punctuation">;</span>
     t<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>1.引入<code class="language-text">thread</code>標頭檔</p>
@@ -39,23 +39,23 @@
 <span class="token punctuation">}</span></code></pre></div>
 <p>所以函數的宣告式自然要改</p>
 <p>但是我們不能直接寫</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>因為這不會傳入函數，而是傳函數的結果，那不是我們需要的東西</p>
 <p>正確的寫法是</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span>hello<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span>hello<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>可以輕鬆的從這個實作(Mingw 版本)中看出參數怎麼傳進去的</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">Function</span><span class="token punctuation">,</span> <span class="token keyword">class</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> Args<span class="token operator">></span>
 <span class="token keyword">explicit</span> <span class="token function">thread</span><span class="token punctuation">(</span>Function<span class="token operator">&amp;&amp;</span> f<span class="token punctuation">,</span> Args<span class="token operator">&amp;&amp;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token keyword">typedef</span> <span class="token keyword">decltype</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">bind</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span> Call<span class="token punctuation">;</span>
-    Call<span class="token operator">*</span> call <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Call</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">bind</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">typedef</span> <span class="token keyword">decltype</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">bind</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span> Call<span class="token punctuation">;</span>
+    Call<span class="token operator">*</span> call <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Call</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">bind</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     mHandle <span class="token operator">=</span> <span class="token punctuation">(</span>HANDLE<span class="token punctuation">)</span><span class="token function">_beginthreadex</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> threadfunc<span class="token operator">&lt;</span>Call<span class="token operator">></span><span class="token punctuation">,</span>
         <span class="token punctuation">(</span>LPVOID<span class="token punctuation">)</span>call<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mThreadId<span class="token punctuation">.</span>mId<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mHandle <span class="token operator">==</span> _STD_THREAD_INVALID_HANDLE<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         <span class="token keyword">int</span> errnum <span class="token operator">=</span> errno<span class="token punctuation">;</span>
         <span class="token keyword">delete</span> call<span class="token punctuation">;</span>
-        <span class="token keyword">throw</span> std<span class="token operator">::</span><span class="token function">system_error</span><span class="token punctuation">(</span>errnum<span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">generic_category</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">system_error</span><span class="token punctuation">(</span>errnum<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span><span class="token function">generic_category</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>事實上，我們不只能傳入函數給 Thread，我們可以傳任何可呼叫(callable)物件進去</p>
@@ -67,17 +67,17 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>就像這樣</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span> <span class="token function">Ya</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span> <span class="token function">Ya</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>我們用原本的寫法，卻發現編譯失敗，原來是因為這個寫法被編譯器當作函式宣告，而不是一個物件定義</p>
 <p>好吧!怎麼處理?</p>
 <p>第一種作法:加上括號</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token function">Ya</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token function">Ya</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>第二種作法:用大括號初始運算子</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread t<span class="token punctuation">{</span> <span class="token function">Ya</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread t<span class="token punctuation">{</span> <span class="token function">Ya</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>第二種作法自然必較好，因為符合新的標準(用大括號是官方推薦寫法)，而且很直觀</p>
 <p>第一種作法則讓人難以理解為什麼這樣就可以</p>
 <p>再介紹一種作法</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread <span class="token function">t3</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread <span class="token function">t3</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
     cout <span class="token operator">&lt;&lt;</span> <span class="token string">"lambda"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>利用<code class="language-text">lambda</code>運算式，不過就算是用<code class="language-text">lambda</code>我也認為應該用大括號運算子，畢竟，沒什麼道理不用擺明用來初始化的大括號(我是說，除了那個該死的<code class="language-text">auto array</code>狀況，還有字串字面值是<code class="language-text">const char *</code>)</p>
@@ -90,7 +90,7 @@
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token operator">~</span><span class="token function">thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        std<span class="token operator">::</span><span class="token function">terminate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span><span class="token function">terminate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>解構子會呼叫<code class="language-text">std::terminate()</code>讓程式掛掉(如果沒有改變可連結狀態)</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span><span class="token keyword">return</span> mHandle <span class="token operator">!=</span> _STD_THREAD_INVALID_HANDLE<span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre></div>
@@ -98,13 +98,13 @@
 <p>所以即使發生例外，也要確保執行緒成功被決定要怎樣處理</p>
 <p>從這裡應該很容易看出來，<code class="language-text">thread</code>物件可不是<code class="language-text">thread</code>本身，而是持有者，所以千萬不要搞混它們的意義</p>
 <p>要讓程式掛掉真的很容易</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span> hello<span class="token punctuation">,</span> i <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span> hello<span class="token punctuation">,</span> i <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>不決定的結果就是程式<code class="language-text">panic</code></p>
 <p>例外!!!</p>
 <p>沒錯，什麼程式遇不到例外，執行緒程式也不例外，前面我們提到，如果沒有決定如何處理<code class="language-text">thread</code>物件，程式就會掛掉</p>
 <p>很好，那麼遇到例外時怎麼辦?</p>
 <p>第一種辦法很土，不過反正能解決問題就是了</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span>hello<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread <span class="token function">t</span><span class="token punctuation">(</span>hello<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">try</span> <span class="token punctuation">{</span>
     <span class="token comment">// ...</span>
 <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">int</span> err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -115,9 +115,9 @@ t<span class="token punctuation">.</span><span class="token function">join</span
 <p>因為我們很可能會忘記寫某一個<code class="language-text">join</code>，然後沒看到，或是當下看不出來，最後 trace bug 還看到<code class="language-text">terminate</code>然後想----我為什麼會呼叫 terminate?恩，因為你沒有呼叫，最後憤怒的找到 thread 函式庫</p>
 <p>第二種辦法是 RAII</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Thread_guard</span> <span class="token punctuation">{</span>
-    std<span class="token operator">::</span>thread t<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>thread t<span class="token punctuation">;</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">explicit</span> <span class="token function">Thread_guard</span><span class="token punctuation">(</span>std<span class="token operator">::</span>thread<span class="token operator">&amp;</span> t_<span class="token punctuation">)</span>
+    <span class="token keyword">explicit</span> <span class="token function">Thread_guard</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>thread<span class="token operator">&amp;</span> t_<span class="token punctuation">)</span>
         <span class="token operator">:</span> t<span class="token punctuation">{</span>t_<span class="token punctuation">}</span>
     <span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token operator">~</span><span class="token function">Thread_guard</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -130,7 +130,7 @@ Thread_guard<span class="token operator">&amp;</span> <span class="token keyword
 <p>因為兩種操作對這個物件而言都異常危險，我們將無法預測會發生什麼事</p>
 <p>宣告為 delete 之後，試圖做上述操作都會直接被編譯器擋下</p>
 <p>用法非常明確</p>
-<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token operator">::</span>thread t<span class="token punctuation">{</span>func<span class="token punctuation">}</span>
+<div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>thread t<span class="token punctuation">{</span>func<span class="token punctuation">}</span>
 Thread_guard tg<span class="token punctuation">{</span>t<span class="token punctuation">}</span>
 
 <span class="token comment">// do something ...</span></code></pre></div>

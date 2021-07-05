@@ -25,30 +25,30 @@
 <span class="token comment">; Account window</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> account-window
   <span class="token punctuation">(</span><span class="token function">new</span> frame%
-       [label <span class="token string">"Account"</span>]
-       [width 400]
-       [height 300]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"Account"</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">width</span> <span class="token number">400</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">height</span> <span class="token number">300</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token punctuation">(</span><span class="token keyword">define</span> money-input
   <span class="token punctuation">(</span><span class="token function">new</span> text-field%
-       [parent account-window]
-       [label <span class="token string">"amount:"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"amount:"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> withdraw-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"withdraw"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"withdraw"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> deposit-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"deposit"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"deposit"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> check-balances-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"check balances"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"check balances"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> query-record-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"all records"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"all records"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token punctuation">(</span><span class="token function">send</span> account-window show <span class="token boolean">#t</span><span class="token punctuation">)</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
 <p>接著執行 <code class="language-text">racket app.rkt</code> 就可以看到我們的 Account 操作介面了，現在所有的按鈕都還沒有綁定要做什麼，所以我們先來看看到底上面這些程式都是拿來做什麼的吧！</p>
@@ -63,52 +63,52 @@
 <p>以及在 <code class="language-text">(send account-window show #t)</code> 之前把 <code class="language-text">current-user</code> 改成存在的帳號，這裡只有 <code class="language-text">danny</code> 這個帳號而已：</p>
 <div class="gatsby-highlight" data-language="scheme"><pre style="counter-reset: linenumber 39" class="language-scheme line-numbers"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">set!</span> current-user <span class="token string">"danny"</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token function">send</span> account-window show <span class="token boolean">#t</span><span class="token punctuation">)</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span></span></pre></div>
-<p>這就算是完成了我們需要的資料部分，但有些東西需要說明一下： <code class="language-text">make-hash</code> 會建立一個可以對應資料到資料的 <strong>map</strong>，例如這裏我們用 <code class="language-text">hash-set!</code> 插入了 <code class="language-text">&quot;danny&quot;</code> 到一個帳戶的 <strong>map</strong>，那麼之後就可以用 <code class="language-text">&quot;danny&quot;</code> 這個 <strong>key</strong> 不斷的存取同一個帳戶。</p>
+<p>這就算是完成了我們需要的資料部分，但有些東西需要說明一下： <code class="language-text">make-hash</code> 會建立一個可以對應資料到資料的 <strong>map</strong>，例如這裏我們用 <code class="language-text">hash-set!</code> 插入了 <code class="language-text">"danny"</code> 到一個帳戶的 <strong>map</strong>，那麼之後就可以用 <code class="language-text">"danny"</code> 這個 <strong>key</strong> 不斷的存取同一個帳戶。</p>
 <p>接著我們打造需要的操作</p>
 <div class="gatsby-highlight" data-language="scheme"><pre style="counter-reset: linenumber 12" class="language-scheme line-numbers"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">show-balances</span> a e<span class="token punctuation">)</span>
-  [message-box <span class="token string">"Balance"</span>
+  <span class="token punctuation">[</span><span class="token function">message-box</span> <span class="token string">"Balance"</span>
                <span class="token punctuation">(</span><span class="token function">format</span> <span class="token string">"balance: ~a"</span>
                        <span class="token punctuation">(</span><span class="token function">check-balances</span> <span class="token punctuation">(</span><span class="token function">hash-ref</span> test-users-transcations current-user<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                account-window
-               <span class="token punctuation">'</span><span class="token punctuation">(</span>no-icon ok<span class="token punctuation">)</span>]<span class="token punctuation">)</span>
+               <span class="token punctuation">'</span><span class="token punctuation">(</span>no-icon ok<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> money-input
   <span class="token punctuation">(</span><span class="token function">new</span> text-field%
-       [parent account-window]
-       [label <span class="token string">"amount:"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"amount:"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">affect-balance</span> action<span class="token punctuation">)</span>
   <span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">a</span> e<span class="token punctuation">)</span>
-    <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token function">[tran</span> <span class="token punctuation">(</span><span class="token function">hash-ref</span> test-users-transcations current-user<span class="token punctuation">)</span>]
-             [amount <span class="token punctuation">(</span><span class="token function">send</span> money-input get-value<span class="token punctuation">)</span>]<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">tran</span> <span class="token punctuation">(</span><span class="token function">hash-ref</span> test-users-transcations current-user<span class="token punctuation">)</span><span class="token punctuation">]</span>
+             <span class="token punctuation">[</span><span class="token function">amount</span> <span class="token punctuation">(</span><span class="token function">send</span> money-input get-value<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token punctuation">(</span><span class="token function">action</span> tran <span class="token punctuation">(</span><span class="token builtin">string->number</span> amount<span class="token punctuation">)</span><span class="token punctuation">)</span>
       <span class="token punctuation">(</span><span class="token function">show-balances</span> a e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
 <p>p.s. 注意到 <code class="language-text">money-input</code> 我們已經宣告過了，只是 <strong>Racket</strong> 要 <code class="language-text">define</code> 之後才能使用變數，<code class="language-text">affect-balance</code> 用到 <code class="language-text">money-input</code> 而我要顯示它們的位置關係才會再顯示一次</p>
-<p>這裏 <code class="language-text">show-balances</code> 做的事情非常簡單，根據 <code class="language-text">current-user</code> 從 <code class="language-text">test-users-transcations</code> 裡找出對應的帳戶接著呼叫 <code class="language-text">atm.rkt</code> 裡的 <code class="language-text">check-balances</code>。並用 <code class="language-text">message-box</code> 顯示在畫面上。而 <code class="language-text">affect-balance</code> 就比較複雜了點，首先要注意到它接收了一個叫做 <code class="language-text">action</code> 的參數然後才是一個 <code class="language-text">λ</code>(就是 <code class="language-text">lambda</code> 的希臘文，在 <strong>Racket</strong> 裡可以互相替換) 函數，而這個 <code class="language-text">λ</code> 函數會根據 <code class="language-text">action</code> 跟 <code class="language-text">money-input</code> 的輸入值(用 <code class="language-text">(send money-input get-value)</code> 取得，注意要把字串轉成數字 <code class="language-text">string-&gt;number</code>)對帳戶產生影響接著用 <code class="language-text">show-balances</code> 顯示餘額。</p>
+<p>這裏 <code class="language-text">show-balances</code> 做的事情非常簡單，根據 <code class="language-text">current-user</code> 從 <code class="language-text">test-users-transcations</code> 裡找出對應的帳戶接著呼叫 <code class="language-text">atm.rkt</code> 裡的 <code class="language-text">check-balances</code>。並用 <code class="language-text">message-box</code> 顯示在畫面上。而 <code class="language-text">affect-balance</code> 就比較複雜了點，首先要注意到它接收了一個叫做 <code class="language-text">action</code> 的參數然後才是一個 <code class="language-text">λ</code>(就是 <code class="language-text">lambda</code> 的希臘文，在 <strong>Racket</strong> 裡可以互相替換) 函數，而這個 <code class="language-text">λ</code> 函數會根據 <code class="language-text">action</code> 跟 <code class="language-text">money-input</code> 的輸入值(用 <code class="language-text">(send money-input get-value)</code> 取得，注意要把字串轉成數字 <code class="language-text">string->number</code>)對帳戶產生影響接著用 <code class="language-text">show-balances</code> 顯示餘額。</p>
 <p>最後我們把函數註冊上各個按鈕：</p>
 <div class="gatsby-highlight" data-language="scheme"><pre style="counter-reset: linenumber 28" class="language-scheme line-numbers"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> withdraw-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"withdraw"</span>]
-       [callback <span class="token punctuation">(</span><span class="token function">affect-balance</span> withdraw<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"withdraw"</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">callback</span> <span class="token punctuation">(</span><span class="token function">affect-balance</span> withdraw<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> deposit-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"deposit"</span>]
-       [callback <span class="token punctuation">(</span><span class="token function">affect-balance</span> deposit<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"deposit"</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">callback</span> <span class="token punctuation">(</span><span class="token function">affect-balance</span> deposit<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> check-balances-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"check balances"</span>]
-       [callback show-balances]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"check balances"</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">callback</span> show-balances<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> query-record-btn
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent account-window]
-       [label <span class="token string">"all records"</span>]
-       [callback <span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">a</span> e<span class="token punctuation">)</span>
-                   <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token function">[tran</span> <span class="token punctuation">(</span><span class="token function">hash-ref</span> test-users-transcations current-user<span class="token punctuation">)</span>]<span class="token punctuation">)</span>
-                     [message-box <span class="token string">"All Records"</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> account-window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"all records"</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">callback</span> <span class="token punctuation">(</span><span class="token function">λ</span> <span class="token punctuation">(</span><span class="token function">a</span> e<span class="token punctuation">)</span>
+                   <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">tran</span> <span class="token punctuation">(</span><span class="token function">hash-ref</span> test-users-transcations current-user<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                     <span class="token punctuation">[</span><span class="token function">message-box</span> <span class="token string">"All Records"</span>
                                   <span class="token punctuation">(</span><span class="token function">format</span> <span class="token string">"records: ~a"</span> <span class="token punctuation">(</span><span class="token function">query-record</span> tran<span class="token punctuation">)</span><span class="token punctuation">)</span>
                                   account-window
-                                  <span class="token punctuation">'</span><span class="token punctuation">(</span>no-icon ok<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
+                                  <span class="token punctuation">'</span><span class="token punctuation">(</span>no-icon ok<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>
 <p>要綁定函數要用 <code class="language-text">callback</code> 這個屬性，而它預期這個函數接收兩個參數，這也是為甚麼要有 <code class="language-text">a</code> <code class="language-text">e</code> 這兩個好像沒在用的參數(其實是 <code class="language-text">button</code> 跟 <code class="language-text">event</code>，但這裡沒用到所以隨便寫)。對於 <code class="language-text">withdraw-btn</code> 跟 <code class="language-text">deposit-btn</code> 來說，<code class="language-text">callback</code> 就是 <code class="language-text">affect-balance</code> 配上要用的 <code class="language-text">action</code>(這就是為什麼要回傳一個函數，這也叫做 closure，指的是內部的函數會帶著原本給它的綁定環境) 得到的函數。對 <code class="language-text">check-balances-btn</code> 來說可以直接用 <code class="language-text">show-balances</code>。而 <code class="language-text">query-record-btn</code> 是唯一直接寫成 <code class="language-text">λ</code> 的，因為沒有其他人會用到這個函數，它做的其實就是調用 <code class="language-text">atm.rkt</code> 裡的 <code class="language-text">query-record</code> 得到全部操作紀錄然後印出，但要記得去改 <code class="language-text">atm.rkt</code>：</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span> (define (query-record tr)
 <span class="token prefix deleted">-</span>   (pretty-print (tran-list tr)))
@@ -128,34 +128,34 @@
 <div class="gatsby-highlight" data-language="scheme"><pre style="counter-reset: linenumber 65" class="language-scheme line-numbers"><code class="language-scheme"><span class="token comment">; Main window</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> window
   <span class="token punctuation">(</span><span class="token function">new</span> frame%
-       [label <span class="token string">"ATM"</span>]
-       [width 400]
-       [height 300]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"ATM"</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">width</span> <span class="token number">400</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">height</span> <span class="token number">300</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token punctuation">(</span><span class="token keyword">define</span> username-input
   <span class="token punctuation">(</span><span class="token function">new</span> text-field%
-       [parent window]
-       [label <span class="token string">"username:"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"username:"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> password-input
   <span class="token punctuation">(</span><span class="token function">new</span> text-field%
-       [parent window]
-       [label <span class="token string">"password:"</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"password:"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">login</span> a e<span class="token punctuation">)</span>
-  <span class="token punctuation">(</span><span class="token keyword">letrec</span> <span class="token punctuation">(</span><span class="token function">[username</span> <span class="token punctuation">(</span><span class="token function">send</span> username-input get-value<span class="token punctuation">)</span>]
-           [passwd <span class="token punctuation">(</span><span class="token function">send</span> password-input get-value<span class="token punctuation">)</span>]
-           [expected-passwd
-            <span class="token punctuation">(</span><span class="token function">hash-ref!</span> test-users username <span class="token symbol">'no-account</span><span class="token punctuation">)</span>]<span class="token punctuation">)</span>
+  <span class="token punctuation">(</span><span class="token keyword">letrec</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">username</span> <span class="token punctuation">(</span><span class="token function">send</span> username-input get-value<span class="token punctuation">)</span><span class="token punctuation">]</span>
+           <span class="token punctuation">[</span><span class="token function">passwd</span> <span class="token punctuation">(</span><span class="token function">send</span> password-input get-value<span class="token punctuation">)</span><span class="token punctuation">]</span>
+           <span class="token punctuation">[</span><span class="token function">expected-passwd</span>
+            <span class="token punctuation">(</span><span class="token function">hash-ref!</span> test-users username <span class="token symbol">'no-account</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">(</span><span class="token keyword">cond</span>
-      [<span class="token punctuation">(</span><span class="token builtin">equal?</span> expected-passwd passwd<span class="token punctuation">)</span>
+      <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token builtin">equal?</span> expected-passwd passwd<span class="token punctuation">)</span>
        <span class="token punctuation">(</span><span class="token keyword">set!</span> current-user username<span class="token punctuation">)</span>
-       <span class="token punctuation">(</span><span class="token function">send</span> account-window show <span class="token boolean">#t</span><span class="token punctuation">)</span>]
-      [#t message-box <span class="token string">"Error"</span> <span class="token string">"No this user or incorrect password"</span> window <span class="token punctuation">'</span><span class="token punctuation">(</span>no-icon ok<span class="token punctuation">)</span>]<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">(</span><span class="token function">send</span> account-window show <span class="token boolean">#t</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+      <span class="token punctuation">[</span><span class="token boolean">#t</span> message-box <span class="token string">"Error"</span> <span class="token string">"No this user or incorrect password"</span> window <span class="token punctuation">'</span><span class="token punctuation">(</span>no-icon ok<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token keyword">define</span> login-button
   <span class="token punctuation">(</span><span class="token function">new</span> button%
-       [parent window]
-       [label <span class="token string">"login"</span>]
-       [callback login]<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">[</span><span class="token function">parent</span> window<span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">label</span> <span class="token string">"login"</span><span class="token punctuation">]</span>
+       <span class="token punctuation">[</span><span class="token function">callback</span> login<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token comment">; Display GUI</span>
 <span class="token punctuation">(</span><span class="token function">send</span> window show <span class="token boolean">#t</span><span class="token punctuation">)</span></code><span aria-hidden="true" class="line-numbers-rows" style="white-space: normal; width: auto; left: 0;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></div>

@@ -20,7 +20,7 @@
 <p>After some research, I found a patch for this(it didn't be merged into DPDK since it's a VMWare problem).</p>
 <p>If you try to bind NIC that using <code class="language-text">e1000</code> you might have the same issue.</p>
 <p>To solve this disables the checking by:</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">sed -i &quot;s/pci_intx_mask_supported(dev)/pci_intx_mask_supported(dev)||1/g&quot; \
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">sed -i "s/pci_intx_mask_supported(dev)/pci_intx_mask_supported(dev)||1/g" \
   $(DPDK_PROJECT)/kernel/linux/igb_uio/igb_uio.c</code></pre></div>
 <p>This would make <code class="language-text">pci_intx_mask_supported</code> check do not work anymore.</p>
 <p>then recompile, after compiling done, reload the kernel module:</p>

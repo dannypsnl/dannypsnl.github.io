@@ -53,16 +53,16 @@
 <p>Now we have a wrong typed example:</p>
 <div class="gatsby-highlight" data-language="ruby"><pre class="language-ruby"><code class="language-ruby">arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token comment"># Array&lt;Integer></span>
 arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"foo"</span></code></pre></div>
-<p>From human view, we expect an error like <code class="language-text">expected: Integer but got: String</code>. However, for overloading, we have to try other methods since we can't sure it would match or not. So the checker keeps going on, and failed at the final definition and report <code class="language-text">expected: Array&lt;Integer&gt; but got: String</code> which is a little confusing. Let's consider more general overloading, at here general means semantic is less limited if the overloading is a normal method than an operator.</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class C&lt;T&gt;
+<p>From human view, we expect an error like <code class="language-text">expected: Integer but got: String</code>. However, for overloading, we have to try other methods since we can't sure it would match or not. So the checker keeps going on, and failed at the final definition and report <code class="language-text">expected: Array&lt;Integer> but got: String</code> which is a little confusing. Let's consider more general overloading, at here general means semantic is less limited if the overloading is a normal method than an operator.</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">class C&lt;T>
   def foo:
-    (Integer, T) -&gt; T
-    | (Integer, Integer, T) -&gt; T
+    (Integer, T) -> T
+    | (Integer, Integer, T) -> T
 end</code></pre></div>
 <p>I think, in this case, we can't do more than say can't find a method for blablabla. For example:</p>
 <div class="gatsby-highlight" data-language="ruby"><pre class="language-ruby"><code class="language-ruby">c <span class="token operator">=</span> <span class="token constant">C</span><span class="token operator">&lt;</span><span class="token builtin">String</span><span class="token operator">></span><span class="token punctuation">.</span><span class="token keyword">new</span>
 c<span class="token punctuation">.</span>foo<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span></code></pre></div>
-<p>We have no idea user is trying to match <code class="language-text">(Integer, Integer, T) -&gt; T</code> by missing one argument, or trying to type <code class="language-text">c.foo(1, &quot;2&quot;)</code> but wrong. However, in my understanding, we can't add more operators into Ruby by the problem. So operators actually are different from normal methods. For example:</p>
+<p>We have no idea user is trying to match <code class="language-text">(Integer, Integer, T) -> T</code> by missing one argument, or trying to type <code class="language-text">c.foo(1, "2")</code> but wrong. However, in my understanding, we can't add more operators into Ruby by the problem. So operators actually are different from normal methods. For example:</p>
 <div class="gatsby-highlight" data-language="ruby"><pre class="language-ruby"><code class="language-ruby">arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
 arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span>
 arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span></code></pre></div>
@@ -84,7 +84,7 @@ arr<span class="token punctuation">[</span><span class="token number">0</span><s
     <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">Range</span><span class="token operator">&lt;</span><span class="token builtin">Integer</span><span class="token operator">></span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token constant">T</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token constant">T</span>
     <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">Range</span><span class="token operator">&lt;</span><span class="token builtin">Integer</span><span class="token operator">></span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span>
 <span class="token keyword">end</span></code></pre></div>
-<p><code class="language-text">=&gt;</code> cuts semantic steps. <code class="language-text">-&gt;</code> followed by the finally return type.</p>
+<p><code class="language-text">=></code> cuts semantic steps. <code class="language-text">-></code> followed by the finally return type.</p>
 <p>Which represents:</p>
 <div class="gatsby-highlight" data-language="ruby"><pre class="language-ruby"><code class="language-ruby"><span class="token keyword">class</span> <span class="token class-name">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span>
   <span class="token keyword">def</span> `<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span>`<span class="token punctuation">:</span>
@@ -144,7 +144,7 @@ arr<span class="token punctuation">[</span><span class="token number">0</span><s
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">Ruby Object             C Object
     |                      |
     |                      |
-    \---&gt; Third Object &lt;---/</code></pre></div>
+    \---> Third Object &lt;---/</code></pre></div>
 <p>Ruby automatically marked some object(gc_mark_no_pin), and not mark from C.</p>
 <p>So when compacter run, GC would move the Third Object however C still reference to old place so program explode.</p>
 <h4>Debugging GC</h4>

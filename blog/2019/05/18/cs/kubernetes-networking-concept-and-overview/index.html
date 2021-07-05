@@ -294,11 +294,11 @@ $ iptables <span class="token punctuation">\</span>
   --to-destination <span class="token number">10.244</span>.1.4:8080</code></pre></div>
 <p>Now we would have a problem, we send the packet to cluster IP to the <strong>Pod</strong> directly, but since the source IP is the client <strong>Pod</strong> IP, target <strong>Pod</strong> would send reply back to the client <strong>Pod</strong> would wrong source IP(not cluster IP). Let's simplify these words:</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"># request send
-podA -&gt; clusterIP
+podA -> clusterIP
 # After iptables
-podA -&gt; podB
+podA -> podB
 # reply send
-podB -&gt; podA</code></pre></div>
+podB -> podA</code></pre></div>
 <p>We can find that connection would be dropped because the destination IP is not what <code class="language-text">podA</code> expected!</p>
 <p>So we also have to change the source IP for reply packet:</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">$ iptables <span class="token punctuation">\</span>
@@ -319,9 +319,9 @@ podB -&gt; podA</code></pre></div>
 <h3>5 Internet to Service</h3>
 <h4>5.1 Egress</h4>
 <p>Egress is the traffic from Pod to internet, consider a packet from Pod to any external service.
-e.g. <code class="language-text">10.244.1.10 -&gt; 8.8.8.8</code></p>
+e.g. <code class="language-text">10.244.1.10 -> 8.8.8.8</code></p>
 <p>However, the thing is not so easy since that <code class="language-text">8.8.8.8</code> has no idea who is <code class="language-text">10.244.1.10</code>, because they are not in the same network. So anyway we would need a global IP, it calls masquerading. Now assuming we have an IP <code class="language-text">219.140.7.218</code>, our target is changing <code class="language-text">10.244.1.10</code> to <code class="language-text">219.140.7.218</code> before it reach <code class="language-text">8.8.8.8</code>. And then when <code class="language-text">8.8.8.8</code> send reply packets, we would change <code class="language-text">219.140.7.218</code> to <code class="language-text">10.244.1.10</code> to complete the whole connection.</p>
-<p>But we have another problem here, what if we have several Pods such outgoing request? How to know which Pod should get the reply packet? A simple way(not going to introduce all NAT way) is allocate a port to each connection, so every Pod outgoing request would get a port, for example: <code class="language-text">10.244.1.10:8080 -&gt; 8.8.8.8:53</code> would be rewrote as <code class="language-text">219.140.7.218:61234</code>, so <code class="language-text">8.8.8.8</code> would send reply to <code class="language-text">219.140.7.218:61234</code>. If at the same time <code class="language-text">10.244.1.11:8080 -&gt; 8.8.8.8:53</code> rewrite as <code class="language-text">219.140.7.218:61235 -&gt; 8.8.8.8:53</code> got reply packet, the packet would send to <code class="language-text">61235</code>, so we can rewrite the packet correct back to <code class="language-text">10.244.1.10</code> and <code class="language-text">10.244.1.11</code>.</p>
+<p>But we have another problem here, what if we have several Pods such outgoing request? How to know which Pod should get the reply packet? A simple way(not going to introduce all NAT way) is allocate a port to each connection, so every Pod outgoing request would get a port, for example: <code class="language-text">10.244.1.10:8080 -> 8.8.8.8:53</code> would be rewrote as <code class="language-text">219.140.7.218:61234</code>, so <code class="language-text">8.8.8.8</code> would send reply to <code class="language-text">219.140.7.218:61234</code>. If at the same time <code class="language-text">10.244.1.11:8080 -> 8.8.8.8:53</code> rewrite as <code class="language-text">219.140.7.218:61235 -> 8.8.8.8:53</code> got reply packet, the packet would send to <code class="language-text">61235</code>, so we can rewrite the packet correct back to <code class="language-text">10.244.1.10</code> and <code class="language-text">10.244.1.11</code>.</p>
 <h4>5.2 Ingress</h4>
 <h5>5.2.1 Load balancer</h5>
 <p>Load balancer is quite easy to understand since it just provide an IP for your service, and do totally the same thing as internal service IP rewritting then send to correct Pod.</p>
