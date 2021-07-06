@@ -12,7 +12,7 @@ tags:
 Phoenix is a great framework, but sometimes we don't want to use frontend framework like React. In this article, you will learn how to use them together. First, we create a project with the following commands.
 
 ```shell
-mix phx.new withrreact --no-ecto
+mix phx.new withreact --no-ecto
 cd withreact/assets
 npm i react react-dom @babel/preset-react remount
 ```
