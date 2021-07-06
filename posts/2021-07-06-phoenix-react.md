@@ -14,7 +14,7 @@ Phoenix is a great framework, but sometimes we don't want to use frontend framew
 ```shell
 mix phx.new withrreact --no-ecto
 cd withreact/assets
-npm i react react-dom @babel/preset-react
+npm i react react-dom @babel/preset-react remount
 ```
 
 Edit `withreact/assets/.babelrc`
