@@ -8,7 +8,7 @@ tags:
 
 這也可以寫成 $V times.circle dots.h.c times.circle V times.circle V^* times.circle dots.h.c times.circle V^*$，注意 $V$ 可接受 $V^*$ 為參數，所以跟上面正好相反。
 
-# 1 (consolidated) product
+# (consolidated) product
 
 舉例來說
 
@@ -22,6 +22,6 @@ $$
 (S times T)(a_1, a_2, v_1, v_2) := S(a_1, v_1)T(a_2, v_2)
 $$
 
-# 2 普通 tensor
+# 普通 tensor
 
 普通的 tensor 記號如 $T^"1 1"_"  2" (V; W)$，是使用排版來表示 $V^* times V times V times V^* -> W$。通用的情況可以直覺的反射這些位置的差異，在 $V$ 是有限維度（manifold 的使用場景通常如此）時，變換成 consolidated form 並不會有任何問題，但在無限維度中，就有同構不成立的可能。
