@@ -1,5 +1,9 @@
 ---
 title: ocaml inline test 使用方式
+tags:
+  - software
+  - ocaml
+  - expect test
 ---
 
 1. write OCaml inline test
