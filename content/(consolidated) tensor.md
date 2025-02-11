@@ -1,5 +1,7 @@
 ---
 title: (consolidated) tensor
+tags:
+  - math
 ---
 
 刻意將底下的 multilinear map 排成 $underbrace(V^* times dots times V^*, r-"times") times underbrace(V times dots times V, s-"times") -> W$ 形式的 $T^r_"  s"(V ; W)$ tensor
