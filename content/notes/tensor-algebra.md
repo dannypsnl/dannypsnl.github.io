@@ -15,7 +15,7 @@ $$
 
 # $(cal(T)(V), +, times.circle)$ 構成 associative algebra
 
-1. $+ : cal(T)^r_s (V) times cal(T)^r_s (V) -> cal(T)^r_s (V)$ 比較容易看出，tensor 會轉發加法給 vector component，因此會繼承 vector space 的屬性
+1. $v, w in cal(T)(V)$ 作為向量，$v + w$ 會按 component 相加；每個 component 是 tensor 會轉發加法給 vector component，因此會繼承 vector space 的屬性
 2. $times.circle$ 的部分是因為 tensor product 只是把更多 vectors 放入，因此與結合順序無關
 
 # natural contraction
