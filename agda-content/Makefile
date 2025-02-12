@@ -1,2 +1,2 @@
 all:
-	agda --html --html-highlight=code dan/test.lagda.md
+	agda --html --html-highlight=code agda/test.lagda.md

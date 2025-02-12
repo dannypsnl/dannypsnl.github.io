@@ -1,7 +1,9 @@
-# test
+---
+title: test
+---
 
 ```
-module dan.test where
+module agda.test where
 ```
 
 This is a data definition
