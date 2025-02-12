@@ -1,0 +1,50 @@
+---
+title: "[AArch64] armv8 store/load 尋址模式"
+date: "2023-06-04"
+---
+
+armv8 中的儲存跟載入指令分別是 str 跟 ldr ，而其中有數種尋址模式（Addressing mode）[1][1]
+
+| mode                    | syntax           |
+| ----------------------- | ---------------- |
+| base register           | `[Xn]`           |
+| offset addressing       | `[Xn, #offset]`  |
+| pre-indexed addressing  | `[Xn, #offset]!` |
+| post-indexed addressing | `[Xn], #offset`  |
+
+# base register
+
+base register 是最簡單的情況
+
+對 `str x0, [x1]` 來說，就是儲存到 `x1` 暫存器紀錄的位址
+對 `ldr x0, [x1]` 來說，是載入 `x1` 暫存器紀錄的位址中的資料
+
+# offset addressing
+
+在這個情況中，是把 `x1` 中的位址加上 `offset` 的數值得到新的位址，再進行儲存或是讀取的行為。在自己管理 stack 而且不打算使用內建呼叫慣例時，這很可能是編譯器會使用的方法，但是這樣有可能會遇到 `offset` 超過立即值規定範圍的問題，所以正確的操作這件事相較下比較複雜。
+
+# pre-indexed addressing
+
+這個情況下， `str x0, [x1, #offset]!` 語意等於
+
+```
+add x1, x1, #offset
+str x0, [x1]
+```
+
+`ldr` 指令亦同
+
+# post-indexed addressing
+
+`str x0, [x1], #offset` 語意上等於
+
+```
+str x0, [x1]
+add x1, x1, #offset
+```
+
+# 堆疊管理
+
+堆疊的底是比較高的位址，所以往堆疊指標 sp 放資料(push)的時候要往下減去得到空間，而讀取(pop)時則要增加 sp 的值，要是刻意儲存到高位址就會遇到 Segmentation fault
+
+[1]: https://developer.arm.com/documentation/ddi0406/c/Application-Level-Architecture/The-Instruction-Sets/Load-store-instructions/Addressing-modes?lang=en
