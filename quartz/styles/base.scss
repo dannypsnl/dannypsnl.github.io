@@ -3,6 +3,7 @@
 @use "./variables.scss" as *;
 @use "./syntax.scss";
 @use "./callouts.scss";
+@use "./Agda.css";
 
 html {
   scroll-behavior: smooth;
