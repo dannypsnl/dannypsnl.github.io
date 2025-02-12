@@ -12,4 +12,4 @@ $$
 $$
 
 > [!note]
-> This a is map from [[(consolidated) tensor|tensors]] to [[Alternating k-multilinear map|space of alternating maps]].
+> This a is map from [[tensor|tensors]] to [[Alternating k-multilinear map|space of alternating maps]].

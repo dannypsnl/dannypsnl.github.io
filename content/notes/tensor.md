@@ -4,7 +4,7 @@ tags:
   - math
 ---
 
-刻意將底下的 multilinear map 排成 $underbrace(V^* times ... times V^*, r-"times") times underbrace(V times ... times V, s-"times") -> W$ 形式的 $T^r_"  s"(V ; W)$ tensor
+刻意將底下的 multilinear map 排成 $underbrace(V^* times ... times V^*, r-"times") times underbrace(V times ... times V, s-"times") -> W$ 形式的 $T^r_"  s" (V ; W)$ tensor
 
 這也可以寫成 $V times.circle dots.h.c times.circle V times.circle V^* times.circle dots.h.c times.circle V^*$，注意 $V$ 可接受 $V^*$ 為參數，所以跟上面正好相反。
 
