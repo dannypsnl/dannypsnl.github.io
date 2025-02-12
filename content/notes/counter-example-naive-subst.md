@@ -1,5 +1,7 @@
 ---
 title: Can Naive substitution work if all variables has different name?
+tags:
+  - cs
 ---
 
 First counter example
