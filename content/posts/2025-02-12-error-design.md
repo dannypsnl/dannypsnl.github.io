@@ -1,6 +1,11 @@
 ---
 title: 錯誤處理的設計
 date: 2025-02-12
+tags:
+  - programming language
+  - error handling
+  - continuation
+  - effect
 ---
 
 從程式設計之初，我們就有錯誤處理的需求，常見的模式有幾種
