@@ -1,6 +1,7 @@
 ---
 title: De Bruijn indices
 tags:
+  - cs
   - agda
   - lambda calculus
 ---
