@@ -1,2 +1,5 @@
+AGDA := agda --html --html-highlight=code
+
 all:
-	agda --html --html-highlight=code agda/test.lagda.md
+	$(AGDA) agda/dbi.lagda.md
+	cp ./html/agda.dbi.md ../content/notes/
