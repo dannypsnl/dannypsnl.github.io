@@ -6,3 +6,8 @@ title: index
 
 - [[posts]]
 - [[notes]]
+
+|        | link                                       |
+| ------ | ------------------------------------------ |
+| github | [@dannypsnl](https://github.com/dannypsnl) |
+| blog   | https://dannypsnl.me/                      |
