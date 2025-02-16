@@ -32,13 +32,22 @@ $$
 可以被視為
 
 $$
-v^1 w^1 e_1 times.circle e_1
+  v^1 w^1 e_1 times.circle e_1
 + v^1 w^2 e_1 times.circle e_2
 + v^2 w^1 e_2 times.circle e_1
 + v^2 w^2 e_2 times.circle e_2
 $$
 
-在 https://www.math3ma.com/blog/the-tensor-product-demystified 中有很好的圖示化
+或是視為矩陣
+
+$$
+mat(
+  v^1 w^1, v^1 w^2;
+  v^2 w^1, v^2 w^2;
+)
+$$
+
+兩個表示法的轉換叫做 reshape，在 https://www.math3ma.com/blog/the-tensor-product-demystified 中有很好的圖示化
 
 # $(cal(T)(V), +, times.circle)$ 構成 associative algebra
 
