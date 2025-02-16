@@ -13,10 +13,37 @@ $$
 cal(T)(V) := plus.circle.big_(r,s) cal(T)^r_s (V)
 $$
 
+# Basis of tensor
+
+假設有維度 $2$ 的空間 $V$ ，可以假設它有兩個 basis $e_1, e_2$
+
+$$
+v = v^1 e_1 + v^2 e_2 \
+w = w^1 e_1 + w^2 e_2
+$$
+
+也就是說
+
+$$
+vec(v^1, v^2) times.circle vec(w^1, w^2)
+= vec(v^1 w^1, v^1 w^2, v^2 w^1, v^2 w^2)
+$$
+
+可以被視為
+
+$$
+v^1 w^1 e_1 times.circle e_1
++ v^1 w^2 e_1 times.circle e_2
++ v^2 w^1 e_2 times.circle e_1
++ v^2 w^2 e_2 times.circle e_2
+$$
+
+在 https://www.math3ma.com/blog/the-tensor-product-demystified 中有很好的圖示化
+
 # $(cal(T)(V), +, times.circle)$ 構成 associative algebra
 
-1. $v, w in cal(T)(V)$ 作為向量，$v + w$ 會按 component 相加；每個 component 是 tensor 會轉發加法給 vector component，因此會繼承 vector space $V$ 的加法屬性
-2. $times.circle$ 的部分是因為 tensor product 只是把更多 vectors 放入，因此與結合順序無關
+1. 藉由 reshape tensor matrix 為 vector，可以看出加法確實是 associative 的
+2. $times.circle$ 因為 tensor product 只是把更多 vectors 放入，因此與結合先後順序無關
 
 # natural contraction
 
