@@ -13,42 +13,6 @@ $$
 cal(T)(V) := plus.circle.big_(r,s) cal(T)^r_s (V)
 $$
 
-# Basis of tensor
-
-假設有維度 $2$ 的空間 $V$ ，可以假設它有兩個 basis $e_1, e_2$
-
-$$
-v = v^1 e_1 + v^2 e_2 \
-w = w^1 e_1 + w^2 e_2
-$$
-
-也就是說
-
-$$
-vec(v^1, v^2) times.circle vec(w^1, w^2)
-= vec(v^1 w^1, v^1 w^2, v^2 w^1, v^2 w^2)
-$$
-
-可以被視為
-
-$$
-  v^1 w^1 e_1 times.circle e_1
-+ v^1 w^2 e_1 times.circle e_2
-+ v^2 w^1 e_2 times.circle e_1
-+ v^2 w^2 e_2 times.circle e_2
-$$
-
-或是視為矩陣
-
-$$
-mat(
-  v^1 w^1, v^1 w^2;
-  v^2 w^1, v^2 w^2;
-)
-$$
-
-兩個表示法的轉換叫做 reshape，在 https://www.math3ma.com/blog/the-tensor-product-demystified 中有很好的圖示化
-
 # $(cal(T)(V), +, times.circle)$ 構成 associative algebra
 
 1. 藉由 reshape tensor matrix 為 vector，可以看出加法確實是 associative 的
