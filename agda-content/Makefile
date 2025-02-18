@@ -1,7 +1,8 @@
 AGDA := agda --html --html-highlight=code
 targets := \
 	html/agda.dbi.md \
-	html/agda.subtype.md
+	html/agda.subtype.md \
+	html/agda.intrinsical.md
 
 all: $(targets)
 
