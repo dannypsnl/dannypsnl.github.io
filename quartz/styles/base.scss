@@ -445,6 +445,7 @@ pre {
   border: 1px solid var(--lightgray);
   position: relative;
 
+  // avoid scrolling (Agda generated pre)
   height: 100%;
   overflow: hidden;
 
