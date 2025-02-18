@@ -445,7 +445,8 @@ pre {
   border: 1px solid var(--lightgray);
   position: relative;
 
-  overscroll-behavior-block: auto;
+  height: 100%;
+  overflow: hidden;
 
   &:has(> code.mermaid) {
     border: none;
