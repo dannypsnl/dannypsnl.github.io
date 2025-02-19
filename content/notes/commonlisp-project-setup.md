@@ -15,7 +15,7 @@ It will create a directory with structure:
 
 ```
 .
- |-..asd
+ |- my-project.asd
  |-.gitignore
  |-README.org
  |-README.markdown
