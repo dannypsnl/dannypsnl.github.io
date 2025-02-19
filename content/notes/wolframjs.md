@@ -1,5 +1,6 @@
 ---
 title: Install wolfram-js-frontend on Mac
+date: 2025-02-12
 tags:
   - math
   - tool

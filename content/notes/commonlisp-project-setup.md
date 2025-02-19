@@ -1,5 +1,6 @@
 ---
 title: How to create a commonlisp project
+date: 2025-02-20
 tags:
   - software
   - commonlisp

@@ -1,5 +1,6 @@
 ---
 title: tensor algebra
+date: 2025-02-17
 tags:
   - math
 ---

@@ -1,5 +1,6 @@
 ---
 title: Antisymmetrization map
+date: 2025-02-12
 tags:
   - math
 ---

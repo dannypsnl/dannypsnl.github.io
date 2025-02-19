@@ -1,5 +1,6 @@
 ---
 title: ocaml inline test 使用方式
+date: 2025-02-12
 tags:
   - software
   - ocaml

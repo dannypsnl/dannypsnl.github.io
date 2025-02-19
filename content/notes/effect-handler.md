@@ -1,5 +1,6 @@
 ---
 title: effect handler 應該如何反應？
+date: 2025-02-19
 tags:
   - cs
   - effect system

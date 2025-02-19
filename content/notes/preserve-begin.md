@@ -1,5 +1,6 @@
 ---
 title: ocamlformat preserve begin end block
+date: 2025-02-18
 tags:
   - software
   - ocaml

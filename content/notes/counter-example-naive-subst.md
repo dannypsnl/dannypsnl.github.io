@@ -1,5 +1,6 @@
 ---
 title: Can Naive substitution work if all variables has different name?
+date: 2025-02-12
 tags:
   - cs
 ---

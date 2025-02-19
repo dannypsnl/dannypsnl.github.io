@@ -1,5 +1,6 @@
 ---
 title: fletcher for string diagram
+date: 2025-02-11
 tags:
   - math
   - tool

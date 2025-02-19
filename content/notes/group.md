@@ -1,5 +1,6 @@
 ---
 title: 有限群整理網站
+date: 2025-02-12
 tags:
   - math
   - group

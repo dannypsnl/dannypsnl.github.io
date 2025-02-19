@@ -1,5 +1,6 @@
 ---
 title: (consolidated) tensor
+date: 2025-02-18
 tags:
   - math
 ---

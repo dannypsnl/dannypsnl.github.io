@@ -1,5 +1,6 @@
 ---
 title: cetz example
+date: 2025-02-11
 tags:
   - math
   - tool

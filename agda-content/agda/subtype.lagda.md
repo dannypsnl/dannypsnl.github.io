@@ -1,5 +1,6 @@
 ---
 title: Subtype
+date: 2025-02-19
 tags:
   - agda
 ---

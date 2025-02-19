@@ -1,5 +1,6 @@
 ---
 title: 繼承的問題
+date: 2025-02-14
 tags:
   - cs
   - oop

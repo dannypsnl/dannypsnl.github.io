@@ -1,5 +1,6 @@
 ---
 title: De Bruijn indices
+date: 2025-02-14
 tags:
   - cs
   - agda
