@@ -3,6 +3,7 @@ title: The problem of union type
 date: 2025-02-21
 tags:
   - cs
+  - plt
 ---
 
 Below typed/racket program will produce `'flo`
