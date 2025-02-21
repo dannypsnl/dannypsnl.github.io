@@ -18,7 +18,7 @@ Below typed/racket program will produce `'flo`
 
 but if I change the order of clauses?
 
-```
+```racket
 (cond
   [(number? n) 'num]
   [(flonum? n) 'flo])
