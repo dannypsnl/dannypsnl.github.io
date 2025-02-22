@@ -447,7 +447,6 @@ pre {
 
   // avoid scrolling (Agda generated pre)
   height: 100%;
-  overflow: hidden;
 
   &:has(> code.mermaid) {
     border: none;
