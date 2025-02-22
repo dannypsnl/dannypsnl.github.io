@@ -22,13 +22,15 @@ NOTE about https://drops.dagstuhl.de/storage/00lipics/lipics-vol299-fscd2024/LIP
 
 | representation                                          | ability                                                           |
 | ------------------------------------------------------- | ----------------------------------------------------------------- |
-| BNF-style (AST)                                         | store exactly the syntax                                          |
-| well-scoped syntax tree                                 | $lambda x.x$ has no different from $lambda y.y$ now               |
-| intrinsic (well-typed) terms                            | non well-typed terms are not expressable in such a representation |
-| well-typed, quotiented by the conversion relation (GAT) |                                                                   |
-| SOGAT                                                   |                                                                   |
+| BNF-style (AST)                                         | store written syntax                                              |
+| well-scoped syntax tree                                 | $lambda x.x$ has no different from $lambda y.y$ here              |
+| [intrinsic](agda.intrinsical) (well-typed) terms        | non well-typed terms are not expressable in such a representation |
+| well-typed, quotiented by the conversion relation (GAT) | see below                                                         |
+| SOGAT                                                   | see below                                                         |
 
 # Schönfinkel's combinator calculus (Algebraic Theories)
+
+An algebraic theory is a set, with some operations, and equations.
 
 ```agda
 record CC : Type₁ where
@@ -81,7 +83,9 @@ record TCC : Type₁ where
 
 # Lambda calculus
 
-## Second-Order algebraic theories
+## Second-Order algebraic theories (SOAT)
+
+> `lam` is not first-order (not strictly positive), hence this is not an algebraic theory
 
 ```agda
 record LC : Type₁ where
@@ -95,8 +99,6 @@ record LC : Type₁ where
 
     β : {f : Tm → Tm} {u : Tm} → lam f · u ≡ f u
 ```
-
-> `lam` is not first-order (not strictly positive), hence this is not an algebraic theory
 
 The point is: a second-order model is clear
 
@@ -114,6 +116,8 @@ The old way is, translate a SOAT to first-order GAT:
 and then `lam` becomes a first order function taking a term in an extended context as input.
 
 ## first-order GAT
+
+From SOAT we can derive a GAT.
 
 ```agda
 record FLC : Type₁ where
