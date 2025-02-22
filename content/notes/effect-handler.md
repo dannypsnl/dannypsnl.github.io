@@ -23,4 +23,39 @@ let xxx () =
 # 應對一：複製整個 `k` 的記憶體內容
 
 我跟朋友討論之後他提出一種方法：另一個 thread 要捕獲 `k` 必須複製整個 `k` 的記憶體內容，這種方法就可以避免在資料損壞的 stack 上繼續運作。
-這個方法很實務，對理論沒有修改。
+這個方法很實務，對理論沒有修改。所有這類複製都有很大的執行代價。
+
+# 應對二：runtime 禁止
+
+下面這個 chez scheme 的程式是會卡住的。
+
+```scheme
+(import (chezscheme))
+
+(define handler-key (gensym))
+(define th #f)
+
+(define x 0)
+
+(define (sub)
+  (define n
+    (call/cc (lambda (k)
+      (define abort (continuation-marks-first (current-continuation-marks) handler-key))
+      (abort k))))
+  (set! x (+ x n)))
+
+(write x)
+(newline)
+
+(with-continuation-mark
+  handler-key (lambda (resume)
+    (set! th (fork-thread (lambda () (resume 20))))
+    (resume 10))
+  (sub))
+
+(write x)
+(newline)
+(thread-join th)
+```
+
+這個方法的缺點是損壞的方式很不穩定。
