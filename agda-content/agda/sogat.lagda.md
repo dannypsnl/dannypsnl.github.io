@@ -13,6 +13,7 @@ tags:
 module agda.sogat where
 open import Agda.Primitive
 open import Cubical.Foundations.Prelude hiding (Sub; _,_)
+open import Cubical.Foundations.Equiv
 ```
 
 </details>
@@ -78,7 +79,9 @@ record TCC : Type₁ where
       → S · f · g · u ≡ f · u · (g · u)
 ```
 
-# Lambda calculus (Second-Order algebraic theories)
+# Lambda calculus
+
+## Second-Order algebraic theories
 
 ```agda
 record LC : Type₁ where
@@ -110,7 +113,7 @@ The old way is, translate a SOAT to first-order GAT:
 
 and then `lam` becomes a first order function taking a term in an extended context as input.
 
-# Lambda calculus (first-order GAT)
+## first-order GAT
 
 ```agda
 record FLC : Type₁ where
@@ -129,9 +132,10 @@ record FLC : Type₁ where
     id-left : {A B : Con} {γ : Sub A B} → id ∘ γ ≡ γ
     id-right : {A B : Con} {γ : Sub A B} → γ ∘ id ≡ γ
 
-    -- terminal
+    -- empty context: zero
     ◇ : Con
     ε : {Γ : Con} → Sub Γ ◇
+    -- terminal
     ◇η : {Γ : Con} → (σ : Sub Γ ◇) → σ ≡ ε
 
     Tm : Con → Set
@@ -139,9 +143,14 @@ record FLC : Type₁ where
     [id] : {Γ : Con} {t : Tm Γ} → t [ id ] ≡ t
     [∘] : {Θ Γ Δ : Con} {t : Tm Γ} {γ : Sub Δ Γ} {δ : Sub Θ Δ} → t [ γ ∘ δ ] ≡ t [ γ ] [ δ ]
 
+    -- context extension: successor
     _▹ : Con → Con
     _,_ : {Δ Γ : Con} → Sub Δ Γ → Tm Δ → Sub Δ (Γ ▹)
 
+    -- variables are definable as De Bruijn indices:
+    -- 0 = q
+    -- 1 = q[p]
+    -- 2 = q[p][p], and so on
     p : {Γ : Con} → Sub (Γ ▹) Γ
     q : {Γ : Con} → Tm (Γ ▹)
 
@@ -161,4 +170,21 @@ record FLC : Type₁ where
 
     β : {Δ Γ : Con} {γ : Sub Δ Γ} {t : Tm (Γ ▹)} {u : Tm Γ}
       → lam t · u ≡ t [ id , u ]
+```
+
+# Lambda calculus (second-order GAT)
+
+```agda
+record STLC : Type₁ where
+  field
+    Ty : Type
+    _⇒_ : Ty → Ty → Ty
+
+    Tm : Ty → Type
+
+    lam : {A B : Ty} → (Tm A → Tm B) → Tm (A ⇒ B)
+    _·_ : {A B : Ty} → Tm (A ⇒ B) → (Tm A → Tm B)
+
+    stlc-cong : {A B : Ty}
+      → Tm (A ⇒ B) ≃ (Tm A → Tm B)
 ```
