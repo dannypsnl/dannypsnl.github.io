@@ -12,7 +12,7 @@ tags:
 {-# OPTIONS --cubical #-}
 module agda.sogat where
 open import Agda.Primitive
-open import Cubical.Foundations.Prelude hiding (Sub)
+open import Cubical.Foundations.Prelude hiding (Sub; _,_)
 ```
 
 </details>
@@ -70,11 +70,11 @@ record TCC : Type₁ where
     S : {A B C : Ty} → Tm ((A ⇒ B ⇒ C) ⇒ (A ⇒ B) ⇒ A ⇒ C)
 
 
-    Kβ : {A B : Ty} → {u : Tm A} {f : Tm B} → K · u · f ≡ u
+    Kβ : {A B : Ty} {u : Tm A} {f : Tm B} → K · u · f ≡ u
     Sβ : {A B C : Ty}
-      → {f : Tm (A ⇒ B ⇒ C)}
-      → {g : Tm (A ⇒ B)}
-      → {u : Tm A}
+      {f : Tm (A ⇒ B ⇒ C)}
+      {g : Tm (A ⇒ B)}
+      {u : Tm A}
       → S · f · g · u ≡ f · u · (g · u)
 ```
 
@@ -93,16 +93,37 @@ record LC : Type₁ where
     β : {f : Tm → Tm} {u : Tm} → lam f · u ≡ f u
 ```
 
+> `lam` is not first-order (not strictly positive), hence this is not an algebraic theory
+
+The point is: a second-order model is clear
+
+1. a set
+2. a binary operation
+3. a second-order function with the type of `lam` satisfying the equation `β`
+
+But the homomorphism between second-order models `M` to `N` is not.
+The old way is, translate a SOAT to first-order GAT:
+
+1. add contexts
+2. add substitutions
+3. index `Tm` and all operations by contexts
+
+and then `lam` becomes a first order function taking a term in an extended context as input.
+
 # Lambda calculus (first-order GAT)
 
 ```agda
 record FLC : Type₁ where
+  infixl 10 _,_
+  infixl 12 _[_]
+  infixl 11 _·_
+
   field
     Con : Type
     Sub : Con → Con → Type
 
     _∘_ : {Δ Γ Θ : Con} → Sub Δ Γ → Sub Θ Δ → Sub Θ Γ
-    ∘-ass : {A B C D : Con} {γ : Sub C D} {δ : Sub B C} {θ : Sub A B}
+    assoc : {A B C D : Con} {γ : Sub C D} {δ : Sub B C} {θ : Sub A B}
       → (γ ∘ δ) ∘ θ ≡ γ ∘ (δ ∘ θ)
     id : {Γ : Con} → Sub Γ Γ
     id-left : {A B : Con} {γ : Sub A B} → id ∘ γ ≡ γ
@@ -115,6 +136,29 @@ record FLC : Type₁ where
 
     Tm : Con → Set
     _[_] : {Γ Δ : Con} → Tm Γ → Sub Δ Γ → Tm Δ
-    -- TODO:
-    -- [∘] : {Θ Γ Δ : Con} {t : Tm Θ} {γ : Sub Δ Γ} {δ : Sub Γ Θ} → t [ γ ∘ δ ] ≡ t [ γ ] [ δ ]
+    [id] : {Γ : Con} {t : Tm Γ} → t [ id ] ≡ t
+    [∘] : {Θ Γ Δ : Con} {t : Tm Γ} {γ : Sub Δ Γ} {δ : Sub Θ Δ} → t [ γ ∘ δ ] ≡ t [ γ ] [ δ ]
+
+    _▹ : Con → Con
+    _,_ : {Δ Γ : Con} → Sub Δ Γ → Tm Δ → Sub Δ (Γ ▹)
+
+    p : {Γ : Con} → Sub (Γ ▹) Γ
+    q : {Γ : Con} → Tm (Γ ▹)
+
+    ▹β₁ : {Δ Γ : Con} {γ : Sub Δ Γ} {t : Tm Δ}
+      → p ∘ (γ , t) ≡ γ
+    ▹β₂ : {Δ Γ : Con} {γ : Sub Δ Γ} {t : Tm Δ}
+      → q [ γ , t ] ≡ t
+    ▹η : {Δ Γ : Con} {σ : Sub Δ (Γ ▹)}
+      → σ ≡ (p ∘ σ , q [ σ ])
+
+    lam : {Γ : Con} → Tm (Γ ▹) → Tm Γ
+    lam[] : {Δ Γ : Con} {γ : Sub Δ Γ} {t : Tm (Γ ▹)}
+      → (lam t)[ γ ] ≡ lam (t [ γ ∘ p , q ])
+
+    _·_ : {Γ : Con} → Tm Γ → Tm Γ → Tm Γ
+    ·[] : {Δ Γ : Con} {γ : Sub Δ Γ} {t u : Tm Γ} → (t · u)[ γ ] ≡ t [ γ ] · (u [ γ ])
+
+    β : {Δ Γ : Con} {γ : Sub Δ Γ} {t : Tm (Γ ▹)} {u : Tm Γ}
+      → lam t · u ≡ t [ id , u ]
 ```
