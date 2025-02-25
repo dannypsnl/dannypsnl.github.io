@@ -3,6 +3,7 @@ title: Intrinsically typed term
 date: 2025-02-19
 tags:
   - agda
+  - plt
 ---
 
 <details>

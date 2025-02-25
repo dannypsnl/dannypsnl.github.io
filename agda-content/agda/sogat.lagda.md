@@ -3,6 +3,7 @@ title: "Second-Order Generalised Algebraic Theories: Signatures and First-Order 
 date: 2025-02-22
 tags:
   - agda
+  - plt
 ---
 
 <details>
