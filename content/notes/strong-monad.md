@@ -40,4 +40,6 @@ $$
 $)
 $$
 
-To make the composition associative and pure computation $(eta_A dot.c pi_2) : Gamma times A -> M A$ an identity, $s$ must satisfy certain coherence condition.
+To make the composition associative and pure computation $(eta_A dot.c pi_2) : Gamma times A -> M A$ an identity, $s$ must satisfy certain coherence condition [1].
+
+[1]: https://dylanm.org/strength.pdf
