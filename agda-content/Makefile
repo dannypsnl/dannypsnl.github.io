@@ -3,7 +3,8 @@ targets := \
 	html/agda.dbi.md \
 	html/agda.subtype.md \
 	html/agda.intrinsical.md \
-	html/agda.sogat.md
+	html/agda.sogat.md \
+	html/agda.so.md \
 
 all: $(targets)
 
