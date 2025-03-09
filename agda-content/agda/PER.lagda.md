@@ -30,8 +30,9 @@ record PartialEquivalenceRel {A : Set a} (_~_ : Rel A ℓ) : Set (a ⊔ ℓ) whe
 QuasiReflexive : (A : Set a) (_~_ : Rel A ℓ) → Set (a ⊔ ℓ)
 QuasiReflexive A _~_ = ∀ {x y : A} → (x ~ y) → (x ~ x) × (y ~ y)
 
+open PartialEquivalenceRel {{...}}
+
 quasi-reflexive : {A : Set a} {x y : A} {_~_ : Rel A ℓ} →
-  PartialEquivalenceRel _~_ → QuasiReflexive A _~_
-quasi-reflexive per x~y = (trans x~y (sym x~y)) , (trans (sym x~y) x~y)
-  where open PartialEquivalenceRel per
+  {{PartialEquivalenceRel _~_}} → QuasiReflexive A _~_
+quasi-reflexive x~y = (trans x~y (sym x~y)) , (trans (sym x~y) x~y)
 ```
