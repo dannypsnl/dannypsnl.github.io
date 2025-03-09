@@ -29,7 +29,6 @@ record PartialEquivalenceRel {A : Set} (_~_ : Rel A ℓ) : Set ℓ where
 
 quasi-reflexive : {A : Set} {x y : A} {_~_ : Rel A ℓ} →
   PartialEquivalenceRel _~_ → x ~ y → (x ~ x) × (y ~ y)
-quasi-reflexive per x~y =
-  let (PER sym trans) = per
-  in ( trans x~y (sym x~y) , trans (sym x~y) x~y )
+quasi-reflexive per x~y = (trans x~y (sym x~y)) , (trans (sym x~y) x~y)
+  where open PartialEquivalenceRel per
 ```
