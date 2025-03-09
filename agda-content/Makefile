@@ -5,6 +5,7 @@ targets := \
 	html/agda.intrinsical.md \
 	html/agda.sogat.md \
 	html/agda.so.md \
+	html/agda.PER.md
 
 all: $(targets)
 
