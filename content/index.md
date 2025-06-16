@@ -10,4 +10,4 @@ title: index
 |        | link                                       |
 | ------ | ------------------------------------------ |
 | github | [@dannypsnl](https://github.com/dannypsnl) |
-| blog   | https://dannypsnl.me/                      |
+| blog   | https://dannypsnl.srht.site/               |
