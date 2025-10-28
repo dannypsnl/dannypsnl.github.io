@@ -35,8 +35,11 @@ $$
 $$
 dif(dif omega)
 =
-C dif x^k and dif x^j and dif x^I
-+ C dif x^j and dif x^k and dif x^I
+C dif x^j and dif x^k and dif x^I
++ C dif x^k and dif x^j and dif x^I
+=
+C dif x^j and dif x^k and dif x^I
+- C dif x^j and dif x^k and dif x^I
 = (C - C) dif x^j and dif x^k and dif x^I
 = 0
 $$
